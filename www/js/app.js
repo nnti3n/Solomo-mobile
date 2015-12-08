@@ -1,6 +1,8 @@
 angular.module('solomo.controllers', []);
 
-angular.module('starter', ['ionic', 'solomo.controllers', 'solomo.services'])
+angular.module('solomo.services', []);
+
+angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -23,7 +25,7 @@ angular.module('starter', ['ionic', 'solomo.controllers', 'solomo.services'])
 
         $stateProvider
 
-        // setup an abstract state for the tabs directive
+            // setup an abstract state for the tabs directive
             .state('tab', {
                 url: '/tab',
                 abstract: true,
@@ -38,6 +40,16 @@ angular.module('starter', ['ionic', 'solomo.controllers', 'solomo.services'])
                     'tab-dash': {
                         templateUrl: 'templates/tab-dash.html',
                         controller: 'LoginCtrl'
+                    }
+                }
+            })
+
+            .state('tab.map', {
+                url: '/map',
+                views: {
+                    'tab-map': {
+                        templateUrl: 'templates/tab-map.html',
+                        controller: 'MapCtrl'
                     }
                 }
             })
