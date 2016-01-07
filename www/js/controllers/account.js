@@ -1,7 +1,9 @@
 angular.module('solomo.controllers')
 
     .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading,$cordovaCamera){
-      $scope.choosePicture = function(){
+
+    $scope.photos = [];
+    $scope.choosePicture = function(){
         $scope.imageHandle(Camera.PictureSourceType.PHOTOLIBRARY);
     };
 
@@ -24,9 +26,13 @@ angular.module('solomo.controllers')
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             var imgURI = "data:image/jpeg;base64," + imageData;
-            $scope.newblog.img = imageData;
+            $scope.img = imageData;
             $scope.photos.push(imgURI);
-            $('#img-container').css('height','250px')
+
+            console.log(imgURI);
+            var cameraImage = document.getElementById('image');
+            cameraImage.style.display = 'block';
+            cameraImage.src = imgURI;
         }, function(err) {
            console.log(err);
         });
