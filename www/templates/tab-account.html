@@ -5,6 +5,26 @@
                 Enable Friends
             </ion-toggle>
             <a class="button button-assertive button-block button-outline" ng-click="showLogOutMenu()">Log Out</a>
+            <div class="row">
+                    <div class="col ">
+                    <button class="button button-block ion-ios-camera" ng-click="takePicture()">
+                        Camera
+                    </button>
+                    </div>
+
+                    <div class="col col-50">
+                    <button class="button button-block ion-images" ng-click="choosePicture()">
+                        Gallery
+                    </button>
+                    </div>
+                </div>
+                <!--<img id="test" data-ng-src="img/joy.jpg"/>-->
+                <ion-scroll direction="x" class="available-scroller" id='img-container'>
+                    <div class="createBlog-list-photo" collection-repeat="photo in photos"
+                       item-height="250" item-width="300">
+                         <img ng-src="{{photo.src}}"/>
+                    </div>
+                </ion-scroll>
         </ion-list>
     </ion-content>
 </ion-view>
