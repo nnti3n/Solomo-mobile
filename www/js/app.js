@@ -25,6 +25,13 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
 
         $stateProvider
 
+            // login
+            .state('login', {
+                url: "/login",
+                templateUrl: "templates/login.html",
+                controller: 'LoginCtrl'
+            })
+
             // setup an abstract state for the tabs directive
             .state('tab', {
                 url: '/tab',
@@ -39,7 +46,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 views: {
                     'tab-dash': {
                         templateUrl: 'templates/tab-dash.html',
-                        controller: 'LoginCtrl'
+                        controller: 'DashCtrl'
                     }
                 }
             })
@@ -65,7 +72,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('/login');
 
     })
 

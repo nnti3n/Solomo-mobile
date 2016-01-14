@@ -30,3 +30,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     height: 100%;
 }
 
+.login-button {
+    position: fixed !important;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+}

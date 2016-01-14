@@ -2,6 +2,9 @@ angular.module('solomo.controllers')
 
     .controller('LoginCtrl', function ($scope, $state, $q, UserService, $ionicLoading) {
         // This is the success callback from the login method
+
+        console.log("hello");
+
         var fbLoginSuccess = function (response) {
             if (!response.authResponse) {
                 fbLoginError("Cannot find the authResponse");
@@ -22,7 +25,7 @@ angular.module('solomo.controllers')
                         picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
                     });
                     $ionicLoading.hide();
-                    $state.go('app.home');
+                    $state.go('tab.dash');
                 }, function (fail) {
                     // Fail get profile info
                     console.log('profile info fail', fail);
@@ -77,13 +80,13 @@ angular.module('solomo.controllers')
                                     picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
                                 });
 
-                                $state.go('app.home');
+                                $state.go('tab.dash');
                             }, function (fail) {
                                 // Fail get profile info
                                 console.log('profile info fail', fail);
                             });
                     } else {
-                        $state.go('app.home');
+                        $state.go('tab.dash');
                     }
                 } else {
                     // If (success.status === 'not_authorized') the user is logged in to Facebook,
