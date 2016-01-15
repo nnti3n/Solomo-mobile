@@ -21,7 +21,7 @@ angular.module('solomo.controllers')
                     // Facebook logout
                     facebookConnectPlugin.logout(function(){
                             $ionicLoading.hide();
-                            $state.go('welcome');
+                            $state.go('login');
                         },
                         function(fail){
                             $ionicLoading.hide();

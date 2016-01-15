@@ -2,7 +2,9 @@ angular.module('solomo.controllers', []);
 
 angular.module('solomo.services', []);
 
-angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova'])
+angular.module('angularRestfulAuth', []);
+
+angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage', 'angularRestfulAuth'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -51,6 +53,16 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 }
             })
 
+            .state('tab.post', {
+                url: '/post',
+                views: {
+                    'tab-post': {
+                        templateUrl: 'templates/tab-post.html',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
+
             .state('tab.map', {
                 url: '/map',
                 views: {
@@ -72,7 +84,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('tab/dash');
 
     })
 
