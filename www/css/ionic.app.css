@@ -9095,3 +9095,9 @@ a.button {
 #map {
   width: 100%;
   height: 100%; }
+
+.login-button {
+  position: fixed !important;
+  bottom: 10%;
+  left: 0;
+  right: 0; }

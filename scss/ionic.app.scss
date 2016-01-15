@@ -20,6 +20,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+@import "www/lib/fontawesome/scss/font-awesome";
 
 .scroll {
     height: 100%;
@@ -30,3 +31,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     height: 100%;
 }
 
+.login-button {
+    position: fixed !important;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+}

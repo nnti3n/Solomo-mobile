@@ -2,7 +2,9 @@ angular.module('solomo.controllers', []);
 
 angular.module('solomo.services', []);
 
-angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova'])
+angular.module('angularRestfulAuth', []);
+
+angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage', 'angularRestfulAuth'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -25,6 +27,13 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
 
         $stateProvider
 
+            // login
+            .state('login', {
+                url: "/login",
+                templateUrl: "templates/login.html",
+                controller: 'LoginCtrl'
+            })
+
             // setup an abstract state for the tabs directive
             .state('tab', {
                 url: '/tab',
@@ -39,7 +48,17 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 views: {
                     'tab-dash': {
                         templateUrl: 'templates/tab-dash.html',
-                        controller: 'LoginCtrl'
+                        controller: 'DashCtrl'
+                    }
+                }
+            })
+
+            .state('tab.post', {
+                url: '/post',
+                views: {
+                    'tab-post': {
+                        templateUrl: 'templates/tab-post.html',
+                        controller: 'PostCtrl'
                     }
                 }
             })
@@ -64,7 +83,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('tab/dash');
 
     })
 
