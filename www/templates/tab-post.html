@@ -1,5 +1,26 @@
 <ion-view view-title="Post Deal">
     <ion-content>
         <p>Welcome to post deal</p>
+        <ion-list>
+            <div class="row">
+                    <div class="col ">
+                    <button class="button button-block ion-ios-camera" ng-click="takePicture()">
+                        Camera
+                    </button>
+                    </div>
+
+                    <div class="col col-50">
+                    <button class="button button-block ion-images" ng-click="choosePicture()">
+                        Gallery
+                    </button>
+                    </div>
+                </div>
+                <!--<img id="test" data-ng-src="img/joy.jpg"/>-->
+                <img id="image" src="" style="display:none;width:100%;">
+                <input type="text" placeholder="Description">
+                <button class="button">
+                  Post
+                </button>
+        </ion-list>
     </ion-content>
 </ion-view>

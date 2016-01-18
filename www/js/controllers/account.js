@@ -1,6 +1,7 @@
 angular.module('solomo.controllers')
 
     .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading,$cordovaCamera){
+
         $scope.showLogOutMenu = function() {
             var hideSheet = $ionicActionSheet.show({
                 destructiveText: 'Logout',
