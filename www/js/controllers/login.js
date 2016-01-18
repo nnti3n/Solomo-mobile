@@ -1,7 +1,8 @@
 angular.module('solomo.controllers')
 
-    .controller('LoginCtrl', function ($scope, $state, $q, UserService, $ionicLoading) {
+    .controller('LoginCtrl', function ($scope, $state, $q, UserService, $ionicLoading, Auth) {
         // This is the success callback from the login method
+
         var fbLoginSuccess = function (response) {
             if (!response.authResponse) {
                 fbLoginError("Cannot find the authResponse");
@@ -13,19 +14,26 @@ angular.module('solomo.controllers')
             getFacebookProfileInfo(authResponse)
                 .then(function (profileInfo) {
                     // For the purpose of this example I will store user data on local storage
-                    console.log(authResponse);
-                    UserService.setUser({
-                        authResponse: authResponse,
-                        userID: profileInfo.id,
-                        name: profileInfo.name,
-                        email: profileInfo.email,
-                        picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-                    });
-                    $ionicLoading.hide();
-                    $state.go('app.home');
+                    Auth.FbLogin(authResponse, function(token_success) {
+                        UserService.setUser({
+                            user_token: token_success.user_token,
+                            userID: profileInfo.id,
+                            name: profileInfo.name,
+                            email: profileInfo.email,
+                            picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
+                        });
+                        $ionicLoading.hide();
+                        $state.go('tab.dash');
+                    }, function(tokenfail) {
+                        console.log('get user token fail', tokenfail);
+                        $ionicLoading.hide();
+                        //alert('get user token fail');
+
+                    })
+
                 }, function (fail) {
                     // Fail get profile info
-                    console.log('profile info fail', fail);
+                    console.log('facebook profile info fail', fail);
                 });
         };
 
@@ -68,22 +76,26 @@ angular.module('solomo.controllers')
                         getFacebookProfileInfo(success.authResponse)
                             .then(function (profileInfo) {
                                 // For the purpose of this example I will store user data on local storage
-                                console.log(success.authResponse);
-                                UserService.setUser({
-                                    authResponse: success.authResponse,
-                                    userID: profileInfo.id,
-                                    name: profileInfo.name,
-                                    email: profileInfo.email,
-                                    picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-                                });
-
-                                $state.go('app.home');
+                                Auth.FbLogin(success.authResponse, function(token_success) {
+                                    UserService.setUser({
+                                        user_token: token_success.user_token,
+                                        userID: profileInfo.id,
+                                        name: profileInfo.name,
+                                        email: profileInfo.email,
+                                        picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
+                                    });
+                                    $state.go('tab.dash');
+                                }, function(tokenfail) {
+                                    console.log('fb connected but get user token fail', tokenfail);
+                                    $ionicLoading.hide();
+                                    //alert('fb connected but get user token fail');
+                                })
                             }, function (fail) {
                                 // Fail get profile info
-                                console.log('profile info fail', fail);
+                                console.log('facebook profile info fail', fail);
                             });
                     } else {
-                        $state.go('app.home');
+                        $state.go('tab.dash');
                     }
                 } else {
                     // If (success.status === 'not_authorized') the user is logged in to Facebook,

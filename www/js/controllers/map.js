@@ -1,14 +1,15 @@
-angular.module('solomo.controllers', [])
+angular.module('solomo.controllers')
 
     .controller('MapCtrl', function ($scope, $cordovaGeolocation, $ionicLoading) {
 
-        //$ionicLoading.show({
-        //    template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>'
-        //});
+        $ionicLoading.show({
+            template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>'
+        });
+
 
         var posOptions = {
             enableHighAccuracy: true,
-            timeout: 20000,
+            timeout: 10000,
             maximumAge: 0
         };
 
@@ -26,7 +27,7 @@ angular.module('solomo.controllers', [])
 
             map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-            google.maps.event.addListenerOnce(map, 'idle', function(){
+            google.maps.event.addListenerOnce(map, 'idle', function () {
 
                 var marker = new google.maps.Marker({
                     map: map,
@@ -36,9 +37,9 @@ angular.module('solomo.controllers', [])
 
             });
 
-            //$ionicLoading.hide();
-        }, function(err) {
-            //$ionicLoading.hide();
+            $ionicLoading.hide();
+        }, function (err) {
+            $ionicLoading.hide();
             console.log(err);
         });
 

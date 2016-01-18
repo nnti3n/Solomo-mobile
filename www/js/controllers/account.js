@@ -1,35 +1,29 @@
 angular.module('solomo.controllers')
 
     .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading,$cordovaCamera){
-      $scope.choosePicture = function(){
-        $scope.imageHandle(Camera.PictureSourceType.PHOTOLIBRARY);
-    };
+        $scope.showLogOutMenu = function() {
+            var hideSheet = $ionicActionSheet.show({
+                destructiveText: 'Logout',
+                titleText: 'Are you sure you want to logout? This app is awsome so I recommend you to stay.',
+                cancelText: 'Cancel',
+                cancel: function() {},
+                buttonClicked: function(index) {
+                    return true;
+                },
+                destructiveButtonClicked: function(){
+                    $ionicLoading.show({
+                        template: 'Logging out...'
+                    });
 
-    $scope.takePicture = function(){
-        $scope.imageHandle(Camera.PictureSourceType.CAMERA);
-    };
-
-    $scope.imageHandle = function(Type) {
-        var options = {
-            quality : 75,
-            destinationType : Camera.DestinationType.DATA_URL,
-            sourceType : Type,
-            allowEdit : true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: true
+                    // Facebook logout
+                    facebookConnectPlugin.logout(function(){
+                            $ionicLoading.hide();
+                            $state.go('login');
+                        },
+                        function(fail){
+                            $ionicLoading.hide();
+                        });
+                }
+            });
         };
-
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            var imgURI = "data:image/jpeg;base64," + imageData;
-            $scope.newblog.img = imageData;
-            $scope.photos.push(imgURI);
-            $('#img-container').css('height','250px')
-        }, function(err) {
-           console.log(err);
-        });
-      }
-
     });

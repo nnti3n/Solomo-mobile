@@ -1,12 +1,87 @@
-<ion-view view-title="Dashboard">
-    <ion-content class="padding">
+<ion-view view-title="Dashboard" hide-nav-bar="true">
+    <ion-content>
+
+        <div class="bar bar-header item-input-inset bar-positive">
+            <label class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
+            </label>
+            <button class="button button-clear" ng-click="clear_search()">
+                Cancel
+            </button>
+        </div>
+
         <div class="list card">
-            <div class="item item-divider">Facebook</div>
+            <div class="item item-avatar">
+                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <h2>Nguyên</h2>
+                <p>Quận 2, HCM</p>
+            </div>
             <div class="item item-body">
-                <div>
-                    <a class="facebook-sign-in button button-block" ng-click="facebookSignIn()">Login with Facebook</a>
-                </div>
+                <img class="full-image" ng-src="img/nguyen-post.jpg">
+                <p style="margin-bottom:5px;">
+                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
+                </p>
+                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
+                </p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
+                </p>
             </div>
         </div>
+
+        <div class="list card">
+            <div class="item item-avatar">
+                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <h2>Nguyên</h2>
+                <p>Quận 2, HCM</p>
+            </div>
+            <div class="item item-body">
+                <img class="full-image" ng-src="img/nguyen-post.jpg">
+                <p style="margin-bottom:5px;">
+                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
+                </p>
+                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
+                </p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-avatar">
+                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <h2>Nguyên</h2>
+                <p>Quận 2, HCM</p>
+            </div>
+            <div class="item item-body">
+                <img class="full-image" ng-src="img/nguyen-post.jpg">
+                <p style="margin-bottom:5px;">
+                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
+                </p>
+                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
+                </p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
+                </p>
+            </div>
+        </div>
+
     </ion-content>
 </ion-view>
