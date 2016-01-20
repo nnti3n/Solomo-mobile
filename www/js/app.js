@@ -53,6 +53,17 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 }
             })
 
+            .state('tab.view-detail', {
+                url: '/view-detail/:viewId',
+                views: {
+                    'tab-dash': {
+                        templateUrl: 'templates/view-detail.html',
+                        controller: 'ViewDetailCtrl'
+                    }
+                }
+
+            })
+
             .state('tab.post', {
                 url: '/post',
                 views: {
