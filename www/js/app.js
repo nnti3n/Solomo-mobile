@@ -64,6 +64,16 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
 
             })
 
+            .state('tab.noti', {
+                url: '/noti',
+                views: {
+                    'tab-noti': {
+                        templateUrl: 'templates/tab-noti.html',
+                        controller: 'NotiCtrl'
+                    }
+                }
+            })
+
             .state('tab.post', {
                 url: '/post',
                 views: {
@@ -94,7 +104,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('tab/dash');
+        $urlRouterProvider.otherwise('login');
 
     })
 

@@ -14,7 +14,7 @@ angular.module('solomo.controllers')
             getFacebookProfileInfo(authResponse)
                 .then(function (profileInfo) {
                     // For the purpose of this example I will store user data on local storage
-                    Auth.FbLogin(authResponse, function(token_success) {
+                    Auth.FbLogin({"facebook_token": authResponse.accessToken}, function(token_success) {
                         UserService.setUser({
                             user_token: token_success.user_token,
                             userID: profileInfo.id,
@@ -76,7 +76,8 @@ angular.module('solomo.controllers')
                         getFacebookProfileInfo(success.authResponse)
                             .then(function (profileInfo) {
                                 // For the purpose of this example I will store user data on local storage
-                                Auth.FbLogin(success.authResponse, function(token_success) {
+                                console.log(success.authResponse);
+                                Auth.FbLogin({"facebook_token": success.authResponse.accessToken}, function(token_success) {
                                     UserService.setUser({
                                         user_token: token_success.user_token,
                                         userID: profileInfo.id,

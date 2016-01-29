@@ -20,7 +20,7 @@ angular.module('solomo.services')
 angular.module('angularRestfulAuth', [])
 
     .factory('Auth', ['$http', '$localStorage', function($http, $localStorage){
-        var baseUrl = "http://localhost:4000/api1/v1";
+        var baseUrl = "http://128.199.111.187/api/v1";
         function changeUser(user) {
             angular.extend(currentUser, user);
         }
