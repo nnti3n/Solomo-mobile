@@ -2,9 +2,9 @@ angular.module('solomo.controllers', []);
 
 angular.module('solomo.services', []);
 
-angular.module('angularRestfulAuth', []);
+angular.module('angularRestful', []);
 
-angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage', 'angularRestfulAuth'])
+angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage', 'angularRestful'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -27,7 +27,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
 
         $stateProvider
 
-            // login
+        // login
             .state('login', {
                 url: "/login",
                 templateUrl: "templates/login.html",
@@ -104,11 +104,25 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('login');
+        $urlRouterProvider.otherwise('tab/dash');
 
     })
 
     .config(function ($ionicConfigProvider) {
         $ionicConfigProvider.navBar.alignTitle('center');
         $ionicConfigProvider.tabs.position('bottom');
+    })
+
+    .directive('hideTabs', function($rootScope) {
+        return {
+            restrict: 'A',
+            link: function($scope, $el) {
+                $rootScope.hideTabs = true;
+                $scope.$on('$destroy', function() {
+                    $rootScope.hideTabs = false;
+                });
+            }
+        };
     });
+
+var baseUrl = "http://128.199.111.187/api/v1";

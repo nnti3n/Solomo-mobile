@@ -21,7 +21,7 @@
             <img id="image" src="" style="display:none;width:100%;">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Description</span>
-                <input type="text" placeholder="Description">
+                <input ng-model="desc" type="text" placeholder="Description">
             </label>
 
             <button class="button button-block button-light">
@@ -33,7 +33,7 @@
             <button class="button button-block button-light">
                 Chọn bạn bè để gửi deal
             </button>
-            <button class="button button-block button-positive" style="margin-top:30px;">
+            <button class="button button-block button-positive" ng-click="post()" style="margin-top:30px;">
                 Post
             </button>
 

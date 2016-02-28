@@ -2,7 +2,7 @@ angular.module('solomo.controllers')
 
     .controller('LoginCtrl', function ($scope, $state, $q, UserService, $ionicLoading, Auth) {
         // This is the success callback from the login method
-
+        console.log('in');
         var fbLoginSuccess = function (response) {
             if (!response.authResponse) {
                 fbLoginError("Cannot find the authResponse");
@@ -15,6 +15,7 @@ angular.module('solomo.controllers')
                 .then(function (profileInfo) {
                     // For the purpose of this example I will store user data on local storage
                     Auth.FbLogin({"facebook_token": authResponse.accessToken}, function(token_success) {
+                        console.log(authResponse.accessToken);
                         UserService.setUser({
                             user_token: token_success.user_token,
                             userID: profileInfo.id,

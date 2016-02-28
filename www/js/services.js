@@ -17,10 +17,10 @@ angular.module('solomo.services')
     });
 
 
-angular.module('angularRestfulAuth', [])
+angular.module('angularRestful', [])
 
-    .factory('Auth', ['$http', '$localStorage', function($http, $localStorage){
-        var baseUrl = "http://128.199.111.187/api/v1";
+    .factory('Auth', ['$http', '$localStorage', function ($http, $localStorage) {
+
         function changeUser(user) {
             angular.extend(currentUser, user);
         }
@@ -55,19 +55,28 @@ angular.module('angularRestfulAuth', [])
         var currentUser = getUserFromToken();
 
         return {
-            save: function(data, success, error) {
+            save: function (data, success, error) {
                 $http.post(baseUrl + '/signin', data).success(success).error(error)
             },
-            FbLogin: function(data, success, error) {
+            FbLogin: function (data, success, error) {
                 $http.post(baseUrl + '/omniauth/facebook.json', data).success(success).error(error)
             },
-            me: function(success, error) {
+            me: function (success, error) {
                 $http.get(baseUrl + '/account.json').success(success).error(error)
             },
-            logout: function(success) {
+            logout: function (success) {
                 changeUser({});
                 delete $localStorage.token;
                 success();
+            }
+        };
+    }
+    ])
+
+    .factory('Post', ['$http', '$localStorage', function ($http, $localStorage) {
+        return {
+            send: function (data, success, error) {
+                $http.post(baseUrl + '/post.json', data).success(success).error(error)
             }
         };
     }

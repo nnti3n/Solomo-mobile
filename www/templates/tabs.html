@@ -1,21 +1,21 @@
-<ion-tabs class="tabs-icon-top">
+<ion-tabs class="tabs-icon-top" ng-class="{'tabs-item-hide': hideTabs}">
 
     <!-- Dashboard Tab -->
     <ion-tab title="Bảng Tin" icon-off="ion-ios-home" icon-on="ion-ios-home" href="#/tab/dash">
         <ion-nav-view name="tab-dash"></ion-nav-view>
     </ion-tab>
 
-    <ion-tab title="Thông Báo" icon-off="ion-android-notifications-none" icon-on="ion-android-notifications-none" href="#/tab/noti">
-        <ion-nav-view name="tab-noti"></ion-nav-view>
+    <!-- Map Tab -->
+    <ion-tab title="Map" icon-off="ion-map" icon-on="ion-map" href="#/tab/map">
+        <ion-nav-view name="tab-map"></ion-nav-view>
     </ion-tab>
 
     <ion-tab title="Tạo Deal" icon-off="ion-camera" icon-on="ion-camera" href="#/tab/post">
         <ion-nav-view name="tab-post"></ion-nav-view>
     </ion-tab>
 
-    <!-- Map Tab -->
-    <ion-tab title="Map" icon-off="ion-map" icon-on="ion-map" href="#/tab/map">
-        <ion-nav-view name="tab-map"></ion-nav-view>
+    <ion-tab title="Thông Báo" icon-off="ion-android-notifications-none" icon-on="ion-android-notifications-none" href="#/tab/noti">
+        <ion-nav-view name="tab-noti"></ion-nav-view>
     </ion-tab>
 
     <!-- Account Tab -->
