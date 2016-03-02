@@ -3,7 +3,7 @@ angular.module('solomo.controllers')
     .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, Post) {
 
         $scope.photos = [];
-        $scope.desc = "";
+        $scope.desc= {};
 
         $scope.choosePicture = function () {
             $scope.imageHandle(Camera.PictureSourceType.PHOTOLIBRARY);
@@ -35,12 +35,20 @@ angular.module('solomo.controllers')
                 var cameraImage = document.getElementById('image');
                 cameraImage.style.display = 'block';
                 cameraImage.src = imgURI;
+
+                window.localStorage.imagecache = imgURI;
             }, function (err) {
                 console.log(err);
             });
         };
+
         $scope.post = function () {
-            Post.send({description: $scope.desc, user_token: UserService.getUser().authResponse.accessToken}, function (success) {
+            Post.send({
+                description: $scope.desc.content,
+                user_token: UserService.getUser().user_token,
+                picture: window.localStorage.imagecache,
+                tags: "10"
+            }, function (success) {
                 console.log(success);
             }, function (error) {
                 console.log(error);

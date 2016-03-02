@@ -23,6 +23,18 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
         });
     })
 
+    .run(function ($rootScope, $state, UserService) {
+        $rootScope.$on('$stateChangeStart', function (event,next) {
+
+            if (!UserService.getUser().userID) {
+                if (next.name !== 'login') {
+                    event.preventDefault();
+                    $state.go('login');
+                }
+            }
+        });
+    })
+
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $stateProvider
@@ -104,7 +116,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('tab/dash');
+        $urlRouterProvider.otherwise('/tab/dash');
 
     })
 
@@ -125,4 +137,4 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
         };
     });
 
-var baseUrl = "http://128.199.111.187/api/v1";
+var baseUrl = "http://192.168.1.6:3000/api/v1";

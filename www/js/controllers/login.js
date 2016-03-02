@@ -71,7 +71,7 @@ angular.module('solomo.controllers')
                     console.log('getLoginStatus', success.status);
 
                     // Check if we have our user saved
-                    var user = UserService.getUser('facebook');
+                    var user = UserService.getUser();
 
                     if (!user.userID) {
                         getFacebookProfileInfo(success.authResponse)
@@ -84,7 +84,7 @@ angular.module('solomo.controllers')
                                         userID: profileInfo.id,
                                         name: profileInfo.name,
                                         email: profileInfo.email,
-                                        picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
+                                        picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
                                     });
                                     $state.go('tab.dash');
                                 }, function(tokenfail) {

@@ -1,6 +1,6 @@
 angular.module('solomo.services')
 
-    .service('UserService', function () {
+    .service('UserService', function ($localStorage) {
         // For the purpose of this example I will store user data on ionic local storage but you should save it on a database
         var setUser = function (user_data) {
             window.localStorage.starter_facebook_user = JSON.stringify(user_data);
@@ -66,7 +66,7 @@ angular.module('angularRestful', [])
             },
             logout: function (success) {
                 changeUser({});
-                delete $localStorage.token;
+                delete $localStorage.starter_facebook_user;
                 success();
             }
         };
