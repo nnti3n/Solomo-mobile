@@ -14,9 +14,11 @@
 
     `$ ionic state restore`
     
+    `$ bower install ngCordova`
+    
     `$ cordova -d plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="537496736415112" --variable APP_NAME="solomo"`
     
-    `$ bower install ngCordova`
+    `$ cordova plugin add org.apache.cordova.camera`
 
 4. Finally, plug-in a android device that have debuging mode turned on
     
