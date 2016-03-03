@@ -36,17 +36,17 @@ angular.module('solomo.controllers')
                 cameraImage.style.display = 'block';
                 cameraImage.src = imgURI;
 
-                window.localStorage.imagecache = imgURI;
             }, function (err) {
                 console.log(err);
             });
         };
 
         $scope.post = function () {
+            console.log($scope.photos);
             Post.send({
                 description: $scope.desc.content,
                 user_token: UserService.getUser().user_token,
-                picture: window.localStorage.imagecache,
+                picture: $scope.photos,
                 tags: "10"
             }, function (success) {
                 console.log(success);
