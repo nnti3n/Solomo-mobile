@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, Post) {
+    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer) {
 
         $scope.photos = [];
         $scope.desc= {};
@@ -14,27 +14,46 @@ angular.module('solomo.controllers')
         };
 
         $scope.imageHandle = function (Type) {
-            var options = {
-                quality: 75,
-                destinationType: Camera.DestinationType.DATA_URL,
+
+            var currentDate = new Date();
+
+            var cameraOptions = {
                 sourceType: Type,
-                allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 300,
-                targetHeight: 300,
-                popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: true
+                targetWidth: 500,
+                targetHeight: 500
             };
 
-            $cordovaCamera.getPicture(options).then(function (imageData) {
-                var imgURI = "data:image/jpeg;base64," + imageData;
-                $scope.img = imageData;
-                $scope.photos.push(imgURI);
+            var uploadOptions = {
+                fileKey: "image",
+                fileName: currentDate + ".jpeg",
+                chunkedMode: false,
+                mimeType: "image/jpeg",
+                params: {user_token: UserService.getUser().user_token}
+            };
 
-                console.log(imgURI);
+            $cordovaCamera.getPicture().then(function (imageData) {
                 var cameraImage = document.getElementById('image');
                 cameraImage.style.display = 'block';
-                cameraImage.src = imgURI;
+                cameraImage.src = imageData;
+
+                $scope.img = imageData;
+                console.log($scope.img);
+
+                $ionicLoading.show({
+                    template: 'uploading image..',
+                    duration: 10000
+                });
+
+                //upload image
+                $cordovaFileTransfer.upload(baseUrl+'/picture.json', imageData, uploadOptions)
+                    .then(function(result){
+                        $ionicLoading.hide();
+                        console.log(result);
+                        $scope.img = result;
+                    }, function(error){
+                        console.log(error);
+                    }, function(progress){});
+
 
             }, function (err) {
                 console.log(err);

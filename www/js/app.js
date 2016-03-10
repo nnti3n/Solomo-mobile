@@ -116,13 +116,17 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('login');
 
     })
 
     .config(function ($ionicConfigProvider) {
         $ionicConfigProvider.navBar.alignTitle('center');
         $ionicConfigProvider.tabs.position('bottom');
+    })
+
+    .config(function($compileProvider){
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
     })
 
     .directive('hideTabs', function($rootScope) {
@@ -137,4 +141,4 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
         };
     });
 
-var baseUrl = "http://192.168.1.6:3000/api/v1";
+var baseUrl = "https://solomo-api.herokuapp.com/api/v1";

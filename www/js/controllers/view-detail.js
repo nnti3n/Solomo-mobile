@@ -8,6 +8,26 @@ angular.module('solomo.controllers')
             $scope.search.searchText = "";
         };
 
+        $ionicLoading.show({
+            template: 'loading..',
+            duration: 10000
+        });
+
+        Post.feeds({
+            params: {
+                user_token: UserService.getUser().user_token
+            },
+            timeout: 10000
+        }, function (success) {
+            console.log(success);
+            $scope.post = success.post;
+            $ionicLoading.hide();
+        }, function (error) {
+            $ionicLoading.hide();
+            $window.alert("error loading feeds");
+            console.log(error);
+        });
+
         //back button
         $scope.GoBack = function () {
             if ($ionicHistory.viewHistory()) {
@@ -15,6 +35,7 @@ angular.module('solomo.controllers')
             } else {
                 $state.go('tab.dash');
             }
-
         }
+
+
     });

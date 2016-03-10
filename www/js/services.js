@@ -73,11 +73,37 @@ angular.module('angularRestful', [])
     }
     ])
 
-    .factory('Post', ['$http', '$localStorage', function ($http, $localStorage) {
+    .factory('Post', ['$http', '$localStorage', function ($http) {
         return {
             send: function (data, success, error) {
-                $http.post(baseUrl + '/post.json', data).success(success).error(error)
+                $http.post(baseUrl + '/posts.json', data).success(success).error(error)
+            },
+            get: function (data, success, error) {
+                $http.post(baseUrl + '/posts.json', data).success(success).error(error)
+            },
+            feeds: function (data, success, error) {
+                $http.get(baseUrl + '/posts.json', data).success(success).error(error)
+            },
+            detail: function (data, success, error) {
+                $http.get(baseUrl + '/posts.json', data).success(success).error(error)
             }
         };
+    }])
+
+    .factory('CameraService', ['$q', function($q) {
+
+        return {
+        getPicture: function(options) {
+            var q = $q.defer();
+
+            navigator.camera.getPicture(function(result) {
+                // Do any magic you need
+                q.resolve(result);
+            }, function(err) {
+                q.reject(err);
+            }, options);
+
+            return q.promise;
+        }
     }
-    ]);
+    }]);

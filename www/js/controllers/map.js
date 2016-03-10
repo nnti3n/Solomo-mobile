@@ -3,7 +3,8 @@ angular.module('solomo.controllers')
     .controller('MapCtrl', function ($scope, $cordovaGeolocation, $ionicLoading) {
 
         $ionicLoading.show({
-            template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>'
+            template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>',
+            duration: 10000
         });
 
 
