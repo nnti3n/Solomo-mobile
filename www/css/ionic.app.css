@@ -9746,3 +9746,7 @@ a.button {
 
 .padding {
   margin: 0 15px 0 15px; }
+
+.login-background-misc {
+  background: url(../img/bg.jpg);
+  background-size: cover; }

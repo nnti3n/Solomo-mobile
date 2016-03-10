@@ -23,6 +23,7 @@ angular.module('solomo.controllers')
                         },
                         function(fail){
                             $ionicLoading.hide();
+                            $state.go('login');
                         });
                 }
             });

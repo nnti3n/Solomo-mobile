@@ -1,7 +1,7 @@
 <ion-view view-title="Dashboard" hide-nav-bar="true">
     <ion-content>
 
-        <div class="bar bar-header item-input-inset bar-positive">
+        <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
             <label class="item-input-wrapper">
                 <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
             </label>
@@ -10,65 +10,17 @@
             </button>
         </div>
 
-        <div class="list card" ng-click="OpenDetail(1)">
+        <div class="list card" ng-click="OpenDetail(post.id)" ng-repeat="post in feeds">
             <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
+                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
                 <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>Nguyên</h2>
+                <h2>{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
             <div class="item item-body">
-                <img class="full-image" ng-src="img/nguyen-post.jpg">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
                 <p style="margin-bottom:5px;">
-                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
-                </p>
-                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
-                </p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
-                </p>
-            </div>
-        </div>
-
-        <div class="list card">
-            <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>Nguyên</h2>
-                <p>Quận 2, HCM</p>
-            </div>
-            <div class="item item-body">
-                <img class="full-image" ng-src="img/nguyen-post.jpg">
-                <p style="margin-bottom:5px;">
-                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
-                </p>
-                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
-                </p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
-                </p>
-            </div>
-        </div>
-
-        <div class="list card">
-            <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>Nguyên</h2>
-                <p>Quận 2, HCM</p>
-            </div>
-            <div class="item item-body">
-                <img class="full-image" ng-src="img/nguyen-post.jpg">
-                <p style="margin-bottom:5px;">
-                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
+                    {{ post.description }}
                 </p>
                 <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
                 <p style="margin:5px 0;">

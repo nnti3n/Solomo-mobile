@@ -9,18 +9,17 @@
 2. Then and Android platform
 
     `$ ionic platform add android`
-    
+
 3. Install Plugins and Dependencies based on package.json file
 
     `$ ionic state restore`
-    
+
     `$ bower install ngCordova`
-    
+
     `$ cordova -d plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="537496736415112" --variable APP_NAME="solomo"`
-    
+
     `$ cordova plugin add org.apache.cordova.camera`
 
-4. Finally, plug-in a android device that have debuging mode turned on
-    
+4. Finally, plug-in a android device that have debugging mode turned on
+
     `$ ionic run android`
-    

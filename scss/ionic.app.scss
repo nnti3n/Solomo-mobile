@@ -20,7 +20,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-@import "www/lib/fontawesome/scss/font-awesome";
 
 .scroll {
     height: 100%;
@@ -46,4 +45,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .padding {
     margin:0 15px 0 15px;
+}
+
+.login-background-misc {
+    background: url(../img/bg.jpg);
+    background-size: cover;
 }
