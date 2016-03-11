@@ -10,9 +10,19 @@ angular.module('solomo.services')
             return JSON.parse(window.localStorage.starter_facebook_user || '{}');
         };
 
+        var setImage = function (id) {
+            window.localStorage.image_post = id;
+        };
+
+        var getImage = function () {
+            return window.localStorage.image_post;
+        };
+
         return {
             getUser: getUser,
-            setUser: setUser
+            setUser: setUser,
+            setImage: setImage,
+            getImage: getImage
         };
     });
 

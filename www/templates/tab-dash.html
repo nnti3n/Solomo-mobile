@@ -1,16 +1,18 @@
 <ion-view view-title="Dashboard" hide-nav-bar="true">
-    <ion-content>
 
-        <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
-            <label class="item-input-wrapper">
-                <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
-            </label>
-            <button class="button button-clear" ng-click="clear_search()">
-                <i class="icon ion-ios-search"></i>
-            </button>
-        </div>
+    <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
+        <label class="item-input-wrapper">
+            <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
+        </label>
+        <button class="button button-clear" ng-click="clear_search()">
+            <i class="icon ion-ios-search"></i>
+        </button>
+    </div>
 
-        <div class="list card" ng-click="OpenDetail(post.id)" ng-repeat="post in feeds">
+    <ion-content scroll="true" style="margin-top:20px;">
+
+        <div class="list card" ng-click="OpenDetail(post.id)"
+             ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
             <div class="item item-avatar">
                 <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
                 <div style="position:absolute; right:15px; top:15px;">1 Day</div>

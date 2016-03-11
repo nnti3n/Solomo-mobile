@@ -1,8 +1,8 @@
 angular.module('solomo.controllers')
 
-    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer) {
+    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, Post) {
 
-        $scope.photos = [];
+        $scope.img = {};
         $scope.desc= {};
 
         $scope.choosePicture = function () {
@@ -40,16 +40,17 @@ angular.module('solomo.controllers')
                 console.log($scope.img);
 
                 $ionicLoading.show({
-                    template: 'uploading image..',
-                    duration: 10000
+                    template: 'uploading image..'
                 });
 
                 //upload image
                 $cordovaFileTransfer.upload(baseUrl+'/picture.json', imageData, uploadOptions)
                     .then(function(result){
                         $ionicLoading.hide();
-                        console.log(result);
-                        $scope.img = result;
+                        var response = JSON.parse(result.response);
+                        $scope.img.info = response.id;
+                        //set localstorage for id
+                        UserService.setImage(response.id);
                     }, function(error){
                         console.log(error);
                     }, function(progress){});
@@ -61,15 +62,21 @@ angular.module('solomo.controllers')
         };
 
         $scope.post = function () {
-            console.log($scope.photos);
+            $ionicLoading.show({
+                template: 'posting..'
+            });
+
+
             Post.send({
                 description: $scope.desc.content,
                 user_token: UserService.getUser().user_token,
-                picture: $scope.photos,
-                tags: "10"
+                picture_id: UserService.getImage()
             }, function (success) {
+                $ionicLoading.hide();
+                $state.go('tab.account', {}, { reload: true });
                 console.log(success);
             }, function (error) {
+                $ionicLoading.hide();
                 console.log(error);
             });
         }
