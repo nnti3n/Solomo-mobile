@@ -1,6 +1,23 @@
 angular.module('solomo.controllers')
 
-    .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading,$cordovaCamera){
+    .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post){
+
+        $scope.profile = UserService.getUser();
+
+        Post.feeds({
+            params: {
+                user_token: UserService.getUser().user_token,
+                user_id: UserService.getUser().userID
+            },
+            timeout: 10000
+        }, function (success) {
+            console.log(success);
+            $scope.feeds = success.posts;
+            $ionicLoading.hide();
+        }, function (error) {
+            $ionicLoading.hide();
+            console.log(error);
+        });
 
         $scope.showLogOutMenu = function() {
             var hideSheet = $ionicActionSheet.show({

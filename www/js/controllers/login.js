@@ -18,13 +18,13 @@ angular.module('solomo.controllers')
                         console.log(authResponse.accessToken);
                         UserService.setUser({
                             user_token: token_success.user_token,
-                            userID: profileInfo.id,
+                            userID: token_success.user_id,
                             name: profileInfo.name,
                             email: profileInfo.email,
                             picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
                         });
                         $ionicLoading.hide();
-                        $state.go('tab.dash');
+                        $state.go('tab.account');
                     }, function(tokenfail) {
                         console.log('get user token fail', tokenfail);
                         $ionicLoading.hide();
@@ -81,12 +81,12 @@ angular.module('solomo.controllers')
                                 Auth.FbLogin({"facebook_token": success.authResponse.accessToken}, function(token_success) {
                                     UserService.setUser({
                                         user_token: token_success.user_token,
-                                        userID: profileInfo.id,
+                                        userID: token_success.user_id,
                                         name: profileInfo.name,
                                         email: profileInfo.email,
                                         picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
                                     });
-                                    $state.go('tab.dash');
+                                    $state.go('tab.account');
                                 }, function(tokenfail) {
                                     console.log('fb connected but get user token fail', tokenfail);
                                     $ionicLoading.hide();

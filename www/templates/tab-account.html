@@ -1,12 +1,50 @@
-<ion-view view-title="Account">
-    <ion-content>
+<ion-view view-title="Account" hide-nav-bar="true">
+
+    <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
+        <label class="item-input-wrapper">
+            <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
+        </label>
+        <button class="button button-clear" ng-click="clear_search()">
+            <i class="icon ion-ios-search"></i>
+        </button>
+    </div>
+
+    <ion-content scroll="true" style="margin-top:20px;">
+
         <div class="list card">
+            <div class="item item-avatar" style="border-bottom: none; padding-top: 30px; padding-left: 85px;">
+                <img height="60" width="60" style="border-radius:0;max-height: 60px; max-width:60px;"
+                     ng-src="{{profile.picture}}">
+                <h2 style="font-size:x-large;">{{profile.name}}</h2>
+            </div>
+            <p style="padding-left:15px; padding-top:10px;"><b>20 Follower 50 Following</b></p>
+        </div>
+
+        <div class="list card" ng-click="OpenDetail(post.id)"
+             ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
             <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="user.picture">
-                <h2>{{user.name}}</h2>
+                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <h2>{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
+            <div class="item item-body">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
+                <p style="margin-bottom:5px;">
+                    {{ post.description }}
+                </p>
+                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
+                </p>
+                <p style="margin:5px 0;">
+                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
+                </p>
+            </div>
         </div>
+
         <ion-list>
             <a class="button button-assertive button-block button-outline" ng-click="showLogOutMenu()">Log Out</a>
         </ion-list>

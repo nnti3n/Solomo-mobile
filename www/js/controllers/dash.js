@@ -32,7 +32,6 @@ angular.module('solomo.controllers')
             $ionicLoading.hide();
         }, function (error) {
             $ionicLoading.hide();
-            $window.alert("error loading feeds");
             console.log(error);
         });
     });
