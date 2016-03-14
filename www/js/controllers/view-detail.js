@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-    .controller('ViewDetailCtrl', function($scope, $ionicHistory, $state) {
+    .controller('ViewDetailCtrl', function($scope, $ionicHistory, $state,$ionicLoading) {
         //search
         $scope.search = {};
         $scope.search.searchText = "";
