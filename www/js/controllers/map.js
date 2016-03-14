@@ -28,12 +28,13 @@ angular.module('solomo.controllers')
         }
         var dealLatlng = new google.maps.LatLng(feeds[feed].lat, feeds[feed].long);
         console.log("yeah");
-        google.maps.event.addListenerOnce(map, 'idle', function () {
-            var marker = new google.maps.Marker({
-                map: map,
-                animation: google.maps.Animation.DROP,
-                position: dealLatlng
-            });
+        var marker = new google.maps.Marker({
+            map: map,
+            animation: google.maps.Animation.DROP,
+            position: dealLatlng
+        });
+        google.maps.event.addListener(marker, 'mousedown', function() {
+            console.log("CLICK!!!!!!!!!")
         });
     }
 
