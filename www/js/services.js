@@ -18,11 +18,31 @@ angular.module('solomo.services')
             return window.localStorage.image_post;
         };
 
+        var setLat = function (latitude) {
+            window.localStorage.latitude = latitude;
+        };
+
+        var getLat = function () {
+            return window.localStorage.latitude;
+        };
+
+        var setLong = function (longitude) {
+            window.localStorage.longitude = longitude;
+        };
+
+        var getLong = function () {
+            return window.localStorage.longitude;
+        };
+
         return {
             getUser: getUser,
             setUser: setUser,
             setImage: setImage,
-            getImage: getImage
+            getImage: getImage,
+            setLat: setLat,
+            getLat:getLat,
+            setLong:setLong,
+            getLong:getLong
         };
     });
 

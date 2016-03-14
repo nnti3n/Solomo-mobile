@@ -1,47 +1,33 @@
 angular.module('solomo.controllers')
 
-    .controller('MapCtrl', function ($scope, $cordovaGeolocation, $ionicLoading) {
+.controller('MapCtrl', function ($scope, UserService,$ionicLoading) {
 
-        $ionicLoading.show({
-            template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>',
-            duration: 10000
-        });
+    $ionicLoading.show({
+        template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>',
+        duration: 10000
+    });
 
+    var lat = UserService.getLat();
+    var long = UserService.getLong();
 
-        var posOptions = {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 0
-        };
+    var myLatlng = new google.maps.LatLng(lat, long);
+    var mapOptions = {
+        center: myLatlng,
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
 
-        $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
-            var lat = position.coords.latitude;
-            var long = position.coords.longitude;
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-            var myLatlng = new google.maps.LatLng(lat, long);
+    google.maps.event.addListenerOnce(map, 'idle', function () {
 
-            var mapOptions = {
-                center: myLatlng,
-                zoom: 16,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-            google.maps.event.addListenerOnce(map, 'idle', function () {
-
-                var marker = new google.maps.Marker({
-                    map: map,
-                    animation: google.maps.Animation.DROP,
-                    position: myLatlng
-                });
-
-            });
-
-            $ionicLoading.hide();
-        }, function (err) {
-            $ionicLoading.hide();
-            console.log(err);
+        var marker = new google.maps.Marker({
+            map: map,
+            animation: google.maps.Animation.DROP,
+            position: myLatlng
         });
 
     });
+
+    $ionicLoading.hide();
+});

@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, Post) {
+    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, $cordovaGeolocation,Post) {
 
         $scope.img = {};
         $scope.desc= {};
@@ -66,11 +66,12 @@ angular.module('solomo.controllers')
                 template: 'posting..'
             });
 
-
             Post.send({
                 description: $scope.desc.content,
                 user_token: UserService.getUser().user_token,
-                picture_id: UserService.getImage()
+                picture_id: UserService.getImage(),
+                location_lat:UserService.getLat(),
+                location_long:UserService.getLong()
             }, function (success) {
                 $ionicLoading.hide();
                 $state.go('tab.account', {}, { reload: true });
