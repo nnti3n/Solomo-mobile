@@ -1,5 +1,12 @@
 <ion-view view-title="Map">
     <ion-content scroll="false">
         <div id="map" data-tap-disabled="true"></div>
+        <div scroll="true" class="list" ng-repeat="post in list">
+            <a class="item item-thumbnail-left" href="#">
+                <img ng-src="{{ post.picture_url }}">
+                <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                <p>{{ post.description }}</p>
+            </a>
+        </div>
     </ion-content>
 </ion-view>

@@ -21,11 +21,14 @@ angular.module('solomo.controllers')
 
     var feeds = UserService.getObject('feed');
     // console.log(feeds[5]);
+    $scope.list = [];
+    // $scope.maker = [];
     for(feed in feeds){
         console.log(feeds[feed]);
         if (feeds[feed].lat == null || feeds[feed].long == null){
             continue;
         }
+        $scope.list.push(feeds[feed]);
         var dealLatlng = new google.maps.LatLng(feeds[feed].lat, feeds[feed].long);
         console.log("yeah");
         var marker = new google.maps.Marker({
@@ -33,8 +36,20 @@ angular.module('solomo.controllers')
             animation: google.maps.Animation.DROP,
             position: dealLatlng
         });
-        google.maps.event.addListener(marker, 'mousedown', function() {
-            console.log("CLICK!!!!!!!!!")
+
+        attachSecretMessage(marker,feeds[feed])
+    }
+
+
+    function attachSecretMessage(marker, feed) {
+        var infowindow = new google.maps.InfoWindow({
+
+            content: feed.description
+        });
+
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(marker.get('map'), marker);
         });
     }
 
