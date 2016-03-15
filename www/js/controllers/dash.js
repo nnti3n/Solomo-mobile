@@ -27,11 +27,13 @@ angular.module('solomo.controllers')
             },
             timeout: 10000
         }, function (success) {
-            console.log(success);
+            console.log(success.posts);
             $scope.feeds = success.posts;
+            UserService.setObject('feed',success.posts);
             $ionicLoading.hide();
         }, function (error) {
             $ionicLoading.hide();
+            $scope.feeds = UserService.getObject('feed');
             console.log(error);
         });
     });
