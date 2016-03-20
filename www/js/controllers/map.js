@@ -24,7 +24,7 @@ angular.module('solomo.controllers')
     $scope.list = [];
     // $scope.maker = [];
     for(feed in feeds){
-        console.log(feeds[feed]);
+        //console.log(feeds[feed]);
         if (feeds[feed].lat == null || feeds[feed].long == null){
             continue;
         }
