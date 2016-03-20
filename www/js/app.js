@@ -33,6 +33,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
             }
         }
     });
+
     //-------------------- GET LOCATION---------------------------
     var options = {
         enableHighAccuracy: true,
@@ -45,9 +46,13 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
         UserService.setLat(pos.coords.latitude);
         UserService.setLong(pos.coords.longitude);
     }
+
     function error(err) {
         console.warn('ERROR(' + err.code + '): ' + err.message);
-    };
+        UserService.setLat(10.7756590);
+        UserService.setLong(106.7004240);
+    }
+
     navigator.geolocation.getCurrentPosition(success, error, options);
     //-------------------- GET LOCATION---------------------------
 })
