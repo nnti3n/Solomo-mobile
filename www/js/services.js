@@ -36,12 +36,13 @@ angular.module('solomo.services')
 
     var setObject =function(key, value) {
         window.localStorage[key] = JSON.stringify(value);
-        console.log(window.localStorage[key])
-    }
+        //console.log(window.localStorage[key]);
+    };
+
     var getObject = function(key) {
-        console.log(window.localStorage[key])
+        console.log(window.localStorage[key]);
         return JSON.parse(window.localStorage[key] || '{}');
-    }
+    };
 
     return {
         getUser: getUser,
@@ -120,7 +121,8 @@ angular.module('angularRestful', [])
             $http.post(baseUrl + '/posts.json', data).success(success).error(error)
         },
         get: function (data, success, error) {
-            $http.post(baseUrl + '/posts.json', data).success(success).error(error)
+            console.log(data);
+            $http.get(baseUrl + '/posts/' + data.params.post_id+ '.json', data).success(success).error(error)
         },
         feeds: function (data, success, error) {
             $http.get(baseUrl + '/posts.json', data).success(success).error(error)
