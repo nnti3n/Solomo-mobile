@@ -1,12 +1,14 @@
 <ion-view view-title="Map">
-    <ion-content scroll="false">
+    <ion-content overflow-scroll="true" scroll="false">
         <div id="map" data-tap-disabled="true" style="height:60%;"></div>
-        <ion-scroll direction="y" class="list" ng-repeat="post in list" style="height:40%;">
-            <a class="item item-thumbnail-left" href="#">
-                <img ng-src="{{ post.picture_url }}">
-                <h2>{{ post.user.name | limitTo: 25 }}</h2>
-                <p>{{ post.description }}</p>
-            </a>
+        <ion-scroll direction="y" style="height:40%;">
+            <div class="list" ng-repeat="post in list">
+                <a class="item item-thumbnail-left"  ng-click="post.OnClick()">
+                    <img ng-src="{{ post.picture_url }}">
+                    <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                    <p>{{ post.description }}</p>
+                </a>
+            </div>
         </ion-scroll>
     </ion-content>
 </ion-view>

@@ -27,7 +27,7 @@ angular.module('solomo.controllers')
             },
             timeout: 10000
         }, function (success) {
-            console.log(success.posts);
+            // console.log(success.posts);
             $scope.feeds = success.posts;
             UserService.setObject('feed',success.posts);
             $ionicLoading.hide();
