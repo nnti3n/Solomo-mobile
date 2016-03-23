@@ -48,4 +48,5 @@ angular.module('solomo.controllers')
             });
         }
 
+
     });

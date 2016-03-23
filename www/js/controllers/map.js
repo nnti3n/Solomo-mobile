@@ -28,7 +28,8 @@ angular.module('solomo.controllers')
         if (feeds[feed].lat == null || feeds[feed].long == null){
             continue;
         }
-        $scope.list.push(feeds[feed]);
+
+        // $scope.$apply();
         var dealLatlng = new google.maps.LatLng(feeds[feed].lat, feeds[feed].long);
         console.log("yeah");
         var marker = new google.maps.Marker({
@@ -37,21 +38,41 @@ angular.module('solomo.controllers')
             position: dealLatlng
         });
 
+        post = feeds[feed];
+        post.marker = marker;
+        post.OnClick = function(){
+            // console.log(id);
+            // console.log($scope.list[id]);
+            infowindow.setContent(this.description);
+            infowindow.open(map, this.marker);
+            map.panTo(this.marker.getPosition()) 
+        };
+        $scope.list.push(post);
+
         attachSecretMessage(marker,feeds[feed])
     }
 
-
+    var infowindow = new google.maps.InfoWindow();
+    console.log($scope.list);
     function attachSecretMessage(marker, feed) {
-        var infowindow = new google.maps.InfoWindow({
+        // var infowindow = new google.maps.InfoWindow({
 
-            content: feed.description
-        });
+        //     content: feed.description
+        // });
 
 
         google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(feed.description);
             infowindow.open(marker.get('map'), marker);
+            map.panTo(marker.getPosition());
         });
     }
-
+    // $scope.OnClick = function(id){
+    //     console.log(id);
+    //     console.log($scope.list[id]);
+    //     infowindow.setContent($scope.list[id].description);
+    //     infowindow.open($scope.list[id].marker.get('map'), $scope.list[id].marker);
+    //     map.panTo($scope.list[id].marker.getPosition())
+    // };
     $ionicLoading.hide();
 });
