@@ -21,19 +21,31 @@ angular.module('solomo.controllers')
             $state.go("tab.view-detail", {viewId: viewId})
         };
 
-        Post.feeds({
-            params: {
-                user_token: UserService.getUser().user_token
-            },
-            timeout: 10000
-        }, function (success) {
-            console.log(success.posts);
-            $scope.feeds = success.posts;
-            UserService.setObject('feed',success.posts);
-            $ionicLoading.hide();
-        }, function (error) {
-            $ionicLoading.hide();
-            $scope.feeds = UserService.getObject('feed');
-            console.log(error);
-        });
+        //call api
+        PostRequest();
+
+        //pull to refresh
+        $scope.doRefresh = function() {
+            PostRequest();
+        };
+
+        function PostRequest() {
+            Post.feeds({
+                params: {
+                    user_token: UserService.getUser().user_token
+                },
+                timeout: 10000
+            }, function (success) {
+                console.log(success);
+                $scope.feeds = success.posts;
+                UserService.setObject('feed', success.posts);
+                $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
+            }, function (error) {
+                $ionicLoading.hide();
+                $scope.feeds = UserService.getObject('feed');
+                console.log(error);
+            });
+        }
+
     });

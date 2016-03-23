@@ -94,8 +94,8 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 templateUrl: 'templates/view-detail.html',
                 controller: 'ViewDetailCtrl'
             }
-        }
-
+        },
+        cache: false
     })
 
     .state('tab.noti', {

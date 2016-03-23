@@ -15,17 +15,24 @@
             </button>
         </div>
 
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+
         <div class="list">
             <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>Nguyên</h2>
+                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
+                <!-- check if crawler post -->
+                <div ng-if="!post.post_type" style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
+                <h2>{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
             <div style="border:none" class="item item-body">
-                <img class="full-image" ng-src="img/nguyen-post.jpg">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
                 <p style="margin-bottom:5px;">
-                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
+                    {{ post.description }}
                 </p>
                 <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
                 <p style="margin:5px 0;">

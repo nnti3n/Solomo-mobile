@@ -11,11 +11,19 @@
 
     <ion-content scroll="true" style="margin-top:20px;">
 
-        <div class="list card" ng-click="OpenDetail(post.id)"
-             ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+
+        <div class="list card post-repeat" ng-click="OpenDetail(post.id)"
+             collection-repeat="post in feeds | filter:search.searchText | orderBy:'-id' " item-height="400">
             <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
+                <!-- check if crawler post -->
+                <div ng-if="!post.post_type" style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
                 <h2>{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
