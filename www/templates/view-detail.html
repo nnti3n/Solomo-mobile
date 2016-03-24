@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="list">
+        <!-- <div class="list">
             <a class="item item-avatar" href="#" style="border:0; padding:16px 15px;">
                 <img ng-src="img/nguyen.jpg" height="40" width="40" style="border-radius:0;">
                 <h2 style="margin-left:50px;">Nguyen Tran</h2>
@@ -59,6 +59,23 @@
                 <h2 style="margin-left:50px;">Nguyen Tran</h2>
                 <p style="margin-left:50px;">Sao hay zi</p>
             </a>
+        </div> -->
+        <div ng-repeat="cmt in post.comments.comments">
+            <div class="card">
+            <div class="item item-avatar item-text-wrap">
+                <img ng-src={{cmt.user.avatar}}>
+                <h2  style="color: #4DADAF;">{{cmt.user.name}}</h2>
+                <!-- <p>{{cmt.created_at}}</p> -->
+                <p class="item">{{cmt.content}}</p>
+            </div>
+            </div>
+        </div>
+        <div class="item item-input-inset">
+            <textarea rows="4" placeholder="Comments" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
+            </textarea>
+            <button class="button button-small" style="background-color: #55B6B8; width: 50px">
+                <i class="icon  ion-paper-airplane" style="color: #ffffff;"></i>
+            </button>
         </div>
 
     </ion-content>
