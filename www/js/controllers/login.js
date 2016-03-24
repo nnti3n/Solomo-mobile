@@ -63,6 +63,10 @@ angular.module('solomo.controllers')
 
         //This method is executed when the user press the "Login with facebook" button
         $scope.facebookSignIn = function () {
+            $ionicLoading.show({
+                template: '<ion-spinner icon="lines"></ion-spinner>',
+                duration: 10000
+            });
             facebookConnectPlugin.getLoginStatus(function (success) {
                 if (success.status === 'connected') {
                     // The user is logged in and has authenticated your app, and response.authResponse supplies
@@ -107,9 +111,10 @@ angular.module('solomo.controllers')
 
                     console.log('getLoginStatus', success.status);
 
-                    $ionicLoading.show({
-                        template: 'Logging in...'
-                    });
+                    // $ionicLoading.show({
+                    //     template: '<ion-spinner icon="lines"></ion-spinner>',
+                    //     duration: 10000
+                    // });
 
                     // Ask the permissions you need. You can learn more about
                     // FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4

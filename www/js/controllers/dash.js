@@ -3,7 +3,7 @@ angular.module('solomo.controllers')
     .controller('DashCtrl', function($scope, $state, Post, UserService, $ionicLoading) {
         //search
         $ionicLoading.show({
-            template: 'loading...',
+            template: '<ion-spinner icon="lines"></ion-spinner>',
             duration: 10000
         });
 
