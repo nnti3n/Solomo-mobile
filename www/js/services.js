@@ -40,7 +40,7 @@ angular.module('solomo.services')
     };
 
     var getObject = function(key) {
-        console.log(window.localStorage[key]);
+        //console.log(window.localStorage[key]);
         return JSON.parse(window.localStorage[key] || '{}');
     };
 
@@ -129,6 +129,12 @@ angular.module('angularRestful', [])
         },
         detail: function (data, success, error) {
             $http.get(baseUrl + '/posts.json', data).success(success).error(error)
+        },
+        like: function (data, success, error) {
+            $http.post(baseUrl + '/post_likes/like.json', data).success(success).error(error)
+        },
+        unlike: function (data, success, error) {
+            $http.post(baseUrl + '/post_likes/unlike.json', data).success(success).error(error)
         }
     };
 }])

@@ -4,6 +4,10 @@ angular.module('solomo.controllers')
 
         $scope.profile = UserService.getUser();
 
+        $scope.OpenDetail = function (viewId) {
+            $state.go("tab.view-detail", {viewId: viewId})
+        };
+
         Post.feeds({
             params: {
                 user_token: UserService.getUser().user_token,
