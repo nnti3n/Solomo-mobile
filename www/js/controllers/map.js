@@ -3,7 +3,7 @@ angular.module('solomo.controllers')
 .controller('MapCtrl', function ($scope, UserService,$ionicLoading) {
 
     $ionicLoading.show({
-        template: '<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>',
+        template: '<ion-spinner icon="lines"></ion-spinner>',
         duration: 10000
     });
 
