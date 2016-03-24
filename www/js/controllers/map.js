@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-.controller('MapCtrl', function ($scope, UserService,$ionicLoading) {
+.controller('MapCtrl', function ($scope, UserService,$ionicLoading, $state) {
 
     $ionicLoading.show({
         template: '<ion-spinner icon="lines"></ion-spinner>',
@@ -45,12 +45,17 @@ angular.module('solomo.controllers')
             // console.log($scope.list[id]);
             infowindow.setContent(this.description);
             infowindow.open(map, this.marker);
-            map.panTo(this.marker.getPosition()) 
+            map.panTo(this.marker.getPosition())
         };
         $scope.list.push(post);
 
         attachSecretMessage(marker,feeds[feed])
     }
+
+    //open detail post
+    $scope.OpenDetail = function (viewId) {
+        $state.go("tab.view-detail", {viewId: viewId})
+    };
 
     var infowindow = new google.maps.InfoWindow();
     console.log($scope.list);
