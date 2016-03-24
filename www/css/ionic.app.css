@@ -9750,3 +9750,13 @@ a.button {
 .login-background-misc {
   background: url(../img/bg.jpg);
   background-size: cover; }
+
+.list-map .button-map {
+  min-width: 40px;
+  min-height: 20px;
+  top: 10px !important;
+  right: 10px !important;
+  position: absolute !important; }
+
+.list-map {
+  margin-bottom: 0 !important; }

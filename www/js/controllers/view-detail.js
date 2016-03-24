@@ -44,11 +44,12 @@ angular.module('solomo.controllers')
 
         //back button
         $scope.GoBack = function () {
-            if ($ionicHistory.viewHistory()) {
-                $ionicHistory.goBack();
-            } else {
-                $state.go('tab.dash');
-            }
+            //if ($ionicHistory.viewHistory()) {
+            //    $ionicHistory.goBack();
+            //} else {
+            //    $state.go('tab.dash');
+            //}
+            $state.go('tab.dash');
         }
 
 
