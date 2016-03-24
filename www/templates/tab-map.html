@@ -2,11 +2,14 @@
     <ion-content overflow-scroll="true" scroll="false">
         <div id="map" data-tap-disabled="true" style="height:60%;"></div>
         <ion-scroll direction="y" style="height:40%;">
-            <div class="list" ng-repeat="post in list">
+            <div class="list list-map" ng-repeat="post in list">
                 <a class="item item-thumbnail-left"  ng-click="post.OnClick()">
                     <img ng-src="{{ post.picture_url }}">
                     <h2>{{ post.user.name | limitTo: 25 }}</h2>
                     <p>{{ post.description }}</p>
+                    <button class="button button-positive button-map" ng-click="OpenDetail(post.id)">
+                        <i class="ion-arrow-right-c"></i>
+                    </button>
                 </a>
             </div>
         </ion-scroll>

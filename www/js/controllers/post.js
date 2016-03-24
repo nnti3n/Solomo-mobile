@@ -5,6 +5,11 @@ angular.module('solomo.controllers')
         $scope.img = {};
         $scope.desc= {};
 
+        //take picture immediatly
+        $scope.$on("$ionicView.enter", function() {
+            $scope.imageHandle(Camera.PictureSourceType.CAMERA);
+        });
+
         $scope.choosePicture = function () {
             $scope.imageHandle(Camera.PictureSourceType.PHOTOLIBRARY);
         };

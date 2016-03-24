@@ -25,6 +25,9 @@
     "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [
-    "android"
+    {
+      "platform": "android",
+      "locator": "browser"
+    }
   ]
 }
