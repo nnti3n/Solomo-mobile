@@ -1,7 +1,36 @@
 angular.module('solomo.controllers')
 
-    .controller('ViewDetailCtrl', function($scope, $ionicHistory, $state,$ionicLoading, $stateParams, Post, UserService, $window) {
+    .controller('ViewDetailCtrl', function($scope, $ionicHistory, $state,$ionicLoading, $stateParams, Post, UserService, $window, Comment) {
         console.log($stateParams.viewId);
+
+        $scope.content = "";
+
+        $scope.sendComment = function(){
+            // if $scope.content == "" 
+            //     return;
+            // var cm = {};
+            // cm.user = UserService.getUser();
+            // cm.content = $scope.content;
+            // $scope.post.comments.comments.push(cm);
+
+            // data = {
+            //     params: {
+            //         user_token: UserService.getUser().user_token,
+            //         post_id: $stateParams.viewId,
+            //         content:$scope.content
+            //     },
+            //     timeout: 10000
+            // };
+            // Comment.send(data,
+            // function (success) {
+            //     console.log(success);
+            // },
+            // function (error) {
+            //     $ionicLoading.hide();
+            //     $window.alert("error send comment");
+            //     console.log(error);
+            // });
+        };
 
         //search
         $scope.search = {};

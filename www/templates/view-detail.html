@@ -65,15 +65,15 @@
             <div class="item item-avatar item-text-wrap">
                 <img ng-src={{cmt.user.avatar}}>
                 <h2  style="color: #4DADAF;">{{cmt.user.name}}</h2>
-                <!-- <p>{{cmt.created_at}}</p> -->
+                <!-- <p>{{cmt.created}}</p> -->
                 <p class="item">{{cmt.content}}</p>
             </div>
             </div>
         </div>
         <div class="item item-input-inset">
-            <textarea rows="4" placeholder="Comments" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
+            <textarea rows="4" placeholder="Comments" ng-model="content" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
             </textarea>
-            <button class="button button-small" style="background-color: #55B6B8; width: 50px">
+            <button class="button button-small" style="background-color: #55B6B8; width: 50px"  ng-click="sendComment()">
                 <i class="icon  ion-paper-airplane" style="color: #ffffff;"></i>
             </button>
         </div>
