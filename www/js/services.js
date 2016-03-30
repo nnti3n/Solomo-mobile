@@ -139,6 +139,14 @@ angular.module('angularRestful', [])
     };
 }])
 
+.factory('Comment', ['$http', function ($http) {
+    return {
+        send: function (data, success, error) {
+            $http.post(baseUrl + '/comments.json', data).success(success).error(error)
+        }
+    };
+}])
+
 .factory('CameraService', ['$q', function($q) {
 
     return {
