@@ -4,7 +4,7 @@ angular.module('solomo.controllers')
         //search
         $ionicLoading.show({
             template: '<ion-spinner icon="lines"></ion-spinner>',
-            duration: 10000
+            duration: 15000
         });
 
         $scope.user = {};
@@ -34,7 +34,7 @@ angular.module('solomo.controllers')
                 params: {
                     user_token: UserService.getUser().user_token
                 },
-                timeout: 10000
+                timeout: 15000
             }, function (success) {
                 console.log(success);
                 $scope.feeds = success.posts;

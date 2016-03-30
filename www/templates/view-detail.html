@@ -36,30 +36,18 @@
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
-                <p style="margin:5px 0;"><b>{{post.likes.count || 200}} người thích deal này</b></p>
+                <p style="margin:5px 0;"><b>{{post.likes.count || 0}} người thích deal này</b></p>
                 <p style="margin:5px 0;">
                     <a href="#" class="subdued" ng-click="like(post.id)"><i class="{{post.icon_like}}" style="font-size:30px;"></i></a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
                     <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
                 </p>
                 <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có {{post.comments.count || 26}} bình luận cho post này</a>
+                    <a href="#" class="subdued">Có {{post.comments.count || 0}} bình luận cho post này</a>
                 </p>
             </div>
         </div>
 
-        <!-- <div class="list">
-            <a class="item item-avatar" href="#" style="border:0; padding:16px 15px;">
-                <img ng-src="img/nguyen.jpg" height="40" width="40" style="border-radius:0;">
-                <h2 style="margin-left:50px;">Nguyen Tran</h2>
-                <p style="margin-left:50px;">Cool</p>
-            </a>
-            <a class="item item-avatar" href="#" style="border:0; padding:16px 15px;">
-                <img ng-src="img/nguyen.jpg" height="40" width="40" style="border-radius:0;">
-                <h2 style="margin-left:50px;">Nguyen Tran</h2>
-                <p style="margin-left:50px;">Sao hay zi</p>
-            </a>
-        </div> -->
         <div ng-repeat="cmt in post.comments.comments">
             <div class="card">
             <div class="item item-avatar item-text-wrap">
@@ -71,7 +59,7 @@
             </div>
         </div>
         <div class="item item-input-inset">
-            <textarea rows="4" placeholder="Comments" ng-model="cmt.content" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
+            <textarea rows="4" placeholder="Comments" ng-model="cmt.content" enter-submit="sendComment()" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
             </textarea>
             <button class="button button-small" style="background-color: #55B6B8; width: 50px"  ng-click="sendComment()">
                 <i class="icon  ion-paper-airplane" style="color: #ffffff;"></i>

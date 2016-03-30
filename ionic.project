@@ -8,5 +8,11 @@
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*"
+  ],
+  "proxies": [
+    {
+        "path": "/api",
+        "proxyUrl": "https://solomo-api.herokuapp.com/api/v1"
+    }
   ]
 }

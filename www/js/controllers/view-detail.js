@@ -16,16 +16,17 @@
                 function (success) {
                     var cm = {};
                     cm.user = UserService.getUser();
+                    cm.user.avatar = UserService.getUser().picture;
                     console.log(cm.user);
                     cm.content = $scope.cmt.content;
                     $scope.post.comments.comments.unshift(cm);
                     $scope.cmt.content = "";
-                    console.log("send comment success ne`")
+                    console.log("send comment success ne`");
                     console.log(success);
                 },
                 function (error) {
                     $ionicLoading.hide();
-                    console.log("error send comment ne`")
+                    console.log("error send comment ne`");
                     console.log(error);
                 });
             };
@@ -127,4 +128,24 @@
             }
 
 
+        })
+
+        // enter to submit
+        .directive('enterSubmit', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
+
+                    elem.bind('keydown', function (event) {
+                        var code = event.keyCode || event.which;
+
+                        if (code === 13) {
+                            if (!event.shiftKey) {
+                                event.preventDefault();
+                                scope.$apply(attrs.enterSubmit);
+                            }
+                        }
+                    });
+                }
+            }
         });
