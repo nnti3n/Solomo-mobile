@@ -98,6 +98,17 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
         cache: false
     })
 
+    .state('tab.user-profile', {
+        url: '/profile/:userId',
+        views: {
+            'tab-dash': {
+                templateUrl: 'templates/user-profile.html',
+                controller: 'ProfileCtrl'
+            }
+        },
+        cache: false
+    })
+
     .state('tab.noti', {
         url: '/noti',
         views: {
