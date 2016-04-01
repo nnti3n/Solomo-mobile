@@ -7,11 +7,27 @@ angular.module('solomo.controllers')
             duration: 15000
         });
 
+        $scope.request = {};
         $scope.user = {};
+        $scope.crawl = {};
         $scope.user.picture = UserService.getUser().picture;
         $scope.user.name = UserService.getUser().name;
         $scope.search = {};
         $scope.search.searchText = "";
+        $scope.crawl.desc = "";
+        $scope.request.page = 1;
+
+        $scope.crawl.getall = function () {
+            $scope.crawl.desc = "";
+        };
+
+        $scope.crawl.getuser = function () {
+            $scope.crawl.desc = "user";
+        };
+
+        $scope.crawl.getcrawler = function () {
+            $scope.crawl.desc = "crawl";
+        };
 
         $scope.clear_search = function () {
             $scope.search.searchText = "";
@@ -19,6 +35,10 @@ angular.module('solomo.controllers')
 
         $scope.OpenDetail = function (viewId) {
             $state.go("tab.view-detail", {viewId: viewId})
+        };
+
+        $scope.GotoProfile = function (userId) {
+            $state.go("tab.user-profile", {userId: userId})
         };
 
         //call api
@@ -32,7 +52,8 @@ angular.module('solomo.controllers')
         function PostRequest() {
             Post.feeds({
                 params: {
-                    user_token: UserService.getUser().user_token
+                    user_token: UserService.getUser().user_token,
+                    page: $scope.request.page
                 },
                 timeout: 15000
             }, function (success) {

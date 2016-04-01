@@ -1,4 +1,4 @@
-<ion-view view-title="Dashboard" hide-nav-bar="true">
+<ion-view view-title="Profile" hide-nav-bar="true">
 
     <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
         <label class="item-input-wrapper">
@@ -9,31 +9,26 @@
         </button>
     </div>
 
-    <div class="bar bar-subheader">
-        <button ng-click="crawl.getall()" class="button button-light" style="display:inline;"> All</button>
-        <button ng-click="crawl.getuser()" class="button button-light" style="display:inline;"> User</button>
-        <button ng-click="crawl.getcrawler()" class="button button-light" style="display:inline;"> Crawler</button>
-    </div>
+    <ion-content scroll="true" style="margin-top:20px;">
 
-    <ion-content scroll="true" style="margin-top:70px;">
+        <div class="list card">
+            <div class="item item-avatar" style="border-bottom: none; padding-top: 30px; padding-left: 85px;">
+                <img height="60" width="60" style="border-radius:0;max-height: 60px; max-width:60px;"
+                     ng-src="{{feeds[0].user.avatar_url}}">
+                <h2 style="font-size:x-large;">{{feeds[0].user.name}}</h2>
+            </div>
+            <p style="padding-left:15px; padding-top:10px;"><b>20 Follower 50 Following</b></p>
+        </div>
 
-        <ion-refresher
-            pulling-text="Pull to refresh..."
-            on-refresh="doRefresh()">
-        </ion-refresher>
-
-        <div class="list card post-repeat"
-             ng-repeat="post in feeds | filter:{description: search.searchText, post_type: crawl.desc}">
-            <div ng-click="GotoProfile(post.user.id)" class="item item-avatar">
-                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
-                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
-                <!-- check if crawler post -->
-                <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
-                <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
+        <div class="list card" ng-click="OpenDetail(post.id)"
+             ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
+            <div class="item item-avatar">
+                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
                 <h2>{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
-            <div class="item item-body" ng-click="OpenDetail(post.id)">
+            <div class="item item-body">
                 <img class="full-image" ng-src="{{ post.picture_url }}">
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
