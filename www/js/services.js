@@ -147,6 +147,20 @@ angular.module('angularRestful', [])
     };
 }])
 
+.factory('Follow', ['$http', function ($http) {
+    return {
+        follow: function (data, success, error) {
+            $http.post(baseUrl + '/followers.json', data).success(success).error(error)
+        },
+        follower: function(data, success, error){
+            $http.get(baseUrl + '/followers.json', data).success(success).error(error)
+        },
+        following: function(data,success, error){
+            $http.get(baseUrl + '/followings.json', data).success(success).error(error)
+        }
+    };
+}])
+
 .factory('CameraService', ['$q', function($q) {
 
     return {
