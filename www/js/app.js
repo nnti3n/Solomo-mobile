@@ -23,7 +23,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
     });
 })
 
-.run(function ($rootScope, $state, UserService) {
+.run(function ($rootScope, $state, UserService, NotiService) {
     $rootScope.$on('$stateChangeStart', function (event,next) {
 
         if (!UserService.getUser().userID) {
@@ -33,6 +33,12 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
             }
         }
     });
+
+    //notification bind
+    if (UserService.getUser().userID) {
+        console.log("hello noti");
+        NotiService.noti();
+    }
 
     //-------------------- GET LOCATION---------------------------
     var options = {

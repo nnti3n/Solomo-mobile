@@ -142,7 +142,7 @@ angular.module('angularRestful', [])
 .factory('Comment', ['$http', function ($http) {
     return {
         send: function (data, success, error) {
-            $http.post(baseUrl + '/comments.json', data).success(success).error(error)
+            $http.get(baseUrl + '/comments.json', data).success(success).error(error)
         }
     };
 }])
@@ -160,6 +160,37 @@ angular.module('angularRestful', [])
         }
     };
 }])
+
+.service('MapService', function ($http) {
+    return {
+        locate: function(data, success, error) {
+            $http.get(baseUrl + '/search/posts_by_location.json', data).success(success).error(error)
+        }
+    }
+})
+
+.service('NotiService', function (UserService) {
+    return {
+        noti: function () {
+            var pusher = new Pusher('0c17cd4dfacbde4ad303', {
+                cluster: 'ap1',
+                encrypted: true
+            });
+
+            var channel = pusher.subscribe('notification_user_' + UserService.getUser().userID);
+            channel.bind('new_notication', function(data) {
+                alert(data.message);
+            });
+
+            // Enable pusher logging - don't include this in production
+            Pusher.log = function(message) {
+                if (window.console && window.console.log) {
+                    window.console.log(message);
+                }
+            };
+        }
+    };
+})
 
 .factory('CameraService', ['$q', function($q) {
 

@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-    .controller('LoginCtrl', function ($scope, $state, $q, UserService, $ionicLoading, Auth) {
+    .controller('LoginCtrl', function ($scope, $state, $q, UserService, $ionicLoading, Auth, NotiService) {
         // This is the success callback from the login method
         console.log('in');
         var fbLoginSuccess = function (response) {
@@ -23,6 +23,8 @@ angular.module('solomo.controllers')
                             email: profileInfo.email,
                             picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
                         });
+                        //notification bind
+                        NotiService.noti();
                         $ionicLoading.hide();
                         $state.go('tab.account');
                     }, function(tokenfail) {
@@ -90,6 +92,8 @@ angular.module('solomo.controllers')
                                         email: profileInfo.email,
                                         picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
                                     });
+                                    //notification bind
+                                    NotiService.noti();
                                     $state.go('tab.account');
                                 }, function(tokenfail) {
                                     console.log('fb connected but get user token fail', tokenfail);

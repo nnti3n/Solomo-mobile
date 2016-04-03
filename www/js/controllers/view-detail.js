@@ -119,12 +119,14 @@
 
             //back button
             $scope.GoBack = function () {
-                //if ($ionicHistory.viewHistory()) {
-                //    $ionicHistory.goBack();
-                //} else {
-                //    $state.go('tab.dash');
-                //}
-                $state.go('tab.dash');
+                console.log($ionicHistory.backView().stateId);
+                if ($ionicHistory.backView()) {
+                    console.log("back");
+                    $ionicHistory.goBack();
+                } else {
+                    $state.go('tab.dash');
+                }
+                //$state.go('tab.dash');
             }
 
 
