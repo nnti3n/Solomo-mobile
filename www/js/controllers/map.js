@@ -1,12 +1,8 @@
 angular.module('solomo.controllers')
 
-.controller('MapCtrl', function ($scope, UserService,$ionicLoading, $state) {
+.controller('MapCtrl', function ($scope, UserService,$ionicLoading, $state, $ionicModal, MapService) {
 
-    $ionicLoading.show({
-        template: '<ion-spinner icon="lines"></ion-spinner>',
-        duration: 10000
-    });
-
+    //get options for map
     var lat = UserService.getLat();
     var long = UserService.getLong();
 
@@ -19,65 +15,94 @@ angular.module('solomo.controllers')
 
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    var feeds = UserService.getObject('feed');
-    // console.log(feeds[5]);
+    //get feeds from localstorage
+    //var feeds_load = UserService.getObject('feed');
     $scope.list = [];
-    // $scope.maker = [];
-    for(feed in feeds){
-        //console.log(feeds[feed]);
-        if (feeds[feed].lat == null || feeds[feed].long == null){
-            continue;
-        }
 
-        // $scope.$apply();
-        var dealLatlng = new google.maps.LatLng(feeds[feed].lat, feeds[feed].long);
-        console.log("yeah");
-        var marker = new google.maps.Marker({
-            map: map,
-            animation: google.maps.Animation.DROP,
-            position: dealLatlng
-        });
+    loadfeeds();
 
-        post = feeds[feed];
-        post.marker = marker;
-        post.OnClick = function(){
-            // console.log(id);
-            // console.log($scope.list[id]);
-            infowindow.setContent(this.description);
-            infowindow.open(map, this.marker);
-            map.panTo(this.marker.getPosition())
-        };
-        $scope.list.push(post);
-
-        attachSecretMessage(marker,feeds[feed])
-    }
-
-    //open detail post
-    $scope.OpenDetail = function (viewId) {
-        $state.go("tab.view-detail", {viewId: viewId})
-    };
+    //load deals
+    var changes = [];
+    map.addListener('center_changed', function() {
+        //delay 2 sec after center change
+        changes.push(1);
+        window.setTimeout(function() {
+            if (changes.length) {
+                console.log('changed');
+                loadfeeds();
+                changes = [];
+            }
+        }, 1000);
+    });
 
     var infowindow = new google.maps.InfoWindow();
-    console.log($scope.list);
+
     function attachSecretMessage(marker, feed) {
-        // var infowindow = new google.maps.InfoWindow({
-
-        //     content: feed.description
-        // });
-
-
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(feed.description);
             infowindow.open(marker.get('map'), marker);
             map.panTo(marker.getPosition());
         });
     }
-    // $scope.OnClick = function(id){
-    //     console.log(id);
-    //     console.log($scope.list[id]);
-    //     infowindow.setContent($scope.list[id].description);
-    //     infowindow.open($scope.list[id].marker.get('map'), $scope.list[id].marker);
-    //     map.panTo($scope.list[id].marker.getPosition())
-    // };
-    $ionicLoading.hide();
+
+    function loadfeeds() {
+        MapService.locate({
+            params: {
+                user_token: UserService.getUser().user_token,
+                lat: map.getCenter().lat(),
+                long: map.getCenter().lng(),
+                zoom: map.getZoom()
+            }
+        }, function(success) {
+            pushfeeds(success.results);
+            console.log(success);
+        }, function(error) {
+            console.log(error);
+        });
+    }
+
+    function pushfeeds(feeds) {
+        console.log(feeds);
+        $scope.list = [];
+        for(feed in feeds) {
+            console.log(feeds[feed].result_data);
+            if (feeds[feed].result_data.lat == null || feeds[feed].result_data.long == null){
+                continue;
+            }
+
+            // $scope.$apply();
+            var dealLatlng = new google.maps.LatLng(feeds[feed].result_data.lat, feeds[feed].result_data.long);
+            var marker = new google.maps.Marker({
+                map: map,
+                animation: google.maps.Animation.DROP,
+                position: dealLatlng
+            });
+
+            post = feeds[feed].result_data;
+            post.marker = marker;
+            post.OnClick = function(){
+                infowindow.setContent(this.description);
+                infowindow.open(map, this.marker);
+                map.panTo(this.marker.getPosition());
+            };
+            $scope.list.push(post);
+
+            attachSecretMessage(marker,feeds[feed].result_data);
+        }
+    }
+
+    //open detail post
+    $scope.OpenDetail = function (viewId) {
+        $scope.modal.hide();
+        $state.go("tab.view-detail", {viewId: viewId})
+    };
+
+    $ionicModal.fromTemplateUrl('modal.html', function($ionicModal) {
+        $scope.modal = $ionicModal;
+    }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+    });
 });

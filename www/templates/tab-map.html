@@ -1,17 +1,27 @@
 <ion-view view-title="Map">
     <ion-content overflow-scroll="true" scroll="false">
-        <div id="map" data-tap-disabled="true" style="height:60%;"></div>
-        <ion-scroll direction="y" style="height:40%;">
-            <div class="list list-map" ng-repeat="post in list">
-                <a class="item item-thumbnail-left"  ng-click="post.OnClick()">
-                    <img ng-src="{{ post.picture_url }}">
-                    <h2>{{ post.user.name | limitTo: 25 }}</h2>
-                    <p>{{ post.description }}</p>
-                    <button class="button button-positive button-map" ng-click="OpenDetail(post.id)">
-                        <i class="ion-arrow-right-c"></i>
-                    </button>
-                </a>
-            </div>
-        </ion-scroll>
+        <div id="map" data-tap-disabled="true"></div>
+        <button class="button button-assertive button-float" ng-click="modal.show()">Bam vo day ne</button>
     </ion-content>
+
+    <script id="modal.html" type="text/ng-template">
+        <div class="modal">
+            <header class="bar bar-header bar-positive">
+                <h1 class="title">Deals</h1>
+                <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
+            </header>
+            <ion-content has-header="true" padding="true" scroll="true">
+                <div class="list list-map" ng-repeat="post in list">
+                    <a class="item item-thumbnail-left"  ng-click="OpenDetail(post.id)">
+                        <img ng-src="{{ post.picture_url }}">
+                        <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                        <p>{{ post.description }}</p>
+                        <button class="button button-positive button-map" ng-click="OpenDetail(post.id)">
+                            <i class="ion-arrow-right-c"></i>
+                        </button>
+                    </a>
+                </div>
+            </ion-content>
+        </div>
+    </script>
 </ion-view>
