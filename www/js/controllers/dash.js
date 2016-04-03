@@ -49,6 +49,25 @@ angular.module('solomo.controllers')
             PostRequest();
         };
 
+        $scope.loadMore = function() {
+            Post.feeds({
+                params:{
+                    user_token:UserService.getUser().user_token,
+                    page:$scope.request.page+1
+                },
+                timeout: 15000
+            }, function(success){
+                $scope.feeds = $scope.feeds.concat(success.posts)
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                $ionicLoading.hide();
+                $scope.request.page++;
+            },function(error){
+                $ionicLoading.hide();
+                // $scope.feeds = UserService.getObject('feed');
+                console.log(error);
+            });
+        };
+
         function PostRequest() {
             Post.feeds({
                 params: {
@@ -69,5 +88,8 @@ angular.module('solomo.controllers')
             });
         }
 
+        function Share(){
+            
+        };
 
     });

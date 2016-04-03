@@ -42,13 +42,18 @@
                 <p style="margin:5px 0;">
                     <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
+                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;" ng-click=Share()></i></a>
                 </p>
                 <p style="margin:5px 0;">
                     <a href="#" class="subdued">Có {{post.comments.count || 0}} bình luận cho post này</a>
                 </p>
             </div>
         </div>
+
+        <ion-infinite-scroll
+            on-infinite="loadMore()"
+            distance="1%">
+        </ion-infinite-scroll>
 
     </ion-content>
 </ion-view>
