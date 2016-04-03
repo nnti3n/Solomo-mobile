@@ -42,10 +42,10 @@ angular.module('solomo.controllers')
         );
 
         $scope.Follow = function(){
-            console.log($scope.cmt.content);
+            // console.log($scope.cmt.content);
             Follow.follow({
                 user_token: UserService.getUser().user_token,
-                user_id:$stateParams.userId
+                following_id:$stateParams.userId
             },
             function (success) {
                 console.log("follow success ne`");

@@ -89,7 +89,7 @@ angular.module('solomo.controllers')
         }
 
         function Share(){
-            
+                
         };
 
     });
