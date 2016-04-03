@@ -174,4 +174,4 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
     };
 });
 
-var baseUrl = "https://solomo-api.herokuapp.com/api/v1";
+var baseUrl = "/api";

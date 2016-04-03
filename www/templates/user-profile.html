@@ -17,7 +17,7 @@
                      ng-src="{{feeds[0].user.avatar_url}}">
                 <h2 style="font-size:x-large;">{{feeds[0].user.name}}</h2>
             </div>
-            <p style="padding-left:15px; padding-top:10px;"><b>20 Follower 50 Following</b></p>
+            <p style="padding-left:15px; padding-top:10px;"><b>{{followers_number}} Follower {{followings_number}} Following</b></p>
             <button class="button button-dark" ng-click="Follow()">
                 Follow
             </button>
