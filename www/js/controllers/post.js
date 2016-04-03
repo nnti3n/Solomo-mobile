@@ -24,8 +24,8 @@ angular.module('solomo.controllers')
 
             var cameraOptions = {
                 sourceType: Type,
-                targetWidth: 500,
-                targetHeight: 500
+                targetWidth: 1200,
+                targetHeight: 800
             };
 
             var uploadOptions = {
@@ -36,7 +36,7 @@ angular.module('solomo.controllers')
                 params: {user_token: UserService.getUser().user_token}
             };
 
-            $cordovaCamera.getPicture().then(function (imageData) {
+            $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
                 var cameraImage = document.getElementById('image');
                 cameraImage.style.display = 'block';
                 cameraImage.src = imageData;
@@ -79,6 +79,8 @@ angular.module('solomo.controllers')
                 location_long:UserService.getLong()
             }, function (success) {
                 $ionicLoading.hide();
+                $scope.img = "";
+                $scope.desc.content = "";
                 $state.go('tab.account', {}, { reload: true });
                 console.log(success);
             }, function (error) {
