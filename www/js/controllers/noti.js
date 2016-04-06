@@ -47,9 +47,10 @@ angular.module('solomo.controllers')
 
         $scope.OpenDetail = function (notiId, refId, type) {
             //read noti then state go
+            console.log(refId);
             readnoti(notiId);
             if (type == "follow") {
-                $state.go("tab.user-profile", refId);
+                $state.go("tab.user-profile", {userId: refId});
             } else {
                 $state.go("tab.view-detail", {viewId: refId});
             }
@@ -79,7 +80,9 @@ angular.module('solomo.controllers')
                 user_token: UserService.getUser().user_token,
                 notification_ids: notiId
             }, function (success) {
-                $rootScope.badge.noti --;
+                if ($rootScope.badge.noti) {
+                    $rootScope.badge.noti --;
+                }
                 console.log(success);
             }, function (error) {
                 console.log(error);

@@ -1,17 +1,33 @@
 angular.module('solomo.controllers')
 
-    .controller('ProfileCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post, $stateParams, Follow){
+    .controller('ProfileCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post, $stateParams, Follow, $ionicHistory){
 
         $ionicLoading.show({
             template: '<ion-spinner icon="lines"></ion-spinner>',
             duration: 15000
         });
 
+        userfeed();
+
+        //back button
+        $scope.GoBack = function () {
+            if ($ionicHistory.backView()) {
+                console.log("back");
+                $ionicHistory.goBack();
+            } else {
+                $state.go('tab.dash');
+            }
+            //$state.go('tab.dash');
+        };
+
+        $scope.doRefresh = function() {
+            userfeed();
+        };
+
         $scope.OpenDetail = function (viewId) {
             $state.go("tab.view-detail", {viewId: viewId})
         };
-        console.log($stateParams.userId);
-        console.log(UserService.getUser().user_token);
+
         Follow.follower({
             params:{
                 user_token:UserService.getUser().user_token,
@@ -42,10 +58,9 @@ angular.module('solomo.controllers')
         );
 
         $scope.Follow = function(){
-            console.log($scope.cmt.content);
             Follow.follow({
                 user_token: UserService.getUser().user_token,
-                user_id:$stateParams.userId
+                following_id:$stateParams.userId
             },
             function (success) {
                 console.log("follow success ne`");
@@ -58,19 +73,22 @@ angular.module('solomo.controllers')
             });
         };
 
-        Post.feeds({
-            params: {
-                user_token: UserService.getUser().user_token,
-                user_id: $stateParams.userId
-            },
-            timeout: 15000
-        }, function (success) {
-            console.log(success);
-            $scope.feeds = success.posts;
-            $ionicLoading.hide();
-        }, function (error) {
-            $ionicLoading.hide();
-            console.log(error);
-        });
+        function userfeed() {
+            Post.feeds({
+                params: {
+                    user_token: UserService.getUser().user_token,
+                    user_id: $stateParams.userId
+                },
+                timeout: 15000
+            }, function (success) {
+                console.log(success);
+                $scope.feeds = success.posts;
+                $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
+            }, function (error) {
+                $ionicLoading.hide();
+                console.log(error);
+            });
+        }
 
     });

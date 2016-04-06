@@ -1,9 +1,20 @@
 angular.module('solomo.controllers')
 
-    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, $cordovaGeolocation,Post) {
+    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, $cordovaGeolocation,Post, $ionicHistory) {
 
         $scope.img = {};
         $scope.desc= {};
+
+        //back button
+        $scope.GoBack = function () {
+            if ($ionicHistory.backView()) {
+                console.log("back");
+                $ionicHistory.goBack();
+            } else {
+                $state.go('tab.dash');
+            }
+            //$state.go('tab.dash');
+        };
 
         //take picture immediatly
         $scope.$on("$ionicView.enter", function() {
