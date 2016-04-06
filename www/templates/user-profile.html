@@ -1,6 +1,10 @@
 <ion-view view-title="Profile" hide-nav-bar="true">
 
     <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
+        <button style="margin-right:10px;" class="button button-clear"
+                ng-click="GoBack()">
+            <i class="ion-arrow-left-c"></i>
+        </button>
         <label class="item-input-wrapper">
             <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
         </label>
@@ -10,6 +14,11 @@
     </div>
 
     <ion-content scroll="true" style="margin-top:20px;">
+
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
 
         <div class="list card">
             <div class="item item-avatar" style="border-bottom: none; padding-top: 30px; padding-left: 85px;">
