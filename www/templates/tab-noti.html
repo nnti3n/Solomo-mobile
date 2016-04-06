@@ -1,24 +1,42 @@
 <ion-view view-title="Notification">
     <ion-content>
+
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+
         <div class="list">
 
-            <a class="item item-thumbnail-left" href="#">
-                <img ng-src="img/nguyen.jpg">
-                <h2>Giam Gia Son</h2>
-                <p style="white-space: normal;">Nguyen Nguyen Tran has liked your deal post</p>
-            </a>
+            <div ng-repeat="noti in notifications ">
 
-            <a class="item item-thumbnail-left" href="#">
-                <img ng-src="img/nguyen.jpg">
-                <h2>Giam Gia Son</h2>
-                <p style="white-space: normal;">Nguyen Nguyen Tran has liked your deal post</p>
-            </a>
+                <div ng-if="noti.notification_type != 'follow'" ng-click="OpenDetail(noti.id, noti.referrer.referrer_id, noti.notification_type)">
+                    <a ng-if="!noti.read" class="item item-thumbnail-left">
+                        <img ng-src="{{noti.notifier.avatar}}">
+                        <div class="messages" ng-bind-html="noti.message"></div>
+                        <img class="image-noti" ng-src="{{noti.referrer.referrer_thumbnail}}" height="100" width="100">
+                    </a>
 
-            <a class="item item-thumbnail-left" href="#">
-                <img ng-src="img/nguyen.jpg">
-                <h2>Giam Gia Son</h2>
-                <p style="white-space: normal;">Nguyen Nguyen Tran has liked your deal post</p>
-            </a>
+                    <a ng-if="noti.read" class="item item-thumbnail-left activated">
+                        <img ng-src="{{noti.notifier.avatar}}">
+                        <div class="messages" ng-bind-html="noti.message"></div>
+                        <img class="image-noti" ng-src="{{noti.referrer.referrer_thumbnail}}" height="100" width="100">
+                    </a>
+                </div>
 
-        </div>
+                <div ng-if="noti.notification_type == 'follow'" ng-click="OpenDetail(noti.id, noti.notifier.id, noti.notification_type)">
+                    <a ng-if="!noti.read" class="item item-thumbnail-left">
+                        <img ng-src="{{noti.notifier.avatar}}">
+                        <div class="messages" ng-bind-html="noti.message"></div>
+                    </a>
+
+                    <a ng-if="noti.read" class="item item-thumbnail-left activated">
+                        <img ng-src="{{noti.notifier.avatar}}">
+                        <div class="messages" ng-bind-html="noti.message"></div>
+                    </a>
+                </div>
+
+            </div>
+
+          </div>
     </ion-content>

@@ -119,7 +119,6 @@
 
             //back button
             $scope.GoBack = function () {
-                console.log($ionicHistory.backView().stateId);
                 if ($ionicHistory.backView()) {
                     console.log("back");
                     $ionicHistory.goBack();
