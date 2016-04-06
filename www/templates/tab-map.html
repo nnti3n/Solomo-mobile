@@ -10,7 +10,7 @@
                 <h1 class="title">Deals</h1>
                 <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
             </header>
-            <ion-content has-header="true" padding="true" scroll="true">
+            <ion-content has-header="true" padding="true" scroll="true" style="margin-top:40px;">
                 <div class="list list-map" ng-repeat="post in list">
                     <a class="item item-thumbnail-left"  ng-click="OpenDetail(post.id)">
                         <img ng-src="{{ post.picture_url }}">

@@ -17,7 +17,6 @@ angular.module('solomo.controllers')
             } else {
                 $state.go('tab.dash');
             }
-            //$state.go('tab.dash');
         };
 
         $scope.doRefresh = function() {
@@ -58,10 +57,6 @@ angular.module('solomo.controllers')
         );
 
         $scope.Follow = function(){
-<<<<<<< HEAD
-            // console.log($scope.cmt.content);
-=======
->>>>>>> 5b804dcf7759473242e4b36562bb17a86b71150e
             Follow.follow({
                 user_token: UserService.getUser().user_token,
                 following_id:$stateParams.userId
