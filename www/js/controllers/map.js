@@ -19,21 +19,42 @@ angular.module('solomo.controllers')
     //var feeds_load = UserService.getObject('feed');
     $scope.list = [];
 
-    loadfeeds();
-
     //load deals
     var changes = [];
-    map.addListener('center_changed', function() {
-        //delay 2 sec after center change
+
+    google.maps.event.addListenerOnce(map, 'idle', function(){
+        loadfeeds();
+    });
+
+    map.addListener('dragend', function() {
         changes.push(1);
-        window.setTimeout(function() {
+        setTimeout(function() {
             if (changes.length) {
-                console.log('changed');
-                loadfeeds();
                 changes = [];
+                loadfeeds();
             }
         }, 1000);
     });
+
+    map.addListener('zoom_changed', function() {
+        changes.push(1);
+        setTimeout(function() {
+            if (changes.length) {
+                changes = [];
+                loadfeeds();
+            }
+        }, 1000);
+    });
+
+    // $scope.nelat = 0;
+    // $scope.nelng = 0;
+
+    // map.addListener('idle', function() {
+    //     var bounds =  map.getBounds();
+    //     var ne = bounds.getNorthEast();
+    //     $scope.nelat = ne.lat();
+    //     $scope.nelng = ne.lng();
+    // });
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -44,37 +65,59 @@ angular.module('solomo.controllers')
             map.panTo(marker.getPosition());
         });
     }
-
+    loadfeeds();
     function loadfeeds() {
+        // console.log(map.getBounds);
+        var bounds =  map.getBounds();
+        if (bounds == null || typeof(bounds) == 'undefined') {
+            return;
+        }
+        $ionicLoading.show();
+        var ne = bounds.getNorthEast();
+        var lat0 = ne.lat();
+        var lng0 = ne.lng();
+        var lat1 = map.getCenter().lat();
+        var lng1 = map.getCenter().lng();
+        console.log(lat0);
+        radius = Math.sqrt((lat0-lat1)*(lat0-lat1)+(lng0-lng1)*(lng0-lng1));
         MapService.locate({
             params: {
                 user_token: UserService.getUser().user_token,
                 lat: map.getCenter().lat(),
                 long: map.getCenter().lng(),
-                zoom: map.getZoom()
+                radius: radius
             }
         }, function(success) {
-            pushfeeds(success.results);
             console.log(success);
+            // setMapOnAll(null);
+            pushfeeds(success.results);
         }, function(error) {
             console.log(error);
         });
+
     }
 
     function pushfeeds(feeds) {
-        console.log(feeds);
+        // console.log(feeds);
+        console.log($scope.list);
+
+        for(post in $scope.list){
+            $scope.list[post].marker.setMap(null);
+        }
         $scope.list = [];
+
         for(feed in feeds) {
-            console.log(feeds[feed].result_data);
+            // console.log(feeds[feed].result_data);
             if (feeds[feed].result_data.lat == null || feeds[feed].result_data.long == null){
                 continue;
             }
 
             // $scope.$apply();
+            console.log("123123");
             var dealLatlng = new google.maps.LatLng(feeds[feed].result_data.lat, feeds[feed].result_data.long);
             var marker = new google.maps.Marker({
                 map: map,
-                animation: google.maps.Animation.DROP,
+                animation: google.maps.Animation.FADE,
                 position: dealLatlng
             });
 
@@ -89,8 +132,9 @@ angular.module('solomo.controllers')
 
             attachSecretMessage(marker,feeds[feed].result_data);
         }
+        $ionicLoading.hide();
     }
-
+    
     //open detail post
     $scope.OpenDetail = function (viewId) {
         $scope.modal.hide();
