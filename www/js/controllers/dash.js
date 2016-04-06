@@ -46,10 +46,17 @@ angular.module('solomo.controllers')
 
         //pull to refresh
         $scope.doRefresh = function() {
+            $scope.request.page = 1;
             PostRequest();
         };
 
         $scope.loadMore = function() {
+            if ($scope.request.limit && $scope.request.page > $scope.request.limit) {
+                console.log("end of page");
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                return null;
+            }
+
             Post.feeds({
                 params:{
                     user_token:UserService.getUser().user_token,
@@ -57,13 +64,14 @@ angular.module('solomo.controllers')
                 },
                 timeout: 15000
             }, function(success){
-                $scope.feeds = $scope.feeds.concat(success.posts)
+                $scope.feeds = $scope.feeds.concat(success.posts);
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.request.limit = success.pagination.total_pages;
+                $scope.request.page++;
+                $ionicLoading.hide();
+            },function(error){
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 $ionicLoading.hide();
-                $scope.request.page++;
-            },function(error){
-                $ionicLoading.hide();
-                // $scope.feeds = UserService.getObject('feed');
                 console.log(error);
             });
         };
@@ -89,7 +97,7 @@ angular.module('solomo.controllers')
         }
 
         function Share(){
-            
+
         };
 
     });

@@ -142,7 +142,7 @@ angular.module('angularRestful', [])
 .factory('Comment', ['$http', function ($http) {
     return {
         send: function (data, success, error) {
-            $http.get(baseUrl + '/comments.json', data).success(success).error(error)
+            $http.post(baseUrl + '/comments.json', data).success(success).error(error)
         }
     };
 }])
@@ -169,7 +169,7 @@ angular.module('angularRestful', [])
     }
 })
 
-.service('NotiService', function (UserService) {
+.service('NotiService', function (UserService, $http) {
     return {
         noti: function () {
             var pusher = new Pusher('0c17cd4dfacbde4ad303', {
@@ -188,6 +188,12 @@ angular.module('angularRestful', [])
                     window.console.log(message);
                 }
             };
+        },
+        get: function(data, success, error) {
+            $http.get(baseUrl + '/notifications', data).success(success).error(error)
+        },
+        read: function(data, success, error) {
+            $http.post(baseUrl + '/notifications/read', data).success(success).error(error)
         }
     };
 })
