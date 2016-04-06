@@ -1,24 +1,33 @@
 <ion-view view-title="Notification">
     <ion-content>
+
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+
         <div class="list">
 
-            <a class="item item-thumbnail-left" href="#">
-                <img ng-src="img/nguyen.jpg">
-                <h2>Giam Gia Son</h2>
-                <p style="white-space: normal;">Nguyen Nguyen Tran has liked your deal post</p>
-            </a>
+            <div ng-repeat="noti in notifications " ng-click="OpenDetail(noti.id, noti.referrer.referrer_id, noti.notification_type)">
 
-            <a class="item item-thumbnail-left" href="#">
-                <img ng-src="img/nguyen.jpg">
-                <h2>Giam Gia Son</h2>
-                <p style="white-space: normal;">Nguyen Nguyen Tran has liked your deal post</p>
-            </a>
+                <a ng-if="!noti.read" class="item item-thumbnail-left">
+                    <img ng-src="{{noti.notifier.avatar}}">
+                    <div class="messages" ng-bind-html="noti.message"></div>
+                    <img class="image-noti" ng-if="noti.notification_type != 'follow'" ng-src="{{noti.referrer.referrer_thumbnail}}" height="100" width="100">
+                </a>
 
-            <a class="item item-thumbnail-left" href="#">
-                <img ng-src="img/nguyen.jpg">
-                <h2>Giam Gia Son</h2>
-                <p style="white-space: normal;">Nguyen Nguyen Tran has liked your deal post</p>
-            </a>
+                <a ng-if="noti.read" class="item item-thumbnail-left activated" style="background-color: #D9D9D9 !important;">
+                    <img ng-src="{{noti.notifier.avatar}}">
+                    <div class="messages" ng-bind-html="noti.message"></div>
+                    <img class="image-noti" ng-if="noti.notification_type != 'follow'" ng-src="{{noti.referrer.referrer_thumbnail}}" height="100" width="100">
+                </a>
+            </div>
 
         </div>
+
+        <ion-infinite-scroll
+            on-infinite="loadMore()"
+            distance="1%">
+        </ion-infinite-scroll>
+
     </ion-content>

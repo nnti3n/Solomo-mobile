@@ -78,7 +78,8 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
     .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'templates/tabs.html'
+        templateUrl: 'templates/tabs.html',
+        controller: 'TabCtrl'
     })
 
     // Each tab has its own nav history stack:
@@ -122,7 +123,8 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 templateUrl: 'templates/tab-noti.html',
                 controller: 'NotiCtrl'
             }
-        }
+        },
+        cache: false
     })
 
     .state('tab.post', {
@@ -180,4 +182,4 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
     };
 });
 
-var baseUrl = "/api";
+var baseUrl = "https://solomo-api.herokuapp.com/api/v1";
