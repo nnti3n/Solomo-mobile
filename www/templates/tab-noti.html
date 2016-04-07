@@ -17,7 +17,7 @@
                         <img class="image-noti" ng-src="{{noti.referrer.referrer_thumbnail}}" height="100" width="100">
                     </a>
 
-                    <a ng-if="noti.read" class="item item-thumbnail-left activated">
+                    <a ng-if="noti.read" class="item item-thumbnail-left activated" style="background-color: #D9D9D9 !important;">
                         <img ng-src="{{noti.notifier.avatar}}">
                         <div class="messages" ng-bind-html="noti.message"></div>
                         <img class="image-noti" ng-src="{{noti.referrer.referrer_thumbnail}}" height="100" width="100">
@@ -30,7 +30,7 @@
                         <div class="messages" ng-bind-html="noti.message"></div>
                     </a>
 
-                    <a ng-if="noti.read" class="item item-thumbnail-left activated">
+                    <a ng-if="noti.read" class="item item-thumbnail-left activated" style="background-color: #D9D9D9 !important;">
                         <img ng-src="{{noti.notifier.avatar}}">
                         <div class="messages" ng-bind-html="noti.message"></div>
                     </a>
@@ -39,4 +39,10 @@
             </div>
 
           </div>
+
+        <ion-infinite-scroll
+            on-infinite="loadMore()"
+            distance="1%">
+        </ion-infinite-scroll>
+
     </ion-content>

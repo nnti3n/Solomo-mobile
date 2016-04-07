@@ -15,7 +15,6 @@ angular.module('solomo.controllers')
                 }
             }, function(success) {
                 console.log(success);
-                $scope.notifications = success.notifications;
                 $rootScope.badge.noti = success.notifications.length;
             }, function(error) {
                 console.log(error);

@@ -71,7 +71,20 @@ angular.module('solomo.controllers')
                 console.log(error);
                 $scope.$broadcast('scroll.refreshComplete');
                 $ionicLoading.hide();
-            })
+            });
+
+            NotiService.get({
+                params: {
+                    user_token: UserService.getUser().user_token,
+                    read: 0
+                }
+            }, function(success) {
+                console.log(success);
+                $rootScope.badge.noti = success.notifications.length;
+            }, function(error) {
+                console.log(error);
+                window.alert(error);
+            });
         }
 
         function readnoti(notiId) {
