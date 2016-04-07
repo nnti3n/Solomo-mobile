@@ -172,22 +172,7 @@ angular.module('angularRestful', [])
 .service('NotiService', function (UserService, $http) {
     return {
         noti: function () {
-            var pusher = new Pusher('0c17cd4dfacbde4ad303', {
-                cluster: 'ap1',
-                encrypted: true
-            });
 
-            var channel = pusher.subscribe('notification_user_' + UserService.getUser().userID);
-            channel.bind('new_notication', function(data) {
-                alert(data.message);
-            });
-
-            // Enable pusher logging - don't include this in production
-            Pusher.log = function(message) {
-                if (window.console && window.console.log) {
-                    window.console.log(message);
-                }
-            };
         },
         get: function(data, success, error) {
             $http.get(baseUrl + '/notifications', data).success(success).error(error)

@@ -112,8 +112,6 @@ angular.module('solomo.controllers')
                 continue;
             }
 
-            // $scope.$apply();
-            console.log("123123");
             var dealLatlng = new google.maps.LatLng(feeds[feed].result_data.lat, feeds[feed].result_data.long);
             var marker = new google.maps.Marker({
                 map: map,
@@ -134,7 +132,7 @@ angular.module('solomo.controllers')
         }
         $ionicLoading.hide();
     }
-    
+
     //open detail post
     $scope.OpenDetail = function (viewId) {
         $scope.modal.hide();
