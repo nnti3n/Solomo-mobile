@@ -71,12 +71,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .button-float {
     position: fixed;
     bottom: 100px;
-    right: 100px;
+    right: 60px;
     z-index: 9999;
 }
 
 .image-noti {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 20px;
+    top: 30px;
+    width: 60px;
+    height: 60px;
 }

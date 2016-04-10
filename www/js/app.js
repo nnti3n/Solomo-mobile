@@ -23,7 +23,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
     });
 })
 
-.run(function ($rootScope, $state, UserService, NotiService) {
+.run(function ($rootScope, $state, UserService) {
     $rootScope.$on('$stateChangeStart', function (event,next) {
 
         if (!UserService.getUser().userID) {
@@ -36,8 +36,26 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
 
     //notification bind
     if (UserService.getUser().userID) {
-        console.log("hello noti");
-        NotiService.noti();
+        //console.log("hello noti");
+        //NotiService.noti();
+        var pusher = new Pusher('0c17cd4dfacbde4ad303', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('notification_user_' + UserService.getUser().userID);
+        channel.bind('new_notification', function(data) {
+            $rootScope.badge.noti ++;
+            console.log("noti increased");
+            $rootScope.$apply();
+        });
+
+        // Enable pusher logging - don't include this in production
+        Pusher.log = function(message) {
+            if (window.console && window.console.log) {
+                window.console.log(message);
+            }
+        };
     }
 
     //-------------------- GET LOCATION---------------------------
@@ -138,7 +156,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
     })
 
     .state('tab.map', {
-        url: '/map',
+        url: '/map/:id/:lat/:long',
         views: {
             'tab-map': {
                 templateUrl: 'templates/tab-map.html',

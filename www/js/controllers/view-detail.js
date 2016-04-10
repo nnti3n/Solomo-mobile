@@ -125,10 +125,12 @@
                 } else {
                     $state.go('tab.dash');
                 }
-                //$state.go('tab.dash');
+            };
+
+            //view post on map
+            $scope.ViewMap = function (id, lat, long) {
+                $state.go('tab.map',{id:id, lat:lat, long: long});
             }
-
-
         })
 
         // enter to submit

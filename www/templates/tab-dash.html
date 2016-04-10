@@ -50,7 +50,7 @@
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
-                Sale off {{post.promotion_value}}
+                <h2 ng-if="post.promotion_value">Sale off {{post.promotion_value}}</h2>
                 <p style="margin:5px 0;"><b>{{post.likes.count || 0}} người thích deal này</b></p>
                 <p style="margin:5px 0;">
                     <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
