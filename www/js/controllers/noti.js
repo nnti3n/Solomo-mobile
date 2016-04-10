@@ -45,10 +45,12 @@ angular.module('solomo.controllers')
             });
         };
 
-        $scope.OpenDetail = function (notiId, refId, type) {
+        $scope.OpenDetail = function (notiId, refId, type, read) {
             //read noti then state go
             console.log(refId);
-            readnoti(notiId);
+            if (!read) {
+                readnoti(notiId);
+            }
             if (type == "follow") {
                 $state.go("tab.user-profile", {userId: refId});
             } else {
