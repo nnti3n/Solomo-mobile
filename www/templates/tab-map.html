@@ -18,9 +18,14 @@
                         <span class="avatar deal-picture" ng-style="{'background-image':'url('+post.picture_url+')'}"></span>
                         <h2>{{ post.user.name | limitTo: 25 }}</h2>
                         <p>{{ post.description }}</p>
-                        <button class="button button-positive button-map" ng-click="OpenDetail(post.id)">
-                            <i class="ion-arrow-right-c"></i>
-                        </button>
+                        <div class="deal-icons">
+                            <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                            <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                            <a href="#" class="subdued"><i class="ion-android-share-alt"></i> {{post.shares.count || 0}}</a>
+                        </div>
+                        <!--<button class="button button-positive button-map" ng-click="OpenDetail(post.id)">-->
+                            <!--<i class="ion-arrow-right-c"></i>-->
+                        <!--</button>-->
                     </div>
                 </div>
             </ion-content>

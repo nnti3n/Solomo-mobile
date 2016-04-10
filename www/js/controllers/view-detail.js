@@ -72,6 +72,8 @@
                         $scope.post.liked = 1;
                     }
 
+                    UserService.setObject('mappost',$scope.post);
+
                     //turn off refresh
                     $scope.$broadcast('scroll.refreshComplete');
                     $ionicLoading.hide();
