@@ -1,18 +1,13 @@
 angular.module('solomo.controllers')
 
-.controller('MapCtrl', function ($scope, UserService,$ionicLoading, $state, $ionicModal, $stateParams, MapService) {
+.controller('MapCtrl', function ($scope, UserService,$ionicLoading, $state, $ionicModal, $stateParams, MapService, $timeout) {
 
+
+    $scope.once = false;
     //get options for map
-    var lat = 10.7763342;
-    var long = 106.7010091;
-
-    if ($stateParams.id) {
-        lat = $stateParams.lat;
-        long = $stateParams.long;
-    } else {
-        lat = UserService.getLat();
-        long = UserService.getLong();
-    }
+    var lat = UserService.getLat();
+    var long = UserService.getLong();
+    // console.log($stateParams.feed.id);
 
     var myLatlng = new google.maps.LatLng(lat, long);
     var mapOptions = {
@@ -26,16 +21,21 @@ angular.module('solomo.controllers')
     var userMarker = new google.maps.Marker({
                 map: map,
                 animation: google.maps.Animation.FADE,
-                position: myLatlng
+                position: myLatlng,
+                icon:"img/marker_red.png"
     });
 
     //get feeds from localstorage
     //var feeds_load = UserService.getObject('feed');
     $scope.list = [];
-    $scope.once = 0;
+    // $scope.once = 0;
 
     //load deals
     var changes = [];
+
+    // google.maps.event.addListenerOnce(map, 'idle', function(){
+    //     loadfeeds();
+    // });
 
     map.addListener('dragend', function() {
         changes.push(1);
@@ -70,10 +70,9 @@ angular.module('solomo.controllers')
     var infowindow = new google.maps.InfoWindow();
 
     function attachSecretMessage(marker, feed) {
-        console.log(feed);
+        // console.log(feed);
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<p>'+feed.description+'</p>' +
-                '<button class="button button-positive" onclick="OpenDetail('+feed.id+')">View detail</button>');
+            infowindow.setContent('<div class="item item-text-wrap map-item" onclick="OpenDetail('+feed.id+')"><img src="'+feed.picture_url+'" ><p>'+feed.description+'</p></div>');
             infowindow.open(marker.get('map'), marker);
             map.panTo(marker.getPosition());
         });
@@ -84,20 +83,45 @@ angular.module('solomo.controllers')
         $scope.OpenDetail(id);
     };
 
-    loadfeeds();
-
+    // loadfeeds();
+    var focusfeed = {};
     $scope.$on("$ionicView.enter", function () {
-        loadfeeds();
-        $scope.once = 1;
+        // console.log($stateParams)
+        focusfeed = UserService.getObject('mappost');
+        // $stateParams.feed = {};
+        $scope.once = false;
+        // $scope.$timeout(function() {
+        setTimeout(function() {
+            // infowindow.close();
+            loadfeeds();
+            $scope.$apply();
+        }, 1000);
     });
 
     function loadfeeds() {
         // console.log(map.getBounds);
+        console.log($scope.once);
         var bounds =  map.getBounds();
         if (bounds == null || typeof(bounds) == 'undefined') {
             return;
         }
         $ionicLoading.show();
+        // console.log($stateParams)
+        if (focusfeed.id && !$scope.once) {
+            lat = focusfeed.lat;
+            long = focusfeed.long;
+            myLatlng = new google.maps.LatLng(lat, long);
+            // $stateParams.feed = {};
+            console.log($scope.once);
+            if (!$scope.once){
+                map.panTo(myLatlng);
+                $scope.once = true;
+            }
+            console.log("aaa");
+            // $scope.once = true;
+        }
+
+
         var ne = bounds.getNorthEast();
         var lat0 = ne.lat();
         var lng0 = ne.lng();
@@ -142,13 +166,14 @@ angular.module('solomo.controllers')
                 map: map,
                 animation: google.maps.Animation.FADE,
                 position: dealLatlng,
-                icon:"img/userMarker.png"
+                icon:"img/marker.png"
             });
 
             post = feeds[feed].result_data;
             post.marker = marker;
             post.OnClick = function(){
-                infowindow.setContent(this.description);
+                infowindow.setContent('<p>'+post.description+'</p>' +
+                '<button class="button button-positive" onclick="OpenDetail('+post.id+')">View detail</button>');
                 infowindow.open(map, this.marker);
                 map.panTo(this.marker.getPosition());
             };
@@ -157,19 +182,28 @@ angular.module('solomo.controllers')
             attachSecretMessage(marker,feeds[feed].result_data);
         }
 
-        console.log($stateParams.id);
-        console.log($stateParams.lat);
-        console.log($scope.once);
-        //open map from post
-        if ($stateParams.id && $scope.once == 0) {
+        // console.log($stateParams.id);
+        // console.log($stateParams.lat);
+        // console.log($scope.once);
+        // //open map from post
+        if (focusfeed.id) {
+            console.log($scope.list);
+            console.log(focusfeed);
             for (item in $scope.list) {
-                if (item.id == $stateParams.id) {
-                    infowindow.open(map, this.marker);
-                    map.panTo(this.marker.getPosition());
+                // console.log(item);
+                if ($scope.list[item].id == focusfeed.id) {
+                    map.panTo(myLatlng);
+                    console.log("eeeeeeeeee");
+                    console.log($scope.list[item]);
+                    // $scope.list[item].OnClick();
+                    infowindow.setContent('<p>'+$scope.list[item].description+'</p>' +
+                        '<button class="button button-positive" onclick="OpenDetail('+$scope.list[item].id+')">View detail</button>');
+                    infowindow.open(map, $scope.list[item].marker);
+                    // map.panTo(this.marker.getPosition());
                 }
             }
         }
-
+        // $stateParams.feed = {};
         $ionicLoading.hide();
     }
 
@@ -180,7 +214,13 @@ angular.module('solomo.controllers')
     };
 
     $ionicModal.fromTemplateUrl('modal.html', function($ionicModal) {
-        $scope.modal = $ionicModal;
+        $scope.toggle = function () {
+            if ($ionicModal.isShown()) {
+                $ionicModal.hide();
+            } else {
+                $ionicModal.show();
+            }
+        }
     }, {
         // Use our scope for the scope of the modal to keep it simple
         scope: $scope,

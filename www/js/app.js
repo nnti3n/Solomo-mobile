@@ -156,7 +156,7 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
     })
 
     .state('tab.map', {
-        url: '/map/:id/:lat/:long',
+        url: '/map',
         views: {
             'tab-map': {
                 templateUrl: 'templates/tab-map.html',
