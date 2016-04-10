@@ -15,6 +15,12 @@ angular.module('solomo.controllers')
 
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+    var userMarker = new google.maps.Marker({
+                map: map,
+                animation: google.maps.Animation.FADE,
+                position: myLatlng
+    });
+
     //get feeds from localstorage
     //var feeds_load = UserService.getObject('feed');
     $scope.list = [];
@@ -59,12 +65,20 @@ angular.module('solomo.controllers')
     var infowindow = new google.maps.InfoWindow();
 
     function attachSecretMessage(marker, feed) {
+        console.log(feed);
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(feed.description);
+            infowindow.setContent('<p>'+feed.description+'</p>' +
+                '<button class="button button-positive" onclick="OpenDetail('+feed.id+')">View detail</button>');
             infowindow.open(marker.get('map'), marker);
             map.panTo(marker.getPosition());
         });
     }
+
+    OpenDetail = function(id){
+        console.log(id);
+        $scope.OpenDetail(id);
+    };
+
     loadfeeds();
     function loadfeeds() {
         // console.log(map.getBounds);
@@ -118,7 +132,8 @@ angular.module('solomo.controllers')
             var marker = new google.maps.Marker({
                 map: map,
                 animation: google.maps.Animation.FADE,
-                position: dealLatlng
+                position: dealLatlng,
+                icon:"img/userMarker.png"
             });
 
             post = feeds[feed].result_data;
