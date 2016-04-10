@@ -25,23 +25,23 @@
             <div class="item item-avatar">
                 <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
                 <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
-            <div class="item item-body">
+            <div class="item item-body" ng-click="OpenDetail(post.id)">
                 <img class="full-image" ng-src="{{ post.picture_url }}">
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
-                <p style="margin:5px 0;"><b>{{post.likes.count || 0}} người thích deal này</b></p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
-                </p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có {{post.comments.count || 0}} bình luận cho post này</a>
-                </p>
+                <div class="deal-icons">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-android-share-alt"></i> {{post.shares.count || 0}}</a>
+                </div>
+                <div class="row deal-footer">
+                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value != null" >Sale off {{post.promotion_value}}</span></div>
+                    <div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>
+                </div>
             </div>
         </div>
 

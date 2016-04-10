@@ -1,1 +1,82 @@
 /* Empty. Add your own CSS if you like */
+.bar > .button + .button:last-child {
+	position: relative;
+	top: 0;
+	bottom: 0;
+	right:0;
+}
+
+.target, .notifier {
+	font-weight: bold;
+}
+
+.item > .messages {
+	padding: 0px 10px;
+	white-space: normal;
+	width: 60%;
+    float: left;
+}
+
+.item-thumbnail-left {
+	padding: 16px;
+}
+
+.item-thumbnail-left > img:first-child {
+	position: relative;
+	float: left;
+	top:0;
+	left:0;
+	width: 20%;
+    height: auto;
+}
+
+.image-noti {
+	width: 20%;
+	height: auto;
+}
+
+.notifications img {
+	width: 25%;
+	height: 25%;
+}
+
+.bar .title {
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+.disable-user-behavior .list {
+	padding: 0px 10px;
+}
+
+.item div.deal-icons {
+	display: block;
+	margin-left: 5px;
+	font-size: 20px;
+	text-align: right;
+}
+
+.deal-sale-off {
+	font-size: 20px;
+	padding: 10px 0px;
+	color: #E88F3C;
+}
+
+.deal-footer {
+	padding: 0;
+	padding-top: 10px;
+}
+
+.item .username {
+	font-weight: bold;
+	color:#4C4C4C;
+}
+
+.share > .button {
+	width: 100%;
+	border-radius: 0px;
+	min-height: 30px;
+    line-height: 35px;
+    background-color: #55B6B8;
+    color:#FFF;
+}
