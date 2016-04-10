@@ -68,6 +68,9 @@ angular.module('solomo.controllers')
     // });
 
     var infowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(infowindow,'closeclick',function(){
+        focusfeed = {};
+    });
 
     function attachSecretMessage(marker, feed) {
          // console.log(feed);
@@ -78,6 +81,7 @@ angular.module('solomo.controllers')
             map.panTo(marker.getPosition());
         });
     }
+
 
     OpenDetail = function(id){
         console.log(id);

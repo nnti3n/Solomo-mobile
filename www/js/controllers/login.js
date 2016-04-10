@@ -3,6 +3,9 @@ angular.module('solomo.controllers')
     .controller('LoginCtrl', function ($scope, $state, $q, UserService, $ionicLoading, Auth, NotiService) {
         // This is the success callback from the login method
         console.log('in');
+        if(UserService.getUser()!= null){
+            $state.go('tab.dash');
+        }
         var fbLoginSuccess = function (response) {
             if (!response.authResponse) {
                 fbLoginError("Cannot find the authResponse");

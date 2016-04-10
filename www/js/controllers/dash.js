@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-    .controller('DashCtrl', function($scope, $state, Post, UserService, $ionicLoading) {
+    .controller('DashCtrl', function($scope, $state, Post, UserService, $ionicLoading, $rootScope) {
         //search
         $ionicLoading.show({
             template: '<ion-spinner icon="lines"></ion-spinner>',
@@ -33,14 +33,13 @@ angular.module('solomo.controllers')
             $scope.search.searchText = "";
         };
 
-        $scope.OpenDetail = function (viewId) {
+        $scope.OpenDetail = function (viewId) {  
             $state.go("tab.view-detail", {viewId: viewId})
         };
 
         $scope.GotoProfile = function (userId) {
             $state.go("tab.user-profile", {userId: userId})
         };
-
         //call api
         PostRequest();
 
@@ -64,6 +63,14 @@ angular.module('solomo.controllers')
                 },
                 timeout: 15000
             }, function(success){
+                console.log("aaaaaaaaaaa");
+                for (item in success.posts){
+                    var waypoint = new Waypoint({
+                      element: document.getElementById(success.posts[item].id),
+                      handler: function(direction) {
+                        console.log('Scrolled to ' + susscess.posts[item].id);
+                    }});
+                }
                 $scope.feeds = $scope.feeds.concat(success.posts);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 $scope.request.limit = success.pagination.total_pages;
