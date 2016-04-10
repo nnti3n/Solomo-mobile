@@ -9782,10 +9782,10 @@ a.button {
 .map-item {
   overflow: hidden; }
   .map-item img {
-    margin-top: 5px;
+    margin-top: 3px;
     float: left;
     height: 100px;
     width: 100px; }
   .map-item p {
-    margin-left: 32%;
-    width: 80%; }
+    margin-left: 29%;
+    width: 68%; }

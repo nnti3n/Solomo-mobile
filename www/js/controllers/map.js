@@ -70,9 +70,9 @@ angular.module('solomo.controllers')
     var infowindow = new google.maps.InfoWindow();
 
     function attachSecretMessage(marker, feed) {
-        // console.log(feed);
+         console.log(feed);
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div class="item item-text-wrap map-item" onclick="OpenDetail('+feed.id+')"><img src="'+feed.picture_url+'" ><p>'+feed.description+'</p></div>');
+            infowindow.setContent('<div onclick="OpenDetail('+ feed.id +')" class="item-text-wrap map-item"><img src="'+feed.picture_url+'" ><p>'+feed.description+'</p></div>');
             infowindow.open(marker.get('map'), marker);
             map.panTo(marker.getPosition());
         });
@@ -172,8 +172,7 @@ angular.module('solomo.controllers')
             post = feeds[feed].result_data;
             post.marker = marker;
             post.OnClick = function(){
-                infowindow.setContent('<p>'+post.description+'</p>' +
-                '<button class="button button-positive" onclick="OpenDetail('+post.id+')">View detail</button>');
+                infowindow.setContent('<div onclick="OpenDetail('+ feed.id +')" class="item-text-wrap map-item"><img src="'+feed.picture_url+'" ><p>'+feed.description+'</p></div>');
                 infowindow.open(map, this.marker);
                 map.panTo(this.marker.getPosition());
             };
@@ -187,17 +186,12 @@ angular.module('solomo.controllers')
         // console.log($scope.once);
         // //open map from post
         if (focusfeed.id) {
-            console.log($scope.list);
-            console.log(focusfeed);
             for (item in $scope.list) {
                 // console.log(item);
                 if ($scope.list[item].id == focusfeed.id) {
                     map.panTo(myLatlng);
-                    console.log("eeeeeeeeee");
-                    console.log($scope.list[item]);
                     // $scope.list[item].OnClick();
-                    infowindow.setContent('<p>'+$scope.list[item].description+'</p>' +
-                        '<button class="button button-positive" onclick="OpenDetail('+$scope.list[item].id+')">View detail</button>');
+                    infowindow.setContent('<div onclick="OpenDetail('+ $scope.list[feed].id +')" class="item-text-wrap map-item"><img src="'+$scope.list[feed].picture_url+'" ><p>'+$scope.list[feed].description+'</p></div>');
                     infowindow.open(map, $scope.list[item].marker);
                     // map.panTo(this.marker.getPosition());
                 }
@@ -209,7 +203,6 @@ angular.module('solomo.controllers')
 
     //open detail post
     $scope.OpenDetail = function (viewId) {
-        $scope.modal.hide();
         $state.go("tab.view-detail", {viewId: viewId})
     };
 
