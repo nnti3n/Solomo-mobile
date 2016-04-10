@@ -26,7 +26,8 @@ angular.module('solomo.controllers')
     var userMarker = new google.maps.Marker({
                 map: map,
                 animation: google.maps.Animation.FADE,
-                position: myLatlng
+                position: myLatlng,
+                icon:"img/marker_red.png"
     });
 
     //get feeds from localstorage
@@ -72,8 +73,7 @@ angular.module('solomo.controllers')
     function attachSecretMessage(marker, feed) {
         console.log(feed);
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<p>'+feed.description+'</p>' +
-                '<button class="button button-positive" onclick="OpenDetail('+feed.id+')">View detail</button>');
+            infowindow.setContent('<div class="item item-text-wrap map-item" onclick="OpenDetail('+feed.id+')"><img src="'+feed.picture_url+'" ><p>'+feed.description+'</p></div>');
             infowindow.open(marker.get('map'), marker);
             map.panTo(marker.getPosition());
         });
@@ -142,7 +142,7 @@ angular.module('solomo.controllers')
                 map: map,
                 animation: google.maps.Animation.FADE,
                 position: dealLatlng,
-                icon:"img/userMarker.png"
+                icon:"img/marker.png"
             });
 
             post = feeds[feed].result_data;
@@ -180,7 +180,13 @@ angular.module('solomo.controllers')
     };
 
     $ionicModal.fromTemplateUrl('modal.html', function($ionicModal) {
-        $scope.modal = $ionicModal;
+        $scope.toggle = function () {
+            if ($ionicModal.isShown()) {
+                $ionicModal.hide();
+            } else {
+                $ionicModal.show();
+            }
+        }
     }, {
         // Use our scope for the scope of the modal to keep it simple
         scope: $scope,
