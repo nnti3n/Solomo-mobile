@@ -15,7 +15,7 @@
         <button ng-click="crawl.getcrawler()" class="button button-light" style="display:inline;"> Crawler</button>
     </div>
 
-    <ion-content scroll="true" style="margin-top:70px;">
+    <ion-content scroll="true" style="margin-top:90px;">
 
         <ion-refresher
             pulling-text="Pull to refresh..."
@@ -31,7 +31,7 @@
                 <!-- check if crawler post -->
                 <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
                 <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
-                <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
 
@@ -41,7 +41,7 @@
                 <!-- check if crawler post -->
                 <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
                 <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
-                <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
 
@@ -50,17 +50,15 @@
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
-                <h2 ng-if="post.promotion_value">Sale off {{post.promotion_value}}</h2>
-                <p style="margin:5px 0;"><b>{{post.likes.count || 0}} người thích deal này</b></p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;" ng-click=Share()></i></a>
-                </p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có {{post.comments.count || 0}} bình luận cho post này</a>
-                </p>
-            </div>
+                <div class="deal-icons">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-android-share-alt"></i> {{post.shares.count || 0}}</a>
+                </div>
+                <div class="row deal-footer">
+                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value">Sale off {{post.promotion_value}}</span></div>
+                    <div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>
+                </div>            </div>
         </div>
 
         <ion-infinite-scroll
