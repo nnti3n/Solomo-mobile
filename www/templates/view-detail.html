@@ -41,7 +41,7 @@
                 <p style="margin:5px 0;">
                     <a href="#" class="subdued" ng-click="like(post.id)"><i class="{{post.icon_like}}" style="font-size:30px;"></i></a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
+                    <a ng-click="ViewMap(post.id, post.lat, post.long)" class="subdued"><i class="ion-ios-location-outline" style="font-size:30px;float:right;"></i></a>
                 </p>
                 <p style="margin:5px 0;">
                     <a href="#" class="subdued">Có {{post.comments.count || 0}} bình luận cho post này</a>
