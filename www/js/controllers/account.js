@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-    .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post){
+    .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post, Follow){
 
         $scope.profile = UserService.getUser();
 
@@ -8,7 +8,7 @@ angular.module('solomo.controllers')
             $state.go("tab.view-detail", {viewId: viewId})
         };
 
-        Post.feeds({
+        Post.posts({
             params: {
                 user_token: UserService.getUser().user_token,
                 user_id: UserService.getUser().userID
@@ -22,6 +22,35 @@ angular.module('solomo.controllers')
             $ionicLoading.hide();
             console.log(error);
         });
+
+        Follow.follower({
+                params:{
+                    user_token:UserService.getUser().user_token,
+                    user_id:UserService.getUser().userId
+                }},
+            function(success){
+                console.log(success);
+                $scope.followers_number = success.followers.length;
+                $scope.followers = success.followers;
+            },
+            function(error) {
+                console.log("error trying to get user followers" + UserService.getUser().user_token)
+            }
+        );
+
+        Follow.following({
+                params:{
+                    user_token:UserService.getUser().user_token,
+                    user_id:UserService.getUser().userId
+                }},
+            function(success){
+                $scope.followings_number = success.followings.length;
+                $scope.followings = success.followings;
+            },
+            function(error) {
+                console.log("error trying to get user followings" + UserService.getUser().user_token)
+            }
+        );
 
         $scope.showLogOutMenu = function() {
             var hideSheet = $ionicActionSheet.show({

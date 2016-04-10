@@ -73,7 +73,7 @@ angular.module('solomo.controllers')
         };
 
         function userfeed() {
-            Post.feeds({
+            Post.posts({
                 params: {
                     user_token: UserService.getUser().user_token,
                     user_id: $stateParams.userId

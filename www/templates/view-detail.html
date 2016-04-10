@@ -37,9 +37,9 @@
                     {{ post.description }}
                 </p>
                 <div class="deal-icons">
-                    <a href="#" class="subdued" ng-click="like(post.id)"><i class="{{post.icon_like}}"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
-                    <a ng-click="ViewMap(post.id)" class="subdued"><i class="ion-ios-location-outline"></i></a>
+                    <a href="#" class="subdued" ng-click="like(post.id)"><span>{{post.likes.count || 0}}</span><i class="{{post.icon_like}}"></i></a>
+                    <a href="#" class="subdued"><span>{{post.comments.count || 0}}</span><i class="ion-ios-chatboxes-outline"></i></a>
+                    <a ng-if="post.lat && post.long" ng-click="ViewMap(post.id)" class="subdued"><i class="ion-ios-location-outline"></i></a>
                 </div>
                 <div class="row deal-footer">
                     <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>

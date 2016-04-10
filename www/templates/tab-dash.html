@@ -10,19 +10,19 @@
     </div>
 
     <div class="bar bar-subheader">
-        <button ng-click="crawl.getall()" class="button button-light" style="display:inline;"> All</button>
-        <button ng-click="crawl.getuser()" class="button button-light" style="display:inline;"> User</button>
-        <button ng-click="crawl.getcrawler()" class="button button-light" style="display:inline;"> Crawler</button>
+        <button ng-click="crawl.getall()" class="button button-light filter" style="display:inline;"> All</button>
+        <button ng-click="crawl.getuser()" class="button button-light filter" style="display:inline;"> User</button>
+        <button ng-click="crawl.getcrawler()" class="button button-light filter" style="display:inline;"> Crawler</button>
     </div>
 
-    <ion-content scroll="true" style="margin-top:90px;">
+    <ion-content scroll="true" class="dashboard">
 
         <ion-refresher
             pulling-text="Pull to refresh..."
             on-refresh="doRefresh()">
         </ion-refresher>
 
-        <div class="list card post-repeat"
+        <div class="list post-repeat"
              ng-repeat="post in feeds | filter:{description: search.searchText, post_type: crawl.desc}">
 
             <div ng-if="post.post_type == 'crawl'" class="item item-avatar">
@@ -31,7 +31,7 @@
                 <!-- check if crawler post -->
                 <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
                 <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
-                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2><i ng-if="post.user.is_store" class="ion-checkmark"></i>
                 <p>Quận 2, HCM</p>
             </div>
 

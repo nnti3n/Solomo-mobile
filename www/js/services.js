@@ -125,6 +125,9 @@ angular.module('angularRestful', [])
             $http.get(baseUrl + '/posts/' + data.params.post_id+ '.json', data).success(success).error(error)
         },
         feeds: function (data, success, error) {
+            $http.get(baseUrl + '/feeds.json', data).success(success).error(error)
+        },
+        posts: function (data, success, error) {
             $http.get(baseUrl + '/posts.json', data).success(success).error(error)
         },
         detail: function (data, success, error) {
