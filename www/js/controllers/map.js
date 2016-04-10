@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-.controller('MapCtrl', function ($scope, UserService,$ionicLoading, $state, $ionicModal, $stateParams, MapService, $timeout) {
+.controller('MapCtrl', function ($scope, UserService,$ionicLoading, $state, $ionicModal, $stateParams, MapService, $timeout,$ionicHistory) {
 
 
     $scope.once = false;
@@ -70,10 +70,11 @@ angular.module('solomo.controllers')
     var infowindow = new google.maps.InfoWindow();
 
     function attachSecretMessage(marker, feed) {
-         console.log(feed);
+         // console.log(feed);
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent('<div onclick="OpenDetail('+ feed.id +')" class="item-text-wrap map-item"><img src="'+feed.picture_url+'" ><p>'+feed.description+'</p></div>');
             infowindow.open(marker.get('map'), marker);
+            focusfeed = feed;
             map.panTo(marker.getPosition());
         });
     }
@@ -86,8 +87,20 @@ angular.module('solomo.controllers')
     // loadfeeds();
     var focusfeed = {};
     $scope.$on("$ionicView.enter", function () {
+        console.log($ionicHistory.backView());
+        if ($ionicHistory.backView() && $ionicHistory.backView().stateName == "tab.view-detail") {
+            focusfeed = UserService.getObject('mappost');
+        }
+        else {
+            focusfeed = {};
+            lat = UserService.getLat();
+            long = UserService.getLong();
+
+            myLatlng = new google.maps.LatLng(lat, long);
+            map.panTo(myLatlng);
+        }
         // console.log($stateParams)
-        focusfeed = UserService.getObject('mappost');
+        console.log(focusfeed);
         // $stateParams.feed = {};
         $scope.once = false;
         // $scope.$timeout(function() {
@@ -120,7 +133,6 @@ angular.module('solomo.controllers')
             console.log("aaa");
             // $scope.once = true;
         }
-
 
         var ne = bounds.getNorthEast();
         var lat0 = ne.lat();
@@ -191,7 +203,7 @@ angular.module('solomo.controllers')
                 if ($scope.list[item].id == focusfeed.id) {
                     map.panTo(myLatlng);
                     // $scope.list[item].OnClick();
-                    infowindow.setContent('<div onclick="OpenDetail('+ $scope.list[feed].id +')" class="item-text-wrap map-item"><img src="'+$scope.list[feed].picture_url+'" ><p>'+$scope.list[feed].description+'</p></div>');
+                    infowindow.setContent('<div onclick="OpenDetail('+ $scope.list[item].id +')" class="item-text-wrap map-item"><img src="'+$scope.list[item].picture_url+'" ><p>'+$scope.list[item].description+'</p></div>');
                     infowindow.open(map, $scope.list[item].marker);
                     // map.panTo(this.marker.getPosition());
                 }
