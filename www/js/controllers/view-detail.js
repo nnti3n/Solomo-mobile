@@ -1,6 +1,6 @@
     angular.module('solomo.controllers')
 
-        .controller('ViewDetailCtrl', function($scope, $ionicHistory, $state,$ionicLoading, $stateParams, Post, UserService, $window, Comment) {
+        .controller('ViewDetailCtrl', function($scope, $ionicHistory, $state,$ionicLoading, $stateParams, Post, UserService, $window, Comment, $localStorage) {
             console.log($stateParams.viewId);
             $scope.cmt = {};
             $scope.cmt.content = "";
@@ -128,8 +128,10 @@
             };
 
             //view post on map
-            $scope.ViewMap = function (id, lat, long) {
-                $state.go('tab.map',{id:id, lat:lat, long: long});
+            $scope.ViewMap = function () {
+                // $stateParams.feed = {};
+                UserService.setObject('mappost',$scope.post);
+                $state.go('tab.map');
             }
         })
 
