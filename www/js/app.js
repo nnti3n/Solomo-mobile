@@ -4,7 +4,7 @@ angular.module('solomo.services', []);
 
 angular.module('angularRestful', []);
 
-angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage', 'angularRestful'])
+angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage', 'angularRestful', 'ionic-material'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -197,6 +197,16 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 $rootScope.hideTabs = false;
             });
         }
+    };
+})
+
+.directive('backImg', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImg;
+        element.css({
+            'background-image': 'url(' + url +')',
+            //'background-size' : 'cover'
+        });
     };
 });
 

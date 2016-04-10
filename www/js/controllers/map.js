@@ -219,12 +219,13 @@ angular.module('solomo.controllers')
 
     //open detail post
     $scope.OpenDetail = function (viewId) {
+        $scope.toggle(true);
         $state.go("tab.view-detail", {viewId: viewId})
     };
 
     $ionicModal.fromTemplateUrl('modal.html', function($ionicModal) {
-        $scope.toggle = function () {
-            if ($ionicModal.isShown()) {
+        $scope.toggle = function (exit) {
+            if ($ionicModal.isShown() || exit) {
                 $ionicModal.hide();
             } else {
                 $ionicModal.show();

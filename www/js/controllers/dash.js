@@ -10,22 +10,30 @@ angular.module('solomo.controllers')
         $scope.request = {};
         $scope.user = {};
         $scope.crawl = {};
+        $scope.toggle = {};
         $scope.user.picture = UserService.getUser().picture;
         $scope.user.name = UserService.getUser().name;
         $scope.search = {};
         $scope.search.searchText = "";
         $scope.crawl.desc = "";
+        $scope.toggle.all = "active";
         $scope.request.page = 1;
 
         $scope.crawl.getall = function () {
+            $scope.toggle = {};
+            $scope.toggle.all = "active";
             $scope.crawl.desc = "";
         };
 
         $scope.crawl.getuser = function () {
+            $scope.toggle = {};
+            $scope.toggle.user = "active";
             $scope.crawl.desc = "user";
         };
 
         $scope.crawl.getcrawler = function () {
+            $scope.toggle = {};
+            $scope.toggle.crawler = "active";
             $scope.crawl.desc = "crawl";
         };
 

@@ -8,30 +8,30 @@
 
         <div class="list">
 
-            <div ng-repeat="noti in notifications ">
+            <div ng-repeat="noti in notifications " class="card in">
 
                 <div ng-if="noti.notification_type != 'follow'" ng-click="OpenDetail(noti.id, noti.referrer.referrer_id, noti.notification_type, noti.read)">
                     <a ng-if="!noti.read" class="item item-thumbnail-left">
-                        <img ng-src="{{noti.notifier.avatar}}">
+                        <span class="avatar" back-img="{{noti.notifier.avatar}}"></span>
                         <div class="messages" ng-bind-html="noti.message"></div>
                         <img class="image-noti" ng-src="{{noti.referrer.referrer_thumbnail}}" height="100" width="100">
                     </a>
 
                     <a ng-if="noti.read" class="item item-thumbnail-left activated" style="background-color: #D9D9D9 !important;">
-                        <img ng-src="{{noti.notifier.avatar}}">
+                        <span class="avatar" back-img="{{noti.notifier.avatar}}"></span>
                         <div class="messages" ng-bind-html="noti.message"></div>
                         <img class="image-noti" ng-src="{{noti.referrer.referrer_thumbnail}}" height="50" width="50">
                     </a>
                 </div>
 
                 <div ng-if="noti.notification_type == 'follow'" ng-click="OpenDetail(noti.id, noti.notifier.id, noti.notification_type, noti.read)">
-                    <a ng-if="!noti.read" class="item item-thumbnail-left">
-                        <img ng-src="{{noti.notifier.avatar}}">
+                    <a ng-if="!noti.read" class="item item-avatar item-thumbnail-left">
+                        <span class="avatar" back-img="{{noti.notifier.avatar}}"></span>
                         <div class="messages" ng-bind-html="noti.message"></div>
                     </a>
 
-                    <a ng-if="noti.read" class="item item-thumbnail-left activated" style="background-color: #D9D9D9 !important;">
-                        <img ng-src="{{noti.notifier.avatar}}">
+                    <a ng-if="noti.read" class="item item-avatar item-thumbnail-left activated" style="background-color: #D9D9D9 !important;">
+                        <span class="avatar" back-img="{{noti.notifier.avatar}}"></span>
                         <div class="messages" ng-bind-html="noti.message"></div>
                     </a>
                 </div>

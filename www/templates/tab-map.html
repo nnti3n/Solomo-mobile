@@ -13,15 +13,15 @@
     <script id="modal.html" type="text/ng-template">
         <div class="modal modal-map">
             <ion-content has-header="true" padding="true" scroll="true">
-                <div class="list list-map" ng-repeat="post in list">
-                    <a class="item item-thumbnail-left"  ng-click="OpenDetail(post.id)">
-                        <img ng-src="{{ post.picture_url }}">
+                <div class="list-map card in done" ng-repeat="post in list">
+                    <div class="item item-avatar item-text-wrap" ng-click="OpenDetail(post.id)">
+                        <span class="avatar deal-picture" ng-style="{'background-image':'url('+post.picture_url+')'}"></span>
                         <h2>{{ post.user.name | limitTo: 25 }}</h2>
                         <p>{{ post.description }}</p>
                         <button class="button button-positive button-map" ng-click="OpenDetail(post.id)">
                             <i class="ion-arrow-right-c"></i>
                         </button>
-                    </a>
+                    </div>
                 </div>
             </ion-content>
         </div>

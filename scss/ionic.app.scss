@@ -21,8 +21,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+$RobotoDraftFontPath: "../lib/robotodraft/fonts"; // REMINDER: edit as appropriate!
+$RobotoDraftFontName: "RobotoDraft";
+$RobotoDraftFontVersion: "1.0.0";
+
+@import "www/lib/robotodraft/sass/robotodraft.scss";    // REMINDER: edit as appropriate!
+
 .scroll {
     height: 100%;
+}
+
+.button.active {
+    background: lightgray !important;
 }
 
 #map {
@@ -54,6 +64,19 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 }
 
+.dashboard {
+
+    background: rgba(128, 128, 128, 0.3);
+    margin-top:90px;
+
+    .list {
+
+        background: white;
+
+    }
+
+}
+
 .list-map {
 
     margin-bottom:0 !important;
@@ -66,6 +89,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
         position: absolute !important;
     }
 
+    .deal-picture {
+        border-radius: 0 !important;
+        margin-top:5px;
+    }
+
 }
 
 .button-float {
@@ -76,11 +104,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .image-noti {
+
     position: absolute;
     right: 20px;
     top: 30px;
     width: 60px;
     height: 60px;
+
 }
 
 .modal-map {
@@ -105,4 +135,38 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
             margin-left:29%;
             width: 68%;
         }
+}
+
+.bar.bar-header {
+    padding-left: 20px;
+}
+
+.bar.bar-subheader {
+
+    padding: 0 2% 0 3%;
+
+    .button.filter {
+        width: 32%;
+        max-width: 32%;
+        display:inline;
+    }
+
+}
+
+.deal-icons {
+
+    span {
+        margin-right:5px;
+    }
+
+}
+
+.item.item-avatar {
+    padding-left:80px !important;
+}
+
+.facebook-sign-in {
+    background:#3a5795 !important;
+    color:white !important;
+    width: 100% !important;
 }
