@@ -1,11 +1,15 @@
 angular.module('solomo.controllers')
 
-    .controller('TabCtrl', function($scope, NotiService, UserService, $rootScope) {
+    .controller('TabCtrl', function($scope, NotiService, UserService, $rootScope, $ionicHistory) {
 
         $rootScope.badge = {};
         $rootScope.badge.noti = 0;
 
         getnoti();
+
+        $scope.onselected = function () {
+            $ionicHistory.clearHistory();
+        };
 
         function getnoti () {
             NotiService.get({
