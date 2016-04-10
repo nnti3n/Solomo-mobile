@@ -10,9 +10,9 @@
     </div>
 
     <div class="bar bar-subheader">
-        <button ng-click="crawl.getall()" class="button button-light filter" style="display:inline;"> All</button>
-        <button ng-click="crawl.getuser()" class="button button-light filter" style="display:inline;"> User</button>
-        <button ng-click="crawl.getcrawler()" class="button button-light filter" style="display:inline;"> Crawler</button>
+        <button ng-click="crawl.getall()" class="button button-light filter" ng-class="toggle.all"> All</button>
+        <button ng-click="crawl.getuser()" class="button button-light filter" ng-class="toggle.user"> User</button>
+        <button ng-click="crawl.getcrawler()" class="button button-light filter" ng-class="toggle.crawler"> Crawler</button>
     </div>
 
     <ion-content scroll="true" class="dashboard">

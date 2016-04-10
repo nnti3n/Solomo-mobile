@@ -9822,6 +9822,9 @@ a.button {
 .scroll {
   height: 100%; }
 
+.button.active {
+  background: lightgray !important; }
+
 #map {
   width: 100%;
   height: 100%; }
@@ -9894,10 +9897,16 @@ a.button {
   padding: 0 2% 0 3%; }
   .bar.bar-subheader .button.filter {
     width: 32%;
-    max-width: 32%; }
+    max-width: 32%;
+    display: inline; }
 
 .deal-icons span {
   margin-right: 5px; }
 
 .item.item-avatar {
   padding-left: 80px !important; }
+
+.facebook-sign-in {
+  background: #3a5795 !important;
+  color: white !important;
+  width: 100% !important; }

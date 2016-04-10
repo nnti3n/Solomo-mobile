@@ -31,6 +31,10 @@ $RobotoDraftFontVersion: "1.0.0";
     height: 100%;
 }
 
+.button.active {
+    background: lightgray !important;
+}
+
 #map {
     width: 100%;
     height: 100%;
@@ -144,6 +148,7 @@ $RobotoDraftFontVersion: "1.0.0";
     .button.filter {
         width: 32%;
         max-width: 32%;
+        display:inline;
     }
 
 }
@@ -158,4 +163,10 @@ $RobotoDraftFontVersion: "1.0.0";
 
 .item.item-avatar {
     padding-left:80px !important;
+}
+
+.facebook-sign-in {
+    background:#3a5795 !important;
+    color:white !important;
+    width: 100% !important;
 }
