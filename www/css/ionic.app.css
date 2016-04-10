@@ -9772,3 +9772,20 @@ a.button {
   top: 30px;
   width: 60px;
   height: 60px; }
+
+.modal-map {
+  min-height: 40% !important;
+  height: 40% !important;
+  bottom: 50px !important;
+  top: inherit !important; }
+
+.map-item {
+  overflow: hidden; }
+  .map-item img {
+    margin-top: 5px;
+    float: left;
+    height: 100px;
+    width: 100px; }
+  .map-item p {
+    margin-left: 32%;
+    width: 80%; }
