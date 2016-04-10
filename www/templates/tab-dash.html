@@ -24,8 +24,8 @@
 
         <div class="list card post-repeat"
              ng-repeat="post in feeds | filter:{description: search.searchText, post_type: crawl.desc}">
-
-            <div ng-if="post.post_type == 'crawl'" class="item item-avatar">
+            <!-- <div id="waypoint"></div> -->
+            <div id="{{post.id}}" ng-if="post.post_type == 'crawl'" class="item item-avatar">
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
                 <!-- check if crawler post -->
@@ -35,7 +35,7 @@
                 <p>Quận 2, HCM</p>
             </div>
 
-            <div ng-if="post.post_type != 'crawl'" ng-click="GotoProfile(post.user.id)" class="item item-avatar">
+            <div id="{{post.id}}" ng-if="post.post_type != 'crawl'" ng-click="GotoProfile(post.user.id)" class="item item-avatar">
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
                 <!-- check if crawler post -->
