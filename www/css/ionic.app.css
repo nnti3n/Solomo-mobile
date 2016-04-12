@@ -9825,6 +9825,12 @@ a.button {
 .button.active {
   background: lightgray !important; }
 
+.button-logout {
+  width: 100%; }
+
+.button-follow {
+  background-color: #4CAF50 !important; }
+
 .button-bar .active {
   background-color: #262626 !important; }
 
@@ -9832,6 +9838,16 @@ a.button {
   width: 100%;
   height: 100%;
   border-bottom: 2px black; }
+
+.deal-button {
+  position: relative !important; }
+  .deal-button span {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px; }
 
 .bar.bar-header .button + .title {
   text-align: center !important; }
@@ -9877,6 +9893,13 @@ a.button {
     text-align: right;
     float: right; }
 
+.item div.deal-icons {
+  display: block;
+  margin-left: 5px;
+  font-size: 20px;
+  text-align: right;
+  float: right; }
+
 .button-float {
   position: fixed;
   bottom: 100px;
@@ -9917,6 +9940,7 @@ a.button {
   .bar.bar-subheader .button.filter {
     width: 32%;
     max-width: 32%;
+    padding: 0 1rem;
     display: inline; }
 
 .deal-icons span {

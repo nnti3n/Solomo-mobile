@@ -24,7 +24,9 @@
             <div class="content">
                 <div class="avatar" ng-style="{'background-image':'url('+feeds[0].user.avatar_url+')'}"></div>
                 <h2 style="margin:0;color:white;">{{feeds[0].user.name}}</h2>
-                <p>{{followers_number || 0}} Follower {{followings_number || 0}} Following</p>
+                <p><span ng-click="ShowFollowing()"> {{followings_number || 0}} Following</span>
+                    <span ng-click="ShowFollowers()">{{followers_number || 0}} Follower</span>
+                </p>
             </div>
         </div>
 
@@ -40,9 +42,9 @@
             </div>
         </div>
 
-        <div class="list card">
-            <button class="button button-dark" ng-click="Follow()">
-                Follow
+        <div class="list card row">
+            <button class="button button-dark" ng-click="Follow()" ng-class="follow == 'Follow' ? 'button-follow': ''" style="left:35%">
+                {{follow || "Follow"}}
             </button>
         </div>
 
