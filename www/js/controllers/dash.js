@@ -41,7 +41,7 @@ angular.module('solomo.controllers')
             $scope.search.searchText = "";
         };
 
-        $scope.OpenDetail = function (viewId) {  
+        $scope.OpenDetail = function (viewId) {
             $state.go("tab.view-detail", {viewId: viewId})
         };
 
