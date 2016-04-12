@@ -160,6 +160,9 @@ angular.module('angularRestful', [])
         },
         following: function(data,success, error){
             $http.get(baseUrl + '/followings.json', data).success(success).error(error)
+        },
+        unfollow: function (data, success, error) {
+            $http.delete(baseUrl + '/followers.json', data).success(success).error(error)
         }
     };
 }])
