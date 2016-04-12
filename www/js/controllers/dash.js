@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-    .controller('DashCtrl', function($scope, $state, Post, UserService, $ionicLoading, $rootScope) {
+.controller('DashCtrl', function($scope, $state, Post, UserService, $ionicLoading, $rootScope, Feeds) {
         //search
         $ionicLoading.show({
             template: '<ion-spinner icon="lines"></ion-spinner>',
@@ -42,17 +42,38 @@ angular.module('solomo.controllers')
         };
 
         $scope.OpenDetail = function (viewId) {  
-            $state.go("tab.view-detail", {viewId: viewId})
+            CreateWaypoint();
+            setTimeout(ReadFeed,2000);
+            $state.go("tab.view-detail", {viewId: viewId});
         };
 
         $scope.GotoProfile = function (userId) {
-            $state.go("tab.user-profile", {userId: userId})
+            CreateWaypoint();
+            setTimeout(ReadFeed,2000);
+            $state.go("tab.user-profile", {userId: userId});
         };
         //call api
         PostRequest();
 
+        var ReadFeed = function(){
+            console.log($scope.PostsSeen);
+            console.log($scope.PostsSeen.toString());
+            Feeds.read({
+                    user_token: UserService.getUser().user_token,
+                    feed_ids: $scope.PostsSeen.toString()
+            }, function (success) {
+                // $scope.PostsSeen = [];
+                console.log(success);
+            }, function (error) {
+                // $scope.PostsSeen = [];
+                console.log(error);
+            });
+        };
+
         //pull to refresh
         $scope.doRefresh = function() {
+            CreateWaypoint();
+            setTimeout(ReadFeed,2000);
             $scope.request.page = 1;
             PostRequest();
         };
@@ -72,13 +93,7 @@ angular.module('solomo.controllers')
                 timeout: 15000
             }, function(success){
                 console.log("aaaaaaaaaaa");
-                for (item in success.posts){
-                    var waypoint = new Waypoint({
-                      element: document.getElementById(success.posts[item].id),
-                      handler: function(direction) {
-                        console.log('Scrolled to ' + susscess.posts[item].id);
-                    }});
-                }
+                // setTimeout(CreateWaypoint, 3000);
                 $scope.feeds = $scope.feeds.concat(success.posts);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 $scope.request.limit = success.pagination.total_pages;
@@ -100,6 +115,7 @@ angular.module('solomo.controllers')
                 timeout: 15000
             }, function (success) {
                 console.log(success);
+                // setTimeout(CreateWaypoint, 1000);
                 $scope.feeds = success.posts;
                 UserService.setObject('feed', success.posts);
                 $scope.$broadcast('scroll.refreshComplete');
@@ -110,6 +126,22 @@ angular.module('solomo.controllers')
                 console.log(error);
             });
         }
+
+        $scope.PostsSeen = [];
+
+        var CreateWaypoint = function() {
+            for (item in $scope.feeds){
+                var waypoint = new Waypoint({
+                  element: document.getElementById($scope.feeds[item].id),
+                  triggerOnce: true,
+                  handler: function(direction) {
+                    console.log('Scrolled to ' + this.element.id);
+                    $scope.PostsSeen.push(this.element.id);
+                    this.destroy();
+                    $scope.$apply();
+                }});
+            }
+        };
 
         function Share(){
         };
