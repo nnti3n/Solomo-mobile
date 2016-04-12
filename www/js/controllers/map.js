@@ -217,6 +217,41 @@ angular.module('solomo.controllers')
         $ionicLoading.hide();
     }
 
+    $scope.focusPost = function (postId) {
+        for (item in $scope.list) {
+            // console.log(item);
+            if ($scope.list[item].id == postId) {
+                infowindow.setContent('<div onclick="OpenDetail('+ $scope.list[item].id +')" class="item-text-wrap map-item">' +
+                    '<img src="'+$scope.list[item].picture_url+'" ><p>'+$scope.list[item].description+'</p></div>');
+                infowindow.open(map, $scope.list[item].marker);
+                 map.panTo($scope.list[item].marker.getPosition());
+            }
+        }
+    };
+
+    //get distance by meter
+    $scope.distanceSort = function getDistance(post) {
+        lat1 = post.lat;
+        lon1 = post.long;
+        lat2 = map.getCenter().lat();
+        lon2 = map.getCenter().lng();
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+        var dLon = deg2rad(lon2 - lon1);
+        var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2)
+            ;
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c * 1000; // Distance in m
+        return Math.round(d);
+    };
+
+    function deg2rad(deg) {
+        return deg * (Math.PI / 180);
+    }
+
     //open detail post
     $scope.OpenDetail = function (viewId) {
         $scope.toggle(true);

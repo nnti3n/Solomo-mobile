@@ -35,9 +35,22 @@ $RobotoDraftFontVersion: "1.0.0";
     background: lightgray !important;
 }
 
+.button-bar {
+
+    .active {
+        background-color: #262626 !important;
+    }
+
+}
+
 #map {
     width: 100%;
     height: 100%;
+    border-bottom:2px black;
+}
+
+.bar.bar-header .button+.title {
+    text-align: center !important;
 }
 
 .login-button {
@@ -82,16 +95,38 @@ $RobotoDraftFontVersion: "1.0.0";
     margin-bottom:0 !important;
 
     .button-map {
+
         min-width: 40px;
         min-height: 20px;
         top: 10px !important;
         right: 10px !important;
         position: absolute !important;
+
     }
 
     .deal-picture {
         border-radius: 0 !important;
-        margin-top:5px;
+        margin-top: 5px;
+    }
+
+    .position {
+
+        display: inline;
+
+        i {
+            font-size: 19px;
+        }
+
+    }
+
+    .deal-icons {
+
+        display:inline;
+        margin-left: 5px;
+        font-size: 20px;
+        text-align: right;
+        float:right
+
     }
 
 }
@@ -105,19 +140,21 @@ $RobotoDraftFontVersion: "1.0.0";
 
 .image-noti {
 
-    position: absolute;
+    position: absolute !important;
     right: 20px;
-    top: 30px;
-    width: 60px;
-    height: 60px;
+    top: 20%;
+    width: 20%;
+    height: auto;
 
 }
 
 .modal-map {
+    border-top: 1px solid gray;
     min-height:40% !important;
     height: 40% !important;
     bottom: 50px !important;
     top: inherit !important;
+    border-top: 2px black;
 }
 
 .map-item {

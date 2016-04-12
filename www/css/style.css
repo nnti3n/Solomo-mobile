@@ -30,11 +30,6 @@
     height: auto;
 }
 
-.image-noti {
-	width: 20%;
-	height: auto;
-}
-
 .notifications img {
 	width: 25%;
 	height: 25%;
@@ -47,13 +42,6 @@
 
 .disable-user-behavior .list {
 	padding: 0px 10px;
-}
-
-.item div.deal-icons {
-	display: block;
-	margin-left: 5px;
-	font-size: 20px;
-	text-align: right;
 }
 
 .deal-sale-off {

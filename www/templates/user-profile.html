@@ -13,7 +13,7 @@
         </button>
     </div>
 
-    <ion-content scroll="true" style="margin-top:20px;">
+    <ion-content scroll="true" class="content dashboard" style="margin-top:20px;">
 
         <ion-refresher
             pulling-text="Pull to refresh..."
@@ -28,13 +28,27 @@
             </div>
         </div>
 
+        <div class="button-bar">
+            <div ng-click="ShowPosts()" ng-class="show == 'posts' ? 'active' : 'btn'" class="button button-dark">
+                Posts
+            </div>
+            <div ng-click="ShowFollowing()" ng-class="show == 'followings' ? 'active' : 'btn'" class="button button-dark">
+                Following
+            </div>
+            <div ng-click="ShowFollowers()" ng-class="show == 'followers' ? 'active' : 'btn'" class="button button-dark">
+                Followers
+            </div>
+        </div>
+
         <div class="list card">
             <button class="button button-dark" ng-click="Follow()">
                 Follow
             </button>
         </div>
 
-        <div class="list card" ng-click="OpenDetail(post.id)"
+        <ion-spinner ng-if="show == ''" icon="android" class="col col-33 col-offset-33 text-center"></ion-spinner>
+
+        <div ng-if="show == 'posts'" class="list post-repeat" ng-click="OpenDetail(post.id)"
              ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
             <div class="item item-avatar">
                 <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
@@ -57,6 +71,26 @@
                     <div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>
                 </div>
             </div>
+        </div>
+
+        <div ng-if="show == 'followings'" class="list">
+            <a  ng-repeat="follow in followings" ng-click="OpenProfile(follow.id)"
+                class="item item-avatar waves-effect waves-button waves-dark in done" style="min-height: 80px;">
+                <span class="avatar deal-picture" ng-style="{'background-image':'url('+follow.avatar+')'}"></span>
+                <h2>{{ follow.name | limitTo: 25 }}</h2>
+            </a>
+
+            <p ng-if="!followings.length" class="text-center">This user has not follow anyone yet</p>
+        </div>
+
+        <div ng-if="show == 'followers'" class="list">
+            <a ng-repeat="follow in followers" ng-click="OpenProfile(follow.id)"
+               class="item item-avatar item-text-wrap in done" style="min-height: 80px;">
+                <span class="avatar deal-picture" ng-style="{'background-image':'url('+follow.avatar+')'}"></span>
+                <h2>{{ follow.name | limitTo: 25 }}</h2>
+            </a>
+
+            <p ng-if="!followers.length" class="text-center">This user has not followed by anyone yet</p>
         </div>
 
     </ion-content>

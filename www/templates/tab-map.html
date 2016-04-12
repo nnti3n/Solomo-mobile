@@ -13,11 +13,12 @@
     <script id="modal.html" type="text/ng-template">
         <div class="modal modal-map">
             <ion-content has-header="true" padding="true" scroll="true">
-                <div class="list-map card in done" ng-repeat="post in list">
-                    <div class="item item-avatar item-text-wrap" ng-click="OpenDetail(post.id)">
-                        <span class="avatar deal-picture" ng-style="{'background-image':'url('+post.picture_url+')'}"></span>
+                <div class="list-map in done" ng-repeat="post in list | orderBy:distanceSort">
+                    <div class="item item-avatar item-text-wrap">
+                        <span ng-click="OpenDetail(post.id)" class="avatar deal-picture" ng-style="{'background-image':'url('+post.picture_url+')'}"></span>
                         <h2>{{ post.user.name | limitTo: 25 }}</h2>
-                        <p>{{ post.description }}</p>
+                        <p ng-click="OpenDetail(post.id)">{{ post.description }}</p>
+                        <div ng-click="focusPost(post.id)" class="position"><i class="ion-ios-location-outline"></i><a ng-bind="' ' + distanceSort(post) + 'm'"></a></div>
                         <div class="deal-icons">
                             <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
                             <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>

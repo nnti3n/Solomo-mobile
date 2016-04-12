@@ -2,12 +2,29 @@ angular.module('solomo.controllers')
 
     .controller('ProfileCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post, $stateParams, Follow, $ionicHistory){
 
-        $ionicLoading.show({
-            template: '<ion-spinner icon="lines"></ion-spinner>',
-            duration: 15000
-        });
+        //$ionicLoading.show({
+        //    template: '<ion-spinner icon="lines"></ion-spinner>',
+        //    duration: 15000
+        //});
+
+        $scope.show = "";
 
         userfeed();
+
+        //show post
+        $scope.ShowPosts = function () {
+            $scope.show = "posts";
+        };
+
+        //show followers
+        $scope.ShowFollowing = function () {
+            $scope.show = "followings";
+        };
+
+        //show followers
+        $scope.ShowFollowers = function () {
+            $scope.show = "followers";
+        };
 
         //back button
         $scope.GoBack = function () {
@@ -23,8 +40,14 @@ angular.module('solomo.controllers')
             userfeed();
         };
 
+        //open post
         $scope.OpenDetail = function (viewId) {
             $state.go("tab.view-detail", {viewId: viewId})
+        };
+
+        //open profile
+        $scope.OpenProfile = function (userId) {
+            $state.go("tab.user-profile", {userId: userId})
         };
 
         Follow.follower({
@@ -48,6 +71,7 @@ angular.module('solomo.controllers')
                 user_id:$stateParams.userId
             }},
             function(success){
+                console.log(success);
                 $scope.followings_number = success.followings.length;
                 $scope.followings = success.followings;
             },
@@ -82,6 +106,7 @@ angular.module('solomo.controllers')
             }, function (success) {
                 console.log(success);
                 $scope.feeds = success.posts;
+                $scope.show = "posts";
                 $scope.$broadcast('scroll.refreshComplete');
                 $ionicLoading.hide();
             }, function (error) {

@@ -2,10 +2,21 @@ angular.module('solomo.controllers')
 
     .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post, Follow){
 
+        $ionicLoading.show({
+            template: '<ion-spinner icon="lines"></ion-spinner>',
+            duration: 15000
+        });
+
         $scope.profile = UserService.getUser();
 
+        //open post
         $scope.OpenDetail = function (viewId) {
             $state.go("tab.view-detail", {viewId: viewId})
+        };
+
+        //open profile
+        $scope.OpenProfile = function (userId) {
+            $state.go("tab.user-profile", {userId: userId})
         };
 
         Post.posts({
@@ -17,11 +28,27 @@ angular.module('solomo.controllers')
         }, function (success) {
             console.log(success);
             $scope.feeds = success.posts;
+            $scope.show = "posts";
             $ionicLoading.hide();
         }, function (error) {
             $ionicLoading.hide();
             console.log(error);
         });
+
+        //show post
+        $scope.ShowPosts = function () {
+            $scope.show = "posts";
+        };
+
+        //show followers
+        $scope.ShowFollowing = function () {
+            $scope.show = "followings";
+        };
+
+        //show followers
+        $scope.ShowFollowers = function () {
+            $scope.show = "followers";
+        };
 
         Follow.follower({
                 params:{
@@ -44,6 +71,7 @@ angular.module('solomo.controllers')
                     user_id:UserService.getUser().userId
                 }},
             function(success){
+                console.log(success);
                 $scope.followings_number = success.followings.length;
                 $scope.followings = success.followings;
             },

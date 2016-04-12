@@ -21,7 +21,7 @@
             on-refresh="doRefresh()">
         </ion-refresher>
 
-        <div class="list" style="margin-bottom:0;">
+        <div style="margin-bottom:0;">
             <div class="item item-avatar">
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
@@ -58,6 +58,9 @@
             </div>
             </div>
         </div>
+
+        <ion-spinner ng-if="load == 'loading'" icon="android" class="col col-33 col-offset-33 text-center"></ion-spinner>
+
         <div class="item item-input-inset">
             <textarea rows="4" placeholder="Comments" ng-model="cmt.content" enter-submit="sendComment()" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
             </textarea>
