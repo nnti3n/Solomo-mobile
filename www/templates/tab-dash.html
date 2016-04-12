@@ -25,7 +25,7 @@
         <div class="list post-repeat"
              ng-repeat="post in feeds | filter:{description: search.searchText, post_type: crawl.desc}">
             <!-- <div id="waypoint"></div> -->
-            <div id="{{post.id}}" ng-if="post.post_type == 'crawl'" class="item item-avatar">
+            <div ng-if="post.post_type == 'crawl'" class="item item-avatar">
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
                 <!-- check if crawler post -->
@@ -35,7 +35,7 @@
                 <p>Quận 2, HCM</p>
             </div>
 
-            <div id="{{post.id}}" ng-if="post.post_type != 'crawl'" ng-click="GotoProfile(post.user.id)" class="item item-avatar">
+            <div ng-if="post.post_type != 'crawl'" ng-click="GotoProfile(post.user.id)" class="item item-avatar">
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
                 <!-- check if crawler post -->
@@ -45,7 +45,7 @@
                 <p>Quận 2, HCM</p>
             </div>
 
-            <div class="item item-body" ng-click="OpenDetail(post.id)">
+            <div id="{{post.id}}" class="item item-body waypoint" ng-click="OpenDetail(post.id)">
                 <img class="full-image" ng-src="{{ post.picture_url }}">
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
