@@ -189,6 +189,14 @@ angular.module('angularRestful', [])
     };
 })
 
+.service('Feeds', function (UserService, $http) {
+    return {
+        read: function (data, success, error) {
+            $http.post(baseUrl + '/feeds/read.json', data).success(success).error(error)
+        }
+    };
+})
+
 .factory('CameraService', ['$q', function($q) {
 
     return {
