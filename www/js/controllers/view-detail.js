@@ -2,11 +2,13 @@
 
         .controller('ViewDetailCtrl', function($scope, $ionicHistory, $state,$ionicLoading, $stateParams, Post, UserService, $window, Comment, $localStorage) {
             console.log($stateParams.viewId);
+            $scope.load = "";
             $scope.cmt = {};
             $scope.cmt.content = "";
 
             $scope.sendComment = function(){
                 console.log($scope.cmt.content);
+                $scope.load = "loading";
                 Comment.send({
                         user_token: UserService.getUser().user_token,
                         post_id: $stateParams.viewId,
@@ -21,6 +23,7 @@
                     cm.content = $scope.cmt.content;
                     $scope.post.comments.comments.unshift(cm);
                     $scope.cmt.content = "";
+                    $scope.load = "done";
                     console.log("send comment success ne`");
                     console.log(success);
                 },
