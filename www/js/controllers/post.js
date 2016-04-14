@@ -1,9 +1,13 @@
 angular.module('solomo.controllers')
 
-    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, $cordovaGeolocation,Post, $ionicHistory) {
+    .controller('PostCtrl', function ($scope, UserService, $ionicActionSheet, $state, $ionicLoading, $cordovaCamera,
+                                      $cordovaFileTransfer, $cordovaGeolocation,Post, $ionicHistory, $http) {
+
+        var user = UserService.getUser();
 
         $scope.img = {};
         $scope.desc= {};
+        $scope.tags = [];
 
         //back button
         $scope.GoBack = function () {
@@ -44,7 +48,7 @@ angular.module('solomo.controllers')
                 fileName: currentDate + ".jpeg",
                 chunkedMode: false,
                 mimeType: "image/jpeg",
-                params: {user_token: UserService.getUser().user_token}
+                params: {user_token: user.user_token}
             };
 
             $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
@@ -82,21 +86,45 @@ angular.module('solomo.controllers')
                 template: 'posting..'
             });
 
+            var tags = [];
+            for (var i = 0; i < $scope.tags.length; i++) {
+                tags.push($scope.tags[i].name);
+            }
+
+            console.log(tags);
+
             Post.send({
                 description: $scope.desc.content,
-                user_token: UserService.getUser().user_token,
+                user_token: user.user_token,
                 picture_id: UserService.getImage(),
                 location_lat:UserService.getLat(),
-                location_long:UserService.getLong()
+                location_long:UserService.getLong(),
+                tags: tags
             }, function (success) {
                 $ionicLoading.hide();
+                tags = [];
                 $scope.img = "";
                 $scope.desc.content = "";
+                $scope.tag = [];
                 $state.go('tab.account', {}, { reload: true });
                 console.log(success);
             }, function (error) {
                 $ionicLoading.hide();
                 console.log(error);
+            });
+        };
+
+        $scope.queryTag = function (query) {
+            var tag_filter = [];
+
+            return $http.get(baseUrl + '/search/tags.json', {params: {user_token: user.user_token, q:query}}).then(function(response) {
+                if (response.data.results.length > 0) {
+                    for (var i = 0; i < response.data.results.length; i++) {
+                        tag_filter.push(response.data.results[i].result_data);
+                    }
+                    console.log(tag_filter);
+                }
+                return tag_filter;
             });
         }
     });
