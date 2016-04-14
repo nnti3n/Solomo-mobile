@@ -271,3 +271,46 @@ $RobotoDraftFontVersion: "1.0.0";
     width: 100% !important;
 
 }
+
+//tag
+.tags {
+
+    .tag-list {
+
+        .tag-item {
+
+            background: #cbebff !important;
+
+        }
+
+    }
+
+}
+
+//tag input
+tags-input
+{
+    .autocomplete {
+        .suggestion-item.selected {
+
+            color: #fff !important;
+            background-color: #BDBDBD !important;
+
+            em {
+                color: #fff !important;
+                background-color: #BDBDBD !important;
+            }
+
+        }
+    }
+
+}
+
+//hash
+.hashtag {
+
+    display: inline;
+    margin-right: 5px;
+    color: #BDBDBD;
+
+}

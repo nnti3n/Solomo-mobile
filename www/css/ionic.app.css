@@ -9953,3 +9953,18 @@ a.button {
   background: #3a5795 !important;
   color: white !important;
   width: 100% !important; }
+
+.tags .tag-list .tag-item {
+  background: #cbebff !important; }
+
+tags-input .autocomplete .suggestion-item.selected {
+  color: #fff !important;
+  background-color: #BDBDBD !important; }
+  tags-input .autocomplete .suggestion-item.selected em {
+    color: #fff !important;
+    background-color: #BDBDBD !important; }
+
+.hashtag {
+  display: inline;
+  margin-right: 5px;
+  color: #BDBDBD; }
