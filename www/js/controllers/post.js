@@ -56,7 +56,7 @@ angular.module('solomo.controllers')
                 console.log($scope.img);
 
                 $ionicLoading.show({
-                    template: 'uploading image..'
+                    template: 'uploading image...'
                 });
 
                 //upload image
@@ -79,7 +79,7 @@ angular.module('solomo.controllers')
 
         $scope.post = function () {
             $ionicLoading.show({
-                template: 'posting..'
+                template: 'posting...'
             });
 
             Post.send({

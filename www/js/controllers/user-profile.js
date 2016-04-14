@@ -19,6 +19,11 @@ angular.module('solomo.controllers')
             $scope.show = "posts";
         };
 
+        //show liked posts
+        $scope.ShowLikedPosts = function () {
+            $scope.show = "likedposts";
+        };
+
         //show followers
         $scope.ShowFollowing = function () {
             $scope.show = "followings";
@@ -140,6 +145,22 @@ angular.module('solomo.controllers')
                 $scope.feeds = success.posts;
                 $scope.show = "posts";
                 $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
+            }, function (error) {
+                $ionicLoading.hide();
+                console.log(error);
+            });
+
+            Post.likedposts({
+                params: {
+                    user_token: UserService.getUser().user_token,
+                    liked_by_id: UserService.getUser().userID
+                },
+                timeout: 10000
+            }, function (success) {
+                console.log(success);
+                $scope.liked = success.posts;
+                $scope.show = "likedposts";
                 $ionicLoading.hide();
             }, function (error) {
                 $ionicLoading.hide();

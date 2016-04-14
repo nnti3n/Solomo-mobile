@@ -1,34 +1,33 @@
 <ion-view hide-nav-bar="true">
 
     <div class="bar bar-header item-input-inset bar-positive">
-        <button style="margin-right:10px;" class="button button-clear"
+        <button class="button button-clear"
                 ng-click="GoBack()">
             <i class="ion-arrow-left-c"></i>
         </button>
         <label class="item-input-wrapper">
-            <i class="icon ion-ios-search placeholder-icon"></i>
             <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
         </label>
         <button class="button button-clear" ng-click="clear_search()">
-            Cancel
+            <i class="icon ion-ios-search"></i>
         </button>
     </div>
 
-    <ion-content style="margin-top:40px;">
+    <ion-content style="margin-top:43px;">
 
         <ion-refresher
             pulling-text="Pull to refresh..."
             on-refresh="doRefresh()">
         </ion-refresher>
 
-        <div style="margin-bottom:0;">
+        <div>
             <div class="item item-avatar">
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
                 <!-- check if crawler post -->
                 <div ng-if="!post.post_type" style="position:absolute; right:15px; top:15px;">1 Day</div>
                 <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
-                <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
             <div class="item item-body" ng-click="OpenDetail(post.id)" style="border:none;">
@@ -37,8 +36,8 @@
                     {{ post.description }}
                 </p>
                 <div class="deal-icons">
-                    <a href="#" class="subdued" ng-click="like(post.id)"><i class="{{post.icon_like}}"></i>{{post.likes.count || 0}}</a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i>{{post.comments.count || 0}}</a>
+                    <a href="#" class="subdued" ng-click="like(post.id)"><i class="{{post.icon_like}}"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
                     <a ng-if="post.lat && post.long" ng-click="ViewMap(post.id)" class="subdued"><i class="ion-ios-location-outline"></i></a>
                 </div>
                 <div class="row deal-footer">
@@ -48,24 +47,26 @@
             </div>
         </div>
 
-        <div ng-repeat="cmt in post.comments.comments">
-            <div class="card">
-            <div class="item item-avatar item-text-wrap">
-                <img ng-src={{cmt.user.avatar}}>
-                <h2  style="color: #4DADAF;">{{cmt.user.name}}</h2>
-                <!-- <p>{{cmt.created}}</p> -->
-                <p class="item">{{cmt.content}}</p>
-            </div>
+        <div class="comment-section" ng-if="post.comments.comments.length">
+            <div class="card" ng-repeat="cmt in post.comments.comments">
+                <div class="item item-avatar item-text-wrap">
+                    <img ng-src={{cmt.user.avatar}}>
+                    <div class="comment-detail">
+                        <h2 class="username">{{cmt.user.name}}</h2>
+                        <div>{{cmt.content}}</div>
+                        <!-- <p>{{cmt.created}}</p> -->
+                    </div>
+                </div>
             </div>
         </div>
 
         <ion-spinner ng-if="load == 'loading'" icon="android" class="col col-33 col-offset-33 text-center"></ion-spinner>
 
-        <div class="item item-input-inset">
-            <textarea rows="4" placeholder="Comments" ng-model="cmt.content" enter-submit="sendComment()" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
+        <div class="item item-input-inset comment-block">
+            <textarea rows="4" placeholder="Comments" ng-model="cmt.content" enter-submit="sendComment()">
             </textarea>
-            <button class="button button-small" style="background-color: #55B6B8; width: 50px"  ng-click="sendComment()">
-                <i class="icon  ion-paper-airplane" style="color: #ffffff;"></i>
+            <button class="button button-small"  ng-click="sendComment()">
+                <i class="icon ion-paper-airplane" style="color: #ffffff;"></i>
             </button>
         </div>
 

@@ -43,7 +43,7 @@
             };
 
             $ionicLoading.show({
-                template: 'loading..',
+                template: 'loading...',
                 duration: 10000
             });
 
