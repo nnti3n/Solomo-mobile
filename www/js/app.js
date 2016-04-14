@@ -4,7 +4,8 @@ angular.module('solomo.services', []);
 
 angular.module('angularRestful', []);
 
-angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage', 'angularRestful', 'ionic-material'])
+angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngCordova', 'ngStorage',
+    'angularRestful', 'ionic-material', 'ngTagsInput'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -172,7 +173,8 @@ angular.module('solomo', ['ionic', 'solomo.controllers', 'solomo.services', 'ngC
                 templateUrl: 'templates/tab-account.html',
                 controller: 'AccountCtrl'
             }
-        }
+        },
+        cache: false
     });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('login');

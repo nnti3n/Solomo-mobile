@@ -35,6 +35,7 @@
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
+                <div ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
                 <div class="deal-icons">
                     <a href="#" class="subdued" ng-click="like(post.id)"><i class="{{post.icon_like}}"></i> {{post.likes.count || 0}}</a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>

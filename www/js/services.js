@@ -141,6 +141,12 @@ angular.module('angularRestful', [])
         },
         unlike: function (data, success, error) {
             $http.post(baseUrl + '/post_likes/unlike.json', data).success(success).error(error)
+        },
+        loadtag: function (data, success, error) {
+            $http.get(baseUrl + '/search/tags.json', data).success(success).error(error)
+        },
+        loadprofile: function (data, success, error) {
+            $http.get(baseUrl + '/users/'+data.params.user_id+'.json', data).success(success).error(error)
         }
     };
 }])

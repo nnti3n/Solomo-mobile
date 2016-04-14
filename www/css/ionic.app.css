@@ -9951,7 +9951,7 @@ a.button {
     color: #4C4C4C;
     display: inline; }
   .bar.bar-subheader .filter.active {
-    border-bottom: 3px solid #3F51B5; 
+    border-bottom: 3px solid #3F51B5;
   }
 
 .deal-icons span {
@@ -9965,7 +9965,18 @@ a.button {
   color: white !important;
   width: 100% !important; }
 
-* {
-  box-shadow: none !important;
-}
+.tags .tag-list .tag-item {
+  background: #cbebff !important; }
+
+tags-input .autocomplete .suggestion-item.selected {
+  color: #fff !important;
+  background-color: #BDBDBD !important; }
+  tags-input .autocomplete .suggestion-item.selected em {
+    color: #fff !important;
+    background-color: #BDBDBD !important; }
+
+.hashtag {
+  display: inline;
+  margin-right: 5px;
+  color: #BDBDBD; }
 

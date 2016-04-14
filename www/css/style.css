@@ -4,15 +4,15 @@ input[type="search"]::-webkit-input-placeholder {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #E9E9E9;  
+   color: #E9E9E9;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #E9E9E9;  
+   color: #E9E9E9;
 }
 
-:-ms-input-placeholder {  
-   color: #E9E9E9;  
+:-ms-input-placeholder {
+   color: #E9E9E9;
 }
 
 .bar > .button + .button:last-child {
@@ -109,7 +109,7 @@ input[type="search"]::-webkit-input-placeholder {
     padding-left: 15px;
 }
 .item-input-wrapper{
-	padding-left: 0;    
+	padding-left: 0;
 	padding-right: 0;
 }
 .ion-ios-search:before {
@@ -124,7 +124,7 @@ input[type="search"]::-webkit-input-placeholder {
 	border-top-color: #EEE;
 }
 .comment-block > .button {
-	background-color: #0C60EE; 
+	background-color: #0C60EE;
 	padding: 0 1rem;
 }
 .comment-block > textarea {
@@ -218,4 +218,8 @@ input[type="search"]::-webkit-input-placeholder {
 }
 .modal-map {
 	border-top: 1px solid #7C7C7C;
+}
+
+* {
+    box-shadow: none !important;
 }

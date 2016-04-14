@@ -13,6 +13,7 @@ angular.module('solomo.controllers')
         //init
         userfeed();
         rqFollowers();
+        userprofile();
 
         //show post
         $scope.ShowPosts = function () {
@@ -164,6 +165,21 @@ angular.module('solomo.controllers')
                 $ionicLoading.hide();
             }, function (error) {
                 $ionicLoading.hide();
+                console.log(error);
+            });
+        }
+
+        //load profile
+        function userprofile() {
+            Post.loadprofile({
+                params: {
+                    user_token: UserService.getUser().user_token,
+                    user_id: $stateParams.userId
+                },
+                timeout: 15000
+            }, function (success) {
+                console.log(success);
+            }, function (error) {
                 console.log(error);
             });
         }
