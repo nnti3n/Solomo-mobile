@@ -130,6 +130,9 @@ angular.module('angularRestful', [])
         posts: function (data, success, error) {
             $http.get(baseUrl + '/posts.json', data).success(success).error(error)
         },
+        likedposts: function (data, success, error) {
+            $http.get(baseUrl + '/posts.json', data).success(success).error(error)
+        },
         detail: function (data, success, error) {
             $http.get(baseUrl + '/posts.json', data).success(success).error(error)
         },
