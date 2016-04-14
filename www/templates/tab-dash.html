@@ -10,9 +10,9 @@
     </div>
 
     <div class="bar bar-subheader">
-        <div ng-click="crawl.getall()" class="button button-light filter" ng-class="toggle.all"> All</div>
-        <div ng-click="crawl.getuser()" class="button button-light filter" ng-class="toggle.user"> User</div>
-        <div ng-click="crawl.getcrawler()" class="button button-light filter" ng-class="toggle.crawler"> Crawler</div>
+        <div ng-click="crawl.getall()" class="filter" ng-class="toggle.all"> All</div>
+        <div ng-click="crawl.getuser()" class="filter" ng-class="toggle.user"> User</div>
+        <div ng-click="crawl.getcrawler()" class="filter" ng-class="toggle.crawler"> Crawler</div>
     </div>
 
     <ion-content scroll="true" class="dashboard">
@@ -53,7 +53,6 @@
                 <div class="deal-icons">
                     <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt"></i> {{post.shares.count || 0}}</a>
                 </div>
                 <div class="row deal-footer">
                     <div class="deal-sale-off col-67"><span ng-if="post.promotion_value">Sale off {{post.promotion_value}}</span></div>

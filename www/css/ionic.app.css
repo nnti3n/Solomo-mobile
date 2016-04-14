@@ -3352,6 +3352,9 @@ body.grade-c {
 
 .content {
   position: relative; }
+  .content.dashboard {
+    margin-top: 43px;
+  }
 
 .scroll-content {
   position: absolute;
@@ -4136,6 +4139,9 @@ a.subdued {
     border-color: transparent;
     background: none; }
 
+.bar-positive, .bar-positive:hover, .bar-positive:active {
+  background-color: #0c60ee !important;
+}
 .bar-positive .button {
   border-color: transparent;
   background-color: #387ef5;
@@ -6558,7 +6564,7 @@ button.item.item-button-right {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 0;
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
 
 .list:last-child {
   margin-bottom: 0px; }
@@ -7602,8 +7608,8 @@ textarea {
   background: transparent;
   line-height: 18px; }
 
-.item-input-wrapper ~ .button {
-  margin-left: 10.66667px; }
+/*.item-input-wrapper ~ .button {
+  margin-left: 10.66667px; }*/
 
 .input-label {
   display: table;
@@ -9867,7 +9873,7 @@ a.button {
 
 .dashboard {
   background: rgba(128, 128, 128, 0.3);
-  margin-top: 90px; }
+  margin-top: 87px; }
   .dashboard .list {
     background: white; }
 
@@ -9933,23 +9939,34 @@ a.button {
     width: 67%; }
 
 .bar.bar-header {
-  padding-left: 20px; }
+  padding-left: 10px; }
 
 .bar.bar-subheader {
   padding: 0 2% 0 3%; }
-  .bar.bar-subheader .button.filter {
+  .bar.bar-subheader .filter {
     width: 32%;
     max-width: 32%;
-    padding: 0 1rem;
+    padding: 3px 15px;
+    line-height: 44px;
+    font-size: 0.8em;
+    color: #4C4C4C;
     display: inline; }
+  .bar.bar-subheader .filter.active {
+    border-bottom: 3px solid #3F51B5; 
+  }
 
 .deal-icons span {
   margin-right: 5px; }
 
 .item.item-avatar {
-  padding-left: 80px !important; }
+  padding-left: 70px !important; }
 
 .facebook-sign-in {
   background: #3a5795 !important;
   color: white !important;
   width: 100% !important; }
+
+* {
+  box-shadow: none !important;
+}
+

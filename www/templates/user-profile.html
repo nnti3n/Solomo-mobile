@@ -1,7 +1,7 @@
 <ion-view view-title="Profile" hide-nav-bar="true">
 
     <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
-        <button style="margin-right:10px;" class="button button-clear"
+        <button class="button button-clear"
                 ng-click="GoBack()">
             <i class="ion-arrow-left-c"></i>
         </button>
@@ -13,7 +13,7 @@
         </button>
     </div>
 
-    <ion-content scroll="true" class="content dashboard" style="margin-top:20px;">
+    <ion-content scroll="true" class="content dashboard user-list" style="margin-top:20px;">
 
         <ion-refresher
             pulling-text="Pull to refresh..."
@@ -66,7 +66,6 @@
                 <div class="deal-icons">
                     <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt"></i> {{post.shares.count || 0}}</a>
                 </div>
                 <div class="row deal-footer">
                     <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
@@ -79,7 +78,7 @@
             <a  ng-repeat="follow in followings" ng-click="OpenProfile(follow.id)"
                 class="item item-avatar waves-effect waves-button waves-dark in done" style="min-height: 80px;">
                 <span class="avatar deal-picture" ng-style="{'background-image':'url('+follow.avatar+')'}"></span>
-                <h2>{{ follow.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ follow.name | limitTo: 25 }}</h2>
             </a>
 
             <p ng-if="!followings.length" class="text-center">This user has not follow anyone yet</p>
@@ -89,7 +88,7 @@
             <a ng-repeat="follow in followers" ng-click="OpenProfile(follow.id)"
                class="item item-avatar item-text-wrap in done" style="min-height: 80px;">
                 <span class="avatar deal-picture" ng-style="{'background-image':'url('+follow.avatar+')'}"></span>
-                <h2>{{ follow.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ follow.name | limitTo: 25 }}</h2>
             </a>
 
             <p ng-if="!followers.length" class="text-center">This user has not followed by anyone yet</p>
