@@ -5659,7 +5659,6 @@ ion-tabs.tabs-color-active-dark .tab-item {
   position: relative;
   z-index: 2;
   display: block;
-  margin: -1px;
   padding: 16px;
   border-width: 1px;
   border-style: solid;
@@ -9946,8 +9945,8 @@ a.button {
   .bar.bar-subheader .filter {
     width: 32%;
     max-width: 32%;
-    padding: 3px 15px;
-    line-height: 44px;
+    line-height: 30px;
+    text-align: center;
     font-size: 0.8em;
     color: #4C4C4C;
     display: inline; }

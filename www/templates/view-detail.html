@@ -13,21 +13,21 @@
         </button>
     </div>
 
-    <ion-content style="margin-top:40px;">
+    <ion-content style="margin-top:43px;">
 
         <ion-refresher
             pulling-text="Pull to refresh..."
             on-refresh="doRefresh()">
         </ion-refresher>
 
-        <div style="margin-bottom:0;">
+        <div>
             <div class="item item-avatar">
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
                 <!-- check if crawler post -->
                 <div ng-if="!post.post_type" style="position:absolute; right:15px; top:15px;">1 Day</div>
                 <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
-                <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
             <div class="item item-body" ng-click="OpenDetail(post.id)" style="border:none;">
@@ -47,14 +47,16 @@
             </div>
         </div>
 
-        <div ng-repeat="cmt in post.comments.comments">
-            <div class="card">
-            <div class="item item-avatar item-text-wrap">
-                <img ng-src={{cmt.user.avatar}}>
-                <h2  style="color: #4DADAF;">{{cmt.user.name}}</h2>
-                <!-- <p>{{cmt.created}}</p> -->
-                <p class="item">{{cmt.content}}</p>
-            </div>
+        <div class="comment-section" ng-if="post.comments.comments.length">
+            <div class="card" ng-repeat="cmt in post.comments.comments">
+                <div class="item item-avatar item-text-wrap">
+                    <img ng-src={{cmt.user.avatar}}>
+                    <div class="comment-detail">
+                        <h2 class="username">{{cmt.user.name}}</h2>
+                        <div>{{cmt.content}}</div>
+                        <!-- <p>{{cmt.created}}</p> -->
+                    </div>
+                </div>
             </div>
         </div>
 

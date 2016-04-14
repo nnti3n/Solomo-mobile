@@ -1,6 +1,6 @@
 <ion-view view-title="Account" hide-nav-bar="true">
 
-    <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
+    <div class="bar bar-header item-input-inset bar-positive">
         <label class="item-input-wrapper">
             <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
         </label>
@@ -15,24 +15,42 @@
             <div class="content">
                 <div class="avatar" back-img="{{profile.picture}}"></div>
                 <h2 class="username" style="margin:0;color:white;">{{profile.name}}</h2>
-                <p>{{followers_number || 0}} Follower {{followings_number || 0}} Following</p>
+                <div class="follow-block"><span ng-click="ShowFollowers()" ng-class="show == 'followers' ? 'active' : 'btn'"> {{followers_number || 0}} Follower</span> | <span ng-click="ShowFollowing()" ng-class="show == 'followings' ? 'active' : 'btn'">{{followings_number || 0}} Following</span></div>
+                <button class="button button-positive button-small" ng-click="showLogOutMenu()">Log Out</button>
             </div>
         </div>
 
         <div class="button-bar">
-            <div ng-click="ShowPosts()" ng-class="show == 'posts' ? 'active' : 'btn'" class="button button-dark">
-                Posts
-            </div>
-            <div ng-click="ShowFollowing()" ng-class="show == 'followings' ? 'active' : 'btn'" class="button button-dark">
-                Following
-            </div>
-            <div ng-click="ShowFollowers()" ng-class="show == 'followers' ? 'active' : 'btn'" class="button button-dark">
-                Followers
-            </div>
+            <div ng-click="ShowPosts()" ng-class="show == 'posts' ? 'active' : 'btn'" class="button button-dark">Posts</div>
+            <div ng-click="ShowLikedPosts()" ng-class="show == 'likedposts' ? 'active' : 'btn'" class="button button-dark">Liked Posts</div>
         </div>
 
         <div ng-if="show == 'posts'" class="list"
              ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
+            <div class="item item-avatar">
+                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
+                <p>Quận 2, HCM</p>
+            </div>
+            <div class="item item-body" ng-click="OpenDetail(post.id)">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
+                <p style="margin-bottom:5px;">
+                    {{ post.description }}
+                </p>
+                <div class="deal-icons">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                </div>
+                <div class="row deal-footer">
+                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
+                    <!--<div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>-->
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="show == 'likedposts'" class="list"
+             ng-repeat="post in liked | filter:search.searchText | orderBy:'-id' ">
             <div class="item item-avatar">
                 <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
                 <div style="position:absolute; right:15px; top:15px;">1 Day</div>
@@ -62,7 +80,7 @@
                 <h2 class="username">{{ follow.name | limitTo: 25 }}</h2>
             </a>
 
-            <p ng-if="!followings.length" class="text-center">This user has not follow anyone yet</p>
+            <p ng-if="!followings.length" class="text-anncounce text-center">This user has not follow anyone yet</p>
         </div>
 
         <div ng-if="show == 'followers'" class="list">
@@ -73,11 +91,7 @@
                 <!--<p>{{ follow.description }}</p>-->
             </a>
 
-            <p ng-if="!followers.length" class="text-center">This user has not followed by anyone yet</p>
+            <p ng-if="!followers.length" class="text-anncounce text-center">This user has not followed by anyone yet</p>
         </div>
-
-        <ion-list>
-            <a class="button button-assertive button-block button-outline button-logout" ng-click="showLogOutMenu()">Log Out</a>
-        </ion-list>
     </ion-content>
 </ion-view>

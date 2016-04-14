@@ -1,6 +1,6 @@
 <ion-view view-title="Profile" hide-nav-bar="true">
 
-    <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
+    <div class="bar bar-header item-input-inset bar-positive">
         <button class="button button-clear"
                 ng-click="GoBack()">
             <i class="ion-arrow-left-c"></i>
@@ -13,7 +13,7 @@
         </button>
     </div>
 
-    <ion-content scroll="true" class="content dashboard user-list" style="margin-top:20px;">
+    <ion-content scroll="true" class="content dashboard user-list">
 
         <ion-refresher
             pulling-text="Pull to refresh..."
@@ -24,28 +24,14 @@
             <div class="content">
                 <div class="avatar" ng-style="{'background-image':'url('+feeds[0].user.avatar_url+')'}"></div>
                 <h2 style="margin:0;color:white;">{{feeds[0].user.name}}</h2>
-                <p><span ng-click="ShowFollowing()"> {{followings_number || 0}} Following</span>
-                    <span ng-click="ShowFollowers()">{{followers_number || 0}} Follower</span>
-                </p>
+                <div class="follow-block"><span ng-click="ShowFollowers()" ng-class="show == 'followers' ? 'active' : 'btn'"> {{followers_number || 0}} Follower</span> | <span ng-click="ShowFollowing()" ng-class="show == 'followings' ? 'active' : 'btn'">{{followings_number || 0}} Following</span></div>
+                <button class="button button-positive button-small follow-button" ng-click="Follow()" ng-class="follow == 'Follow' ? 'button-follow': ''">{{ follow || "Follow" }}</button>
             </div>
         </div>
 
         <div class="button-bar">
-            <div ng-click="ShowPosts()" ng-class="show == 'posts' ? 'active' : 'btn'" class="button button-dark">
-                Posts
-            </div>
-            <div ng-click="ShowFollowing()" ng-class="show == 'followings' ? 'active' : 'btn'" class="button button-dark">
-                Following
-            </div>
-            <div ng-click="ShowFollowers()" ng-class="show == 'followers' ? 'active' : 'btn'" class="button button-dark">
-                Followers
-            </div>
-        </div>
-
-        <div class="list card row">
-            <button class="button button-dark" ng-click="Follow()" ng-class="follow == 'Follow' ? 'button-follow': ''" style="left:35%">
-                {{follow || "Follow"}}
-            </button>
+            <div ng-click="ShowPosts()" ng-class="show == 'posts' ? 'active' : 'btn'" class="button button-dark">Posts</div>
+            <div ng-click="ShowLikedPosts()" ng-class="show == 'likedposts' ? 'active' : 'btn'" class="button button-dark">Liked Posts</div>
         </div>
 
         <ion-spinner ng-if="show == ''" icon="android" class="col col-33 col-offset-33 text-center"></ion-spinner>
@@ -70,6 +56,30 @@
                 <div class="row deal-footer">
                     <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
                     <div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="show == 'likedposts'" class="list"
+             ng-repeat="post in liked | filter:search.searchText | orderBy:'-id' ">
+            <div class="item item-avatar">
+                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
+                <p>Quận 2, HCM</p>
+            </div>
+            <div class="item item-body" ng-click="OpenDetail(post.id)">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
+                <p style="margin-bottom:5px;">
+                    {{ post.description }}
+                </p>
+                <div class="deal-icons">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                </div>
+                <div class="row deal-footer">
+                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
+                    <!--<div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>-->
                 </div>
             </div>
         </div>

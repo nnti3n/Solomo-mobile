@@ -1,6 +1,6 @@
 <ion-view view-title="Dashboard" hide-nav-bar="true">
 
-    <div class="bar bar-header item-input-inset bar-positive" style="position: fixed;">
+    <div class="bar bar-header item-input-inset bar-positive">
         <label class="item-input-wrapper">
             <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
         </label>
@@ -10,9 +10,9 @@
     </div>
 
     <div class="bar bar-subheader">
-        <div ng-click="crawl.getall()" class="filter" ng-class="toggle.all"> All</div>
-        <div ng-click="crawl.getuser()" class="filter" ng-class="toggle.user"> User</div>
-        <div ng-click="crawl.getcrawler()" class="filter" ng-class="toggle.crawler"> Crawler</div>
+        <div ng-click="crawl.getall()" class="filter col col-33" ng-class="toggle.all"> All</div>
+        <div ng-click="crawl.getuser()" class="filter col col-33" ng-class="toggle.user"> User</div>
+        <div ng-click="crawl.getcrawler()" class="filter col col-33" ng-class="toggle.crawler"> Crawler</div>
     </div>
 
     <ion-content scroll="true" class="dashboard">
