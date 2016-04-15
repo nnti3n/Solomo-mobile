@@ -7,10 +7,10 @@
         </button>
     </div>
 
-    <ion-content>
+    <ion-content class="create-deal-block">
 
         <div class="row">
-            <div class="col ">
+            <div class="col col-50">
                 <button class="button button-block ion-ios-camera" ng-click="takePicture()">
                     Camera
                 </button>
@@ -23,20 +23,19 @@
             </div>
         </div>
 
-        <div class="padding">
-
+        <div class="post-detail padding">
             <img id="image" src="" style="display:none;width:100%;">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Description</span>
                 <input ng-model="desc.content" type="text" placeholder="Description">
             </label>
 
-            <tags-input ng-model="tags" display-property="name">
+            <tags-input ng-model="tags" display-property="name" class="tag-block">
                 <auto-complete source="queryTag($query)"></auto-complete>
             </tags-input>
             <!--<p ng-repeat="tag in tags">{{tag.name}}</p>-->
 
-            <button class="button button-block button-positive" ng-click="post()" style="margin-top:30px;">
+            <button class="button button-block button-positive" ng-click="post()">
                 Post
             </button>
 

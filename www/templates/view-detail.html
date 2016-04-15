@@ -51,7 +51,7 @@
         <div class="comment-section" ng-if="post.comments.comments.length">
             <div class="card" ng-repeat="cmt in post.comments.comments">
                 <div class="item item-avatar item-text-wrap">
-                    <img ng-src={{cmt.user.avatar}}>
+                    <img ng-src={{cmt.user.avatar}} ng-click="OpenProfile(cmt.user.id)">
                     <div class="comment-detail">
                         <h2 class="username">{{cmt.user.name}}</h2>
                         <div>{{cmt.content}}</div>

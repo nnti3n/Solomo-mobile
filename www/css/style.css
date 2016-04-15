@@ -229,8 +229,9 @@ input[type="search"]::-webkit-input-placeholder {
 	font-size: 1.5em;
 	vertical-align: sub;
 }
-
-/*Google Map Css Hack*/
+.tags-input .tags {
+	border-color: #DDDDDD !important;
+}
 .map-item {
 	overflow: auto;
 }
