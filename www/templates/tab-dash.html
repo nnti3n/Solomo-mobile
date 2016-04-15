@@ -29,19 +29,17 @@
                 <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
                 <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
                 <!-- check if crawler post -->
-                <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
-                <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
+                <div style="position:absolute; right:15px; top:15px;">Ads</div>
                 <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2><i ng-if="post.user.is_store" class="ion-checkmark"></i>
                 <p>Quận 2, HCM</p>
             </div>
 
-            <div ng-if="post.post_type != 'crawl'" ng-click="GotoProfile(post.user.id)" class="item item-avatar">
-                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
-                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
+            <div ng-if="post.post_type != 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}" ng-click="OpenProfile(post.user.id)">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg" ng-click="OpenProfile(post.user.id)">
                 <!-- check if crawler post -->
                 <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
-                <div ng-if="post.post_type == 'crawl' " style="position:absolute; right:15px; top:15px;">Ads</div>
-                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
+                <h2 class="username" ng-click="OpenProfile(post.user.id)">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
 

@@ -38,10 +38,21 @@
 
         <div ng-if="show == 'posts'" class="list post-repeat" ng-click="OpenDetail(post.id)"
              ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
-            <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
+            <div ng-if="post.post_type == 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
+                <!-- check if crawler post -->
+                <div style="position:absolute; right:15px; top:15px;">Ads</div>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2><i ng-if="post.user.is_store" class="ion-checkmark"></i>
+                <p>Quận 2, HCM</p>
+            </div>
+
+            <div ng-if="post.post_type != 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}" ng-click="OpenProfile(post.user.id)">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg" ng-click="OpenProfile(post.user.id)">
+                <!-- check if crawler post -->
+                <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
+                <h2 class="username" ng-click="OpenProfile(post.user.id)">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
             <div class="item item-body" ng-click="OpenDetail(post.id)">
