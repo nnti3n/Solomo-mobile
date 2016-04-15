@@ -1,6 +1,6 @@
 angular.module('solomo.controllers')
 
-.controller('DashCtrl', function($scope, $state, Post, UserService, $ionicLoading, $rootScope, Feeds) {
+.controller('DashCtrl', function($scope, $state, Post, UserService, $ionicLoading, $rootScope, Feeds, $ionicModal) {
         //search
         $ionicLoading.show({
             template: '<ion-spinner icon="lines"></ion-spinner>',
@@ -13,12 +13,17 @@ angular.module('solomo.controllers')
         $scope.toggle = {};
         $scope.user.picture = UserService.getUser().picture;
         $scope.user.name = UserService.getUser().name;
-        $scope.search = {};
-        $scope.search.searchText = "";
+        //$scope.search = {};
+        //$scope.search.searchText = "";
+        //search scope
+        $scope.data = {};
+        $scope.data.search = "";
+        $scope.data.items = [];
         $scope.crawl.desc = "";
         $scope.toggle.all = "active";
         $scope.request.page = 1;
 
+        //filter button
         $scope.crawl.getall = function () {
             $scope.toggle = {};
             $scope.toggle.all = "active";
@@ -37,19 +42,19 @@ angular.module('solomo.controllers')
             $scope.crawl.desc = "crawl";
         };
 
-        $scope.clear_search = function () {
-            $scope.search.searchText = "";
-        };
-
         $scope.OpenDetail = function (viewId) {
             CreateWaypoint();
             setTimeout(ReadFeed,2000);
+            $scope.clear_search();
+            $scope.toggleHide();
             $state.go("tab.view-detail", {viewId: viewId});
         };
 
         $scope.GotoProfile = function (userId) {
             CreateWaypoint();
             setTimeout(ReadFeed,2000);
+            $scope.clear_search();
+            $scope.toggleHide();
             $state.go("tab.user-profile", {userId: userId});
         };
         //call api
@@ -132,7 +137,7 @@ angular.module('solomo.controllers')
         var CreateWaypoint = function() {
             for (item in $scope.feeds){
                 var waypoint = new Waypoint({
-                  element: document.getElementById($scope.feeds[item].id),
+                  element: document.getElementById($scope.feeds[item].feed_id),
                   triggerOnce: true,
                   handler: function(direction) {
                     console.log('Scrolled to ' + this.element.id);
@@ -142,6 +147,48 @@ angular.module('solomo.controllers')
                 }});
             }
         };
+
+        $scope.clear_search = function () {
+            $scope.data.search = "";
+        };
+
+        $scope.$on('modal.hidden', function() {
+            $scope.clear_search();
+        });
+
+        //search function
+        $scope.search = function () {
+            Feeds.search_all({
+                params: {
+                    user_token: UserService.getUser().user_token,
+                    q: $scope.data.search
+                }
+            }, function (success) {
+                console.log(success);
+                $scope.data.items = success.results;
+            }, function (error) {
+                console.log(error);
+            });
+        };
+
+        $ionicModal.fromTemplateUrl('modal-search.html', function($ionicModal) {
+            $scope.toggleHide = function () {
+                $ionicModal.hide();
+            };
+
+            $scope.toggleModal = function (exit) {
+                if ($ionicModal.isShown() || exit) {
+                    $ionicModal.hide();
+                } else {
+                    $ionicModal.show();
+                }
+            }
+        }, {
+            // Use our scope for the scope of the modal to keep it simple
+            scope: $scope,
+            // The animation we want to use for the modal entrance
+            animation: 'no-animation'
+        });
 
         function Share(){
         };
