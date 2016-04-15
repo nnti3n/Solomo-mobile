@@ -9864,7 +9864,7 @@ a.button {
   right: 0; }
 
 .padding {
-  margin: 0 15px 0 15px; }
+  margin: -3px; }
 
 .login-background-misc {
   background: url(../img/bg.jpg);

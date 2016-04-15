@@ -38,6 +38,7 @@
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
+                <div ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
                 <div class="deal-icons">
                     <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
@@ -51,10 +52,21 @@
 
         <div ng-if="show == 'likedposts'" class="list"
              ng-repeat="post in liked | filter:search.searchText | orderBy:'-id' ">
-            <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2>
+            <div ng-if="post.post_type == 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
+                <!-- check if crawler post -->
+                <div style="position:absolute; right:15px; top:15px;">Ads</div>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2><i ng-if="post.user.is_store" class="ion-checkmark"></i>
+                <p>Quận 2, HCM</p>
+            </div>
+
+            <div ng-if="post.post_type != 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}" ng-click="OpenProfile(post.user.id)">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg" ng-click="OpenProfile(post.user.id)">
+                <!-- check if crawler post -->
+                <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
+                <h2 class="username" ng-click="OpenProfile(post.user.id)">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
             <div class="item item-body" ng-click="OpenDetail(post.id)">
@@ -62,6 +74,7 @@
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
+                <div ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
                 <div class="deal-icons">
                     <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>

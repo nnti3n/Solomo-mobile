@@ -50,6 +50,11 @@ angular.module('solomo.controllers')
             $state.go("tab.view-detail", {viewId: viewId});
         };
 
+        //open profile
+        $scope.OpenProfile = function (userId) {
+            $state.go("tab.user-profile", {userId: userId})
+        };
+
         $scope.GotoProfile = function (userId) {
             CreateWaypoint();
             setTimeout(ReadFeed,2000);

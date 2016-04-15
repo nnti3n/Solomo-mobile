@@ -50,6 +50,11 @@
             // call api
             PostRequest();
 
+            //open profile
+            $scope.OpenProfile = function (userId) {
+                $state.go("tab.user-profile", {userId: userId})
+            };
+
             //pull to refresh
             $scope.doRefresh = function() {
                 PostRequest();
