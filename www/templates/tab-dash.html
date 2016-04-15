@@ -2,10 +2,11 @@
 
     <div class="bar bar-header item-input-inset bar-positive">
         <label class="item-input-wrapper">
-            <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
+            <!--<input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">-->
+            <input type="search" placeholder="Tìm kiếm deal..." ng-change="search()" ng-model="data.search" ng-click="toggleModal()">
         </label>
         <button class="button button-clear" ng-click="clear_search()">
-            <i class="icon ion-ios-search"></i>
+            <i class="icon" ng-class="data.search ? 'ion-close-round' : 'ion-ios-search'"></i>
         </button>
     </div>
 
@@ -45,7 +46,7 @@
                 <p>Quận 2, HCM</p>
             </div>
 
-            <div id="{{post.id}}" class="item item-body waypoint" ng-click="OpenDetail(post.id)">
+            <div id="{{post.feed_id}}" class="item item-body waypoint" ng-click="OpenDetail(post.id)">
                 <img class="full-image" ng-src="{{ post.picture_url }}">
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
@@ -66,4 +67,26 @@
         </ion-infinite-scroll>
 
     </ion-content>
+
+    <script id="modal-search.html" type="text/ng-template">
+        <div class="modal modal-map" style="height:83% !important;">
+
+            <ion-content has-header="true" padding="true" scroll="true">
+                <div class="list-map in done" ng-repeat="item in data.items">
+                    <div ng-if="item.result_type == 'Post'" class="item item-avatar item-text-wrap">
+                        <span ng-click="OpenDetail(item.result_data.id)" class="avatar deal-picture" ng-style="{'background-image':'url('+item.result_data.picture_url+')'}"></span>
+                        <!--<h2>{{ post.user.name | limitTo: 25 }}</h2>-->
+                        <p ng-click="OpenDetail(item.result_data.id)">{{ item.result_data.description }}</p>
+                    </div>
+
+                    <div ng-if="item.result_type == 'User'" ng-click="GotoProfile(item.result_data.id)" class="item item-avatar item-text-wrap item-thumbnail-left" style="height: 80px;">
+                        <span class="avatar deal-picture search" ng-style="{'background-image':'url('+item.result_data.avatar+')'}"></span>
+                        <h2 class="username">{{ item.result_data.name | limitTo: 25 }}</h2>
+                    </div>
+                </div>
+
+            </ion-content>
+        </div>
+    </script>
+
 </ion-view>

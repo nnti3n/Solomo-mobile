@@ -223,3 +223,9 @@ input[type="search"]::-webkit-input-placeholder {
 * {
     box-shadow: none !important;
 }
+
+.list-map .deal-picture.search {
+    border-radius: 50% !important;
+    height: 50px;
+    width: 50px;
+}

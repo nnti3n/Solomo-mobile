@@ -161,7 +161,6 @@ angular.module('solomo.controllers')
             }, function (success) {
                 console.log(success);
                 $scope.liked = success.posts;
-                $scope.show = "likedposts";
                 $ionicLoading.hide();
             }, function (error) {
                 $ionicLoading.hide();

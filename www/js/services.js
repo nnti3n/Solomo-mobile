@@ -202,6 +202,9 @@ angular.module('angularRestful', [])
     return {
         read: function (data, success, error) {
             $http.post(baseUrl + '/feeds/read.json', data).success(success).error(error)
+        },
+        search_all: function (data, success, error) {
+            $http.get(baseUrl + '/search/all.json', data).success(success).error(error)
         }
     };
 })

@@ -120,7 +120,7 @@ $RobotoDraftFontVersion: "1.0.0";
 .dashboard {
 
     background: rgba(128, 128, 128, 0.3);
-    margin-top:90px;
+    margin-top:40px;
 
     .list {
 
@@ -147,6 +147,10 @@ $RobotoDraftFontVersion: "1.0.0";
     .deal-picture {
         border-radius: 0 !important;
         margin-top: 5px;
+    }
+
+    .deal-picture.search {
+        border-radius: 50% !important;
     }
 
     .position {
@@ -241,7 +245,7 @@ $RobotoDraftFontVersion: "1.0.0";
 
     padding: 0 2% 0 3%;
 
-    .button.filter {
+    .filter {
         width: 32%;
         max-width: 32%;
         padding: 0 1rem;
