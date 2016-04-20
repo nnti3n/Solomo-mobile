@@ -252,3 +252,17 @@ input[type="search"]::-webkit-input-placeholder {
     height: 50px;
     width: 50px;
 }
+
+.modal-search {
+    position: absolute;
+    top: 44px !important;
+    min-height: 600px !important;
+}
+
+.modal-search .item-post {
+    min-height: 97px;
+}
+
+.modal-search .item-user {
+    height: 80px;
+}
