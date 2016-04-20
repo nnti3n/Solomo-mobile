@@ -105,7 +105,7 @@ angular.module('solomo.controllers')
                 tags = [];
                 $scope.img = "";
                 $scope.desc.content = "";
-                $scope.tag = [];
+                $scope.tags = [];
                 $state.go('tab.account', {}, { reload: true });
                 console.log(success);
             }, function (error) {
