@@ -23,7 +23,7 @@ angular.module('solomo.controllers')
         };
 
         //open profile
-        $scope.OpenProfile = function (userId) {
+        $scope.GotoProfile = function (userId) {
             $scope.clear_search();
             $scope.toggleHide();
             $state.go("tab.user-profile", {userId: userId})
