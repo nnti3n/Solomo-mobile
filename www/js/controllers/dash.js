@@ -92,28 +92,27 @@ angular.module('solomo.controllers')
             if ($scope.request.limit && $scope.request.page > $scope.request.limit) {
                 console.log("end of page");
                 $scope.$broadcast('scroll.infiniteScrollComplete');
-                return null;
+            } else {
+                Post.feeds({
+                    params:{
+                        user_token:UserService.getUser().user_token,
+                        page:$scope.request.page+1
+                    },
+                    timeout: 15000
+                }, function(success){
+                    console.log("aaaaaaaaaaa");
+                    // setTimeout(CreateWaypoint, 3000);
+                    $scope.feeds = $scope.feeds.concat(success.posts);
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                    $scope.request.limit = success.pagination.total_pages;
+                    $scope.request.page++;
+                    $ionicLoading.hide();
+                },function(error){
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                    $ionicLoading.hide();
+                    console.log(error);
+                });
             }
-
-            Post.feeds({
-                params:{
-                    user_token:UserService.getUser().user_token,
-                    page:$scope.request.page+1
-                },
-                timeout: 15000
-            }, function(success){
-                console.log("aaaaaaaaaaa");
-                // setTimeout(CreateWaypoint, 3000);
-                $scope.feeds = $scope.feeds.concat(success.posts);
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-                $scope.request.limit = success.pagination.total_pages;
-                $scope.request.page++;
-                $ionicLoading.hide();
-            },function(error){
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-                $ionicLoading.hide();
-                console.log(error);
-            });
         };
 
         function PostRequest() {

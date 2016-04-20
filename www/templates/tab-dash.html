@@ -60,6 +60,7 @@
         </div>
 
         <ion-infinite-scroll
+            ng-if="request.page <= request.limit"
             on-infinite="loadMore()"
             distance="1%">
         </ion-infinite-scroll>
