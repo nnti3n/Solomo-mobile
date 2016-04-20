@@ -127,6 +127,20 @@
                 }
             };
 
+            //share function
+            $scope.Share = function (id) {
+                Post.share({
+                        user_token: UserService.getUser().user_token,
+                        shared_from_id: id
+                    }, function (success) {
+                        console.log(success);
+                        $state.go('tab.account')
+                    }, function (error) {
+                        console.log(error);
+                    }
+                )
+            };
+
             //back button
             $scope.GoBack = function () {
                 if ($ionicHistory.backView()) {

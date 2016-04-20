@@ -120,6 +120,9 @@ angular.module('angularRestful', [])
         send: function (data, success, error) {
             $http.post(baseUrl + '/posts.json', data).success(success).error(error)
         },
+        share: function (data, success, error) {
+            $http.post(baseUrl + '/posts/share.json', data).success(success).error(error)
+        },
         get: function (data, success, error) {
             console.log(data);
             $http.get(baseUrl + '/posts/' + data.params.post_id+ '.json', data).success(success).error(error)

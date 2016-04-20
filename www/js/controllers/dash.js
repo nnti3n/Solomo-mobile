@@ -153,6 +153,20 @@ angular.module('solomo.controllers')
             }
         };
 
+        //share function
+        $scope.Share = function (id) {
+            Post.share({
+                user_token: UserService.getUser().user_token,
+                shared_from_id: id
+            }, function (success) {
+                console.log(success);
+                $state.go('tab.account')
+            }, function (error) {
+                console.log(error);
+            }
+        )};
+
+        //search function
         $scope.clear_search = function () {
             $scope.data.search = "";
         };
@@ -161,7 +175,6 @@ angular.module('solomo.controllers')
             $scope.clear_search();
         });
 
-        //search function
         $scope.search = function () {
             $scope.data.loading = 1;
             Feeds.search_all({
