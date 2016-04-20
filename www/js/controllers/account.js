@@ -17,11 +17,15 @@ angular.module('solomo.controllers')
 
         //open post
         $scope.OpenDetail = function (viewId) {
+            $scope.clear_search();
+            $scope.toggleHide();
             $state.go("tab.view-detail", {viewId: viewId})
         };
 
         //open profile
         $scope.OpenProfile = function (userId) {
+            $scope.clear_search();
+            $scope.toggleHide();
             $state.go("tab.user-profile", {userId: userId})
         };
 
