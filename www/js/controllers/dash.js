@@ -13,12 +13,12 @@ angular.module('solomo.controllers')
         $scope.toggle = {};
         $scope.user.picture = UserService.getUser().picture;
         $scope.user.name = UserService.getUser().name;
-        //$scope.search = {};
-        //$scope.search.searchText = "";
-        //search scope
+        //search data
         $scope.data = {};
         $scope.data.search = "";
         $scope.data.items = [];
+        $scope.data.loading = 0;
+        //toggle button data
         $scope.crawl.desc = "";
         $scope.toggle.all = "active";
         $scope.request.page = 1;
@@ -133,6 +133,7 @@ angular.module('solomo.controllers')
             }, function (error) {
                 $ionicLoading.hide();
                 $scope.feeds = UserService.getObject('feed');
+                $scope.$broadcast('scroll.refreshComplete');
                 console.log(error);
             });
         }
@@ -163,6 +164,7 @@ angular.module('solomo.controllers')
 
         //search function
         $scope.search = function () {
+            $scope.data.loading = 1;
             Feeds.search_all({
                 params: {
                     user_token: UserService.getUser().user_token,
@@ -170,9 +172,11 @@ angular.module('solomo.controllers')
                 }
             }, function (success) {
                 console.log(success);
+                $scope.data.loading = 0;
                 $scope.data.items = success.results;
             }, function (error) {
                 console.log(error);
+                $scope.data.loading = 0;
             });
         };
 

@@ -2,10 +2,10 @@
 
     <div class="bar bar-header item-input-inset bar-positive">
         <label class="item-input-wrapper">
-            <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
+            <input type="search" placeholder="Tìm kiếm deal..." ng-change="search()" ng-model="data.search" ng-click="toggleModal()">
         </label>
         <button class="button button-clear" ng-click="clear_search()">
-            <i class="icon ion-ios-search"></i>
+            <i class="icon" ng-class="data.search ? 'ion-close-round' : 'ion-ios-search'"></i>
         </button>
     </div>
 
@@ -43,10 +43,10 @@
                     <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
                 </div>
-                <div class="row deal-footer">
-                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
+                <!--<div class="row deal-footer">-->
+                    <!--<div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>-->
                     <!--<div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>-->
-                </div>
+                <!--</div>-->
             </div>
         </div>
 
@@ -74,14 +74,14 @@
                 <p style="margin-bottom:5px;">
                     {{ post.description }}
                 </p>
-                <div ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
+                <div ng-show="post.tags.length" ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
                 <div class="deal-icons">
                     <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
                     <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
                 </div>
                 <div class="row deal-footer">
                     <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
-                    <!--<div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>-->
+                    <div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>
                 </div>
             </div>
         </div>
@@ -107,4 +107,27 @@
             <p ng-if="!followers.length" class="text-anncounce text-center">This user has not followed by anyone yet</p>
         </div>
     </ion-content>
+
+    <script id="modal-search.html" type="text/ng-template">
+        <div class="modal modal-map modal-search">
+
+            <ion-content has-header="true" padding="true" scroll="true">
+                <ion-spinner ng-if="data.loading" icon="android" class="col col-33 col-offset-33 text-center"></ion-spinner>
+                <div class="list-map in done" ng-repeat="item in data.items">
+                    <div ng-if="item.result_type == 'Post'" class="item item-avatar item-text-wrap item-post">
+                        <span ng-click="OpenDetail(item.result_data.id)" class="avatar deal-picture" ng-style="{'background-image':'url('+item.result_data.picture_url+')'}"></span>
+                        <h2>{{ item.result_data.user.name | limitTo: 25 }}</h2>
+                        <p ng-click="OpenDetail(item.result_data.id)">{{ item.result_data.description }}</p>
+                    </div>
+
+                    <div ng-if="item.result_type == 'User'" ng-click="GotoProfile(item.result_data.id)" class="item item-avatar item-text-wrap item-thumbnail-left item-user">
+                        <span class="avatar deal-picture search" ng-style="{'background-image':'url('+item.result_data.avatar+')'}"></span>
+                        <h2 class="username">{{ item.result_data.name | limitTo: 25 }}</h2>
+                    </div>
+                </div>
+
+            </ion-content>
+        </div>
+    </script>
+
 </ion-view>

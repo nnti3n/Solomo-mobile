@@ -1,6 +1,12 @@
 angular.module('solomo.controllers')
 
-    .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $state, $ionicLoading, Post, Follow){
+    .controller('AccountCtrl', function($scope, UserService, $ionicActionSheet, $ionicModal, $state, $ionicLoading, Post, Follow, Feeds){
+
+        //search data
+        $scope.data = {};
+        $scope.data.search = "";
+        $scope.data.items = [];
+        $scope.data.loading = 0;
 
         $ionicLoading.show({
             template: '<ion-spinner icon="lines"></ion-spinner>',
@@ -99,6 +105,51 @@ angular.module('solomo.controllers')
                 console.log("error trying to get user followings" + UserService.getUser().user_token)
             }
         );
+
+        //search function
+        $scope.clear_search = function () {
+            $scope.data.search = "";
+        };
+
+        $scope.$on('modal.hidden', function() {
+            $scope.clear_search();
+        });
+
+        $scope.search = function () {
+            $scope.data.loading = 1;
+            Feeds.search_all({
+                params: {
+                    user_token: UserService.getUser().user_token,
+                    q: $scope.data.search
+                }
+            }, function (success) {
+                console.log(success);
+                $scope.data.loading = 0;
+                $scope.data.items = success.results;
+            }, function (error) {
+                $scope.data.loading = 0;
+                console.log(error);
+            });
+        };
+
+        $ionicModal.fromTemplateUrl('modal-search.html', function($ionicModal) {
+            $scope.toggleHide = function () {
+                $ionicModal.hide();
+            };
+
+            $scope.toggleModal = function (exit) {
+                if ($ionicModal.isShown() || exit) {
+                    $ionicModal.hide();
+                } else {
+                    $ionicModal.show();
+                }
+            }
+        }, {
+            // Use our scope for the scope of the modal to keep it simple
+            scope: $scope,
+            // The animation we want to use for the modal entrance
+            animation: 'no-animation'
+        });
 
         $scope.showLogOutMenu = function() {
             var hideSheet = $ionicActionSheet.show({
