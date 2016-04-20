@@ -92,10 +92,11 @@ angular.module('solomo.controllers')
     var focusfeed = {};
     $scope.$on("$ionicView.enter", function () {
         console.log($ionicHistory.backView());
-        if ($ionicHistory.backView() && $ionicHistory.backView().stateName == "tab.view-detail") {
-            focusfeed = UserService.getObject('mappost');
-        }
-        else {
+        // if ($ionicHistory.backView() && $ionicHistory.backView().stateName == "tab.view-detail") {
+        focusfeed = UserService.getObject('mappost');
+        // }
+        if (focusfeed == null)
+        {
             focusfeed = {};
             lat = UserService.getLat();
             long = UserService.getLong();
