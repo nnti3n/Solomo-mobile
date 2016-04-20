@@ -18,7 +18,7 @@
     
     `$ bower install waypoints`
     
-    '$ bower install ng-tags-input#3.0.0 --save'
+    `$ bower install ng-tags-input#3.0.0 --save`
 
     `$ cordova -d plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="537496736415112" --variable APP_NAME="solomo"`
 
