@@ -8,6 +8,7 @@ angular.module('solomo.controllers')
         //});
 
         $scope.show = "";
+        $scope.user = {};
         var userId = UserService.getUser().id;
 
         //init
@@ -177,6 +178,7 @@ angular.module('solomo.controllers')
                 },
                 timeout: 15000
             }, function (success) {
+                $scope.user = success;
                 console.log(success);
             }, function (error) {
                 console.log(error);

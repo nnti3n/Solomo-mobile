@@ -22,8 +22,8 @@
 
         <div class="hero has-mask" ng-style="{'background-image':'url('+feeds[1].picture_url+')'}">
             <div class="content">
-                <div class="avatar" ng-style="{'background-image':'url('+feeds[0].user.avatar_url+')'}"></div>
-                <h2 style="margin:0;color:white;">{{feeds[0].user.name}}</h2>
+                <div class="avatar" ng-style="{'background-image':'url('+user.avatar+')'}"></div>
+                <h2 style="margin:0;color:white;">{{user.name}}</h2>
                 <div class="follow-block"><span ng-click="ShowFollowers()" ng-class="show == 'followers' ? 'active' : 'btn'"> {{followers_number || 0}} Follower</span> | <span ng-click="ShowFollowing()" ng-class="show == 'followings' ? 'active' : 'btn'">{{followings_number || 0}} Following</span></div>
                 <button class="button button-positive button-small follow-button" ng-click="Follow()" ng-class="follow == 'Follow' ? 'button-follow': ''">{{ follow || "Follow" }}</button>
             </div>
