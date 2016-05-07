@@ -1,8 +1,16 @@
 <ion-view view-title="Post Deal">
-    <ion-content>
+
+    <div class="bar bar-header item-input-inset bar-positive">
+        <button class="button button-clear"
+                ng-click="GoBack()">
+            <i class="ion-arrow-left-c"></i>
+        </button>
+    </div>
+
+    <ion-content class="create-deal-block">
 
         <div class="row">
-            <div class="col ">
+            <div class="col col-50">
                 <button class="button button-block ion-ios-camera" ng-click="takePicture()">
                     Camera
                 </button>
@@ -15,25 +23,19 @@
             </div>
         </div>
 
-        <div class="padding">
-
-            <!--<img id="test" data-ng-src="img/joy.jpg"/>-->
+        <div class="post-detail padding">
             <img id="image" src="" style="display:none;width:100%;">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Description</span>
                 <input ng-model="desc.content" type="text" placeholder="Description">
             </label>
 
-            <button class="button button-block button-light">
-                Thêm địa chỉ của deal
-            </button>
-            <button class="button button-block button-light">
-                Thêm thời gian gửi deal
-            </button>
-            <button class="button button-block button-light">
-                Chọn bạn bè để gửi deal
-            </button>
-            <button class="button button-block button-positive" ng-click="post()" style="margin-top:30px;">
+            <tags-input ng-model="tags" display-property="name" class="tag-block">
+                <auto-complete source="queryTag($query)"></auto-complete>
+            </tags-input>
+            <!--<p ng-repeat="tag in tags">{{tag.name}}</p>-->
+
+            <button class="button button-block button-positive" ng-click="post()">
                 Post
             </button>
 

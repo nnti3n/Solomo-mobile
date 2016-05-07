@@ -1,5 +1,35 @@
-<ion-view view-title="Map">
-    <ion-content>
+<ion-view view-title="MAP">
+
+    <ion-nav-buttons side="right">
+        <button class="button deal-button" ng-click="toggle()">
+            <span>DEAL</span>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content overflow-scroll="true" scroll="false">
         <div id="map" data-tap-disabled="true"></div>
     </ion-content>
+
+    <script id="modal.html" type="text/ng-template">
+        <div class="modal modal-map">
+            <ion-content has-header="true" padding="true" scroll="true">
+                <div class="list-map in done" ng-repeat="post in list | orderBy:distanceSort">
+                    <div class="item item-avatar item-text-wrap">
+                        <span ng-click="OpenDetail(post.id)" class="avatar deal-picture" ng-style="{'background-image':'url('+post.picture_url+')'}"></span>
+                        <h2>{{ post.user.name | limitTo: 25 }}</h2>
+                        <div ng-click="OpenDetail(post.id)">{{ post.description }}</div>
+                        <div ng-click="focusPost(post.id)" class="position"><i class="ion-ios-location-outline"></i><a ng-bind="' ' + distanceSort(post) + 'm'"></a></div>
+                        <div class="deal-icons">
+                            <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                            <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                        </div>
+                        <!--<button class="button button-positive button-map" ng-click="OpenDetail(post.id)">-->
+                            <!--<i class="ion-arrow-right-c"></i>-->
+                        <!--</button>-->
+                    </div>
+                </div>
+            </ion-content>
+        </div>
+    </script>
+
 </ion-view>

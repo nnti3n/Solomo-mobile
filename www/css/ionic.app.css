@@ -3352,6 +3352,9 @@ body.grade-c {
 
 .content {
   position: relative; }
+  .content.dashboard {
+    margin-top: 43px;
+  }
 
 .scroll-content {
   position: absolute;
@@ -4136,6 +4139,9 @@ a.subdued {
     border-color: transparent;
     background: none; }
 
+.bar-positive, .bar-positive:hover, .bar-positive:active {
+  background-color: #0c60ee !important;
+}
 .bar-positive .button {
   border-color: transparent;
   background-color: #387ef5;
@@ -5653,7 +5659,6 @@ ion-tabs.tabs-color-active-dark .tab-item {
   position: relative;
   z-index: 2;
   display: block;
-  margin: -1px;
   padding: 16px;
   border-width: 1px;
   border-style: solid;
@@ -6558,7 +6563,7 @@ button.item.item-button-right {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 0;
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
 
 .list:last-child {
   margin-bottom: 0px; }
@@ -7602,8 +7607,8 @@ textarea {
   background: transparent;
   line-height: 18px; }
 
-.item-input-wrapper ~ .button {
-  margin-left: 10.66667px; }
+/*.item-input-wrapper ~ .button {
+  margin-left: 10.66667px; }*/
 
 .input-label {
   display: table;
@@ -9731,12 +9736,126 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+/* BEGIN Thin */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Thin/RobotoDraft-Thin.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Thin/RobotoDraft-Thin.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Thin/RobotoDraft-Thin.ttf?v=1.0.0") format("truetype");
+  font-weight: 100;
+  font-style: normal; }
+
+/* END Thin */
+/* BEGIN Light */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Light/RobotoDraft-Light.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Light/RobotoDraft-Light.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Light/RobotoDraft-Light.ttf?v=1.0.0") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+
+/* END Light */
+/* BEGIN Regular */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Regular/RobotoDraft-Regular.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Regular/RobotoDraft-Regular.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Regular/RobotoDraft-Regular.ttf?v=1.0.0") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Regular/RobotoDraft-Regular.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Regular/RobotoDraft-Regular.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Regular/RobotoDraft-Regular.ttf?v=1.0.0") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+/* END Regular */
+/* BEGIN Italic */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Italic/RobotoDraft-Italic.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Italic/RobotoDraft-Italic.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Italic/RobotoDraft-Italic.ttf?v=1.0.0") format("truetype");
+  font-weight: 400;
+  font-style: italic; }
+
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Italic/RobotoDraft-Italic.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Italic/RobotoDraft-Italic.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Italic/RobotoDraft-Italic.ttf?v=1.0.0") format("truetype");
+  font-weight: normal;
+  font-style: italic; }
+
+/* END Italic */
+/* BEGIN Medium */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Medium/RobotoDraft-Medium.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Medium/RobotoDraft-Medium.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Medium/RobotoDraft-Medium.ttf?v=1.0.0") format("truetype");
+  font-weight: 500;
+  font-style: normal; }
+
+/* END Medium */
+/* BEGIN Bold */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Bold/RobotoDraft-Bold.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Bold/RobotoDraft-Bold.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Bold/RobotoDraft-Bold.ttf?v=1.0.0") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Bold/RobotoDraft-Bold.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Bold/RobotoDraft-Bold.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Bold/RobotoDraft-Bold.ttf?v=1.0.0") format("truetype");
+  font-weight: bold;
+  font-style: normal; }
+
+/* END Bold */
+/* BEGIN Bold Italic */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/BoldItalic/RobotoDraft-BoldItalic.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/BoldItalic/RobotoDraft-BoldItalic.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/BoldItalic/RobotoDraft-BoldItalic.ttf?v=1.0.0") format("truetype");
+  font-weight: 700;
+  font-style: italic; }
+
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/BoldItalic/RobotoDraft-BoldItalic.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/BoldItalic/RobotoDraft-BoldItalic.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/BoldItalic/RobotoDraft-BoldItalic.ttf?v=1.0.0") format("truetype");
+  font-weight: bold;
+  font-style: italic; }
+
+/* END Bold Italic */
+/* BEGIN Black */
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../lib/robotodraft/fonts/Black/RobotoDraft-Black.woff2?v=1.0.0") format("woff2"), url("../lib/robotodraft/fonts/Black/RobotoDraft-Black.woff?v=1.0.0") format("woff"), url("../lib/robotodraft/fonts/Black/RobotoDraft-Black.ttf?v=1.0.0") format("truetype");
+  font-weight: 900;
+  font-style: normal; }
+
+/* END Black */
 .scroll {
   height: 100%; }
 
+.button.active {
+  background: lightgray !important; }
+
+.button-logout {
+  width: 100%; }
+
+.button-follow {
+  background-color: #4CAF50 !important; }
+
+.button-bar .active {
+  background-color: #262626 !important; }
+
 #map {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  border-bottom: 2px black; }
+
+.deal-button {
+  position: relative !important; }
+  .deal-button span {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px; }
+
+.bar.bar-header .button + .title {
+  text-align: center !important; }
 
 .login-button {
   position: fixed !important;
@@ -9745,4 +9864,119 @@ a.button {
   right: 0; }
 
 .padding {
-  margin: 0 15px 0 15px; }
+  margin: -3px; }
+
+.login-background-misc {
+  background: url(../img/bg.jpg);
+  background-size: cover; }
+
+.dashboard {
+  background: rgba(128, 128, 128, 0.3);
+  margin-top: 87px; }
+  .dashboard .list {
+    background: white; }
+
+.list-map {
+  margin-bottom: 0 !important; }
+  .list-map .button-map {
+    min-width: 40px;
+    min-height: 20px;
+    top: 10px !important;
+    right: 10px !important;
+    position: absolute !important; }
+  .list-map .deal-picture {
+    border-radius: 0 !important;
+    margin-top: 5px; }
+  .list-map .position {
+    display: inline; }
+    .list-map .position i {
+      font-size: 19px; }
+  .list-map .deal-icons {
+    display: inline;
+    margin-left: 5px;
+    font-size: 20px;
+    text-align: right;
+    float: right; }
+
+.item div.deal-icons {
+  display: block;
+  margin-left: 5px;
+  font-size: 20px;
+  text-align: right;
+  float: right; }
+
+.button-float {
+  position: fixed;
+  bottom: 100px;
+  right: 60px;
+  z-index: 9999; }
+
+.image-noti {
+  position: absolute !important;
+  right: 20px;
+  top: 20%;
+  width: 20%;
+  height: auto; }
+
+.modal-map {
+  border-top: 1px solid gray;
+  min-height: 40% !important;
+  height: 40% !important;
+  bottom: 50px !important;
+  top: inherit !important;
+  border-top: 2px black; }
+
+.map-item {
+  overflow: hidden; }
+  .map-item img {
+    margin-top: 3px;
+    float: left;
+    height: 100px;
+    width: 100px; }
+  .map-item p {
+    margin-left: 33%;
+    width: 67%; }
+
+.bar.bar-header {
+  padding-left: 10px; }
+
+.bar.bar-subheader {
+  padding: 0 2% 0 3%; }
+  .bar.bar-subheader .filter {
+    width: 32%;
+    max-width: 32%;
+    line-height: 30px;
+    text-align: center;
+    font-size: 0.8em;
+    color: #4C4C4C;
+    display: inline; }
+  .bar.bar-subheader .filter.active {
+    border-bottom: 3px solid #3F51B5;
+  }
+
+.deal-icons span {
+  margin-right: 5px; }
+
+.item.item-avatar {
+  padding-left: 70px !important; }
+
+.facebook-sign-in {
+  background: #3a5795 !important;
+  color: white !important;
+  width: 100% !important; }
+
+.tags .tag-list .tag-item {
+  background: #cbebff !important; }
+
+tags-input .autocomplete .suggestion-item.selected {
+  color: #fff !important;
+  background-color: #BDBDBD !important; }
+  tags-input .autocomplete .suggestion-item.selected em {
+    color: #fff !important;
+    background-color: #BDBDBD !important; }
+
+.hashtag {
+  display: inline;
+  margin-right: 5px;
+  color: #BDBDBD; }
+

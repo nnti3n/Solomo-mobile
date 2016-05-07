@@ -1,86 +1,92 @@
 <ion-view view-title="Dashboard" hide-nav-bar="true">
-    <ion-content>
 
-        <div class="bar bar-header item-input-inset bar-positive">
-            <label class="item-input-wrapper">
-                <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
-            </label>
-            <button class="button button-clear" ng-click="clear_search()">
-                <i class="icon ion-ios-search"></i>
-            </button>
-        </div>
+    <div class="bar bar-header item-input-inset bar-positive">
+        <label class="item-input-wrapper">
+            <input type="search" placeholder="Tìm kiếm deal..." ng-change="search()" ng-model="data.search" ng-click="toggleModal()">
+        </label>
+        <button class="button button-clear" ng-click="clear_search()">
+            <i class="icon" ng-class="data.search ? 'ion-close-round' : 'ion-ios-search'"></i>
+        </button>
+    </div>
 
-        <div class="list card" ng-click="OpenDetail(1)">
-            <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>Nguyên</h2>
+    <div class="bar bar-subheader">
+        <div ng-click="crawl.getall()" class="filter col col-33" ng-class="toggle.all"> All</div>
+        <div ng-click="crawl.getuser()" class="filter col col-33" ng-class="toggle.user"> User</div>
+        <div ng-click="crawl.getcrawler()" class="filter col col-33" ng-class="toggle.crawler"> Crawler</div>
+    </div>
+
+    <ion-content scroll="true" class="dashboard">
+
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+
+        <div class="list post-repeat"
+             ng-repeat="post in feeds | filter:{description: search.searchText, post_type: crawl.desc}">
+            <!-- <div id="waypoint"></div> -->
+            <div ng-if="post.post_type == 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
+                <!-- check if crawler post -->
+                <div style="position:absolute; right:15px; top:15px;">Ads</div>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2><i ng-if="post.user.is_store" class="ion-checkmark"></i>
                 <p>Quận 2, HCM</p>
             </div>
-            <div class="item item-body">
-                <img class="full-image" ng-src="img/nguyen-post.jpg">
-                <p style="margin-bottom:5px;">
-                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
-                </p>
-                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
-                </p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
-                </p>
-            </div>
-        </div>
 
-        <div class="list card">
-            <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>Nguyên</h2>
+            <div ng-if="post.post_type != 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}" ng-click="OpenProfile(post.user.id)">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg" ng-click="OpenProfile(post.user.id)">
+                <!-- check if crawler post -->
+                <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
+                <h2 class="username" ng-click="OpenProfile(post.user.id)">{{ post.user.name | limitTo: 25 }}</h2>
                 <p>Quận 2, HCM</p>
             </div>
-            <div class="item item-body">
-                <img class="full-image" ng-src="img/nguyen-post.jpg">
+
+            <div id="{{post.feed_id}}" class="item item-body waypoint" ng-click="OpenDetail(post.id)">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
                 <p style="margin-bottom:5px;">
-                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
+                    {{ post.description }}
                 </p>
-                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
-                </p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
-                </p>
-            </div>
+                <div ng-show="post.tags.length" ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
+                <div class="deal-icons">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                </div>
+                <div class="row deal-footer">
+                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value">Sale off {{post.promotion_value}}</span></div>
+                    <div class="share col-33"><button class="button" ng-click=Share(post.id)>Share</button></div>
+                </div>            </div>
         </div>
 
-        <div class="list card">
-            <div class="item item-avatar">
-                <img style="border-radius:0;" ng-src="img/nguyen.jpg">
-                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
-                <h2>Nguyên</h2>
-                <p>Quận 2, HCM</p>
-            </div>
-            <div class="item item-body">
-                <img class="full-image" ng-src="img/nguyen-post.jpg">
-                <p style="margin-bottom:5px;">
-                    Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi, Giảm giá son nè các bạn ơi,
-                </p>
-                <p style="margin:5px 0;"><b>200 người thích deal này</b></p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued"><i class="ion-android-star-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline" style="font-size:30px;"></i></a>
-                    <a href="#" class="subdued"><i class="ion-android-share-alt" style="font-size:30px;"></i></a>
-                </p>
-                <p style="margin:5px 0;">
-                    <a href="#" class="subdued">Có 26 bình luận cho post này</a>
-                </p>
-            </div>
-        </div>
+        <ion-infinite-scroll
+            ng-if="request.page <= request.limit"
+            on-infinite="loadMore()"
+            distance="1%">
+        </ion-infinite-scroll>
 
     </ion-content>
+
+    <script id="modal-search.html" type="text/ng-template">
+        <div class="modal modal-map modal-search">
+
+            <ion-content has-header="true" padding="true" scroll="true">
+                <ion-spinner ng-if="data.loading" icon="android" class="col col-33 col-offset-33 text-center"></ion-spinner>
+                <div class="list-map in done" ng-repeat="item in data.items">
+                    <div ng-if="item.result_type == 'Post'" class="item item-avatar item-text-wrap item-post">
+                        <span ng-click="OpenDetail(item.result_data.id)" class="avatar deal-picture" ng-style="{'background-image':'url('+item.result_data.picture_url+')'}"></span>
+                        <h2>{{ item.result_data.user.name | limitTo: 25 }}</h2>
+                        <p ng-click="OpenDetail(item.result_data.id)">{{ item.result_data.description }}</p>
+                    </div>
+
+                    <div ng-if="item.result_type == 'User'" ng-click="GotoProfile(item.result_data.id)" class="item item-avatar item-text-wrap item-thumbnail-left item-user">
+                        <span class="avatar deal-picture search" ng-style="{'background-image':'url('+item.result_data.avatar+')'}"></span>
+                        <h2 class="username">{{ item.result_data.name | limitTo: 25 }}</h2>
+                    </div>
+                </div>
+
+            </ion-content>
+        </div>
+    </script>
+
 </ion-view>

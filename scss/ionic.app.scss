@@ -20,15 +20,74 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-@import "www/lib/fontawesome/scss/font-awesome";
+
+$RobotoDraftFontPath: "../lib/robotodraft/fonts"; // REMINDER: edit as appropriate!
+$RobotoDraftFontName: "RobotoDraft";
+$RobotoDraftFontVersion: "1.0.0";
+
+@import "www/lib/robotodraft/sass/robotodraft.scss";    // REMINDER: edit as appropriate!
 
 .scroll {
+
     height: 100%;
+
+}
+
+.button.active {
+
+    background: lightgray !important;
+
+}
+
+.button-logout {
+
+    width: 100%;
+
+}
+
+.button-follow {
+
+    background-color: #4CAF50 !important;
+
+}
+
+.button-bar {
+
+    .active {
+        background-color: #262626 !important;
+    }
+
 }
 
 #map {
+
     width: 100%;
     height: 100%;
+    border-bottom:2px black;
+
+}
+
+.deal-button {
+
+    position: relative !important;
+
+    span {
+
+        position: absolute;
+        margin: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size:15px;
+
+    }
+
+}
+
+.bar.bar-header .button+.title {
+
+    text-align: center !important;
+
 }
 
 .login-button {
@@ -39,11 +98,223 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .item-input-wrapper {
+
     background-color: {
 
     }
 }
 
 .padding {
+
     margin:0 15px 0 15px;
+
+}
+
+.login-background-misc {
+
+    background: url(../img/bg.jpg);
+    background-size: cover;
+
+}
+
+.dashboard {
+
+    background: rgba(128, 128, 128, 0.3);
+    margin-top:40px;
+
+    .list {
+
+        background: white;
+
+    }
+
+}
+
+.list-map {
+
+    margin-bottom:0 !important;
+
+    .button-map {
+
+        min-width: 40px;
+        min-height: 20px;
+        top: 10px !important;
+        right: 10px !important;
+        position: absolute !important;
+
+    }
+
+    .deal-picture {
+        border-radius: 0 !important;
+        margin-top: 5px;
+    }
+
+    .deal-picture.search {
+        border-radius: 50% !important;
+    }
+
+    .position {
+
+        display: inline;
+
+        i {
+            font-size: 19px;
+        }
+
+    }
+
+    .deal-icons {
+
+        display:inline;
+        margin-left: 5px;
+        font-size: 20px;
+        text-align: right;
+        float:right
+
+    }
+
+}
+
+.item {
+
+    div.deal-icons {
+
+        display:block;
+        margin-left: 5px;
+        font-size: 20px;
+        text-align: right;
+        float:right
+
+    }
+
+}
+
+.button-float {
+
+    position: fixed;
+    bottom: 100px;
+    right: 60px;
+    z-index: 9999;
+}
+
+.image-noti {
+
+    position: absolute !important;
+    right: 20px;
+    top: 20%;
+    width: 20%;
+    height: auto;
+
+}
+
+.modal-map {
+
+    border-top: 1px solid gray;
+    min-height:40% !important;
+    height: 40% !important;
+    bottom: 50px !important;
+    top: inherit !important;
+    border-top: 2px black;
+
+}
+
+.map-item {
+
+    overflow:hidden;
+
+        img {
+            margin-top:3px;
+            float:left;
+            height:100px;
+            width:100px;
+        }
+
+        p {
+            margin-left: 33%;
+            width: 67%;
+        }
+}
+
+.bar.bar-header {
+
+    padding-left: 20px;
+
+}
+
+.bar.bar-subheader {
+
+    padding: 0 2% 0 3%;
+
+    .filter {
+        width: 32%;
+        max-width: 32%;
+        padding: 0 1rem;
+        display:inline;
+    }
+
+}
+
+.deal-icons {
+
+    span {
+        margin-right:5px;
+    }
+
+}
+
+.item.item-avatar {
+
+    padding-left:80px !important;
+
+}
+
+.facebook-sign-in {
+
+    background:#3a5795 !important;
+    color:white !important;
+    width: 100% !important;
+
+}
+
+//tag
+.tags {
+
+    .tag-list {
+
+        .tag-item {
+
+            background: #cbebff !important;
+
+        }
+
+    }
+
+}
+
+//tag input
+tags-input
+{
+    .autocomplete {
+        .suggestion-item.selected {
+
+            color: #fff !important;
+            background-color: #BDBDBD !important;
+
+            em {
+                color: #fff !important;
+                background-color: #BDBDBD !important;
+            }
+
+        }
+    }
+
+}
+
+//hash
+.hashtag {
+
+    display: inline;
+    margin-right: 5px;
+    color: #BDBDBD;
+
 }

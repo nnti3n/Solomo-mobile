@@ -6,3 +6,5 @@ platforms/
 plugins/
 .idea/
 npm-debug.log
+www/lib
+firebase.json

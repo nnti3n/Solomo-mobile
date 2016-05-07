@@ -1,0 +1,121 @@
+<ion-view view-title="Profile" hide-nav-bar="true">
+
+    <div class="bar bar-header item-input-inset bar-positive">
+        <button class="button button-clear"
+                ng-click="GoBack()">
+            <i class="ion-arrow-left-c"></i>
+        </button>
+        <label class="item-input-wrapper">
+            <input type="search" placeholder="Tìm kiếm deal..." ng-model="search.searchText">
+        </label>
+        <button class="button button-clear" ng-click="clear_search()">
+            <i class="icon ion-ios-search"></i>
+        </button>
+    </div>
+
+    <ion-content scroll="true" class="content dashboard user-list">
+
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+
+        <div class="hero has-mask" ng-style="{'background-image':'url('+feeds[1].picture_url+')'}">
+            <div class="content">
+                <div class="avatar" ng-style="{'background-image':'url('+user.avatar+')'}"></div>
+                <h2 style="margin:0;color:white;">{{user.name}}</h2>
+                <div class="follow-block"><span ng-click="ShowFollowers()" ng-class="show == 'followers' ? 'active' : 'btn'"> {{followers_number || 0}} Follower</span> | <span ng-click="ShowFollowing()" ng-class="show == 'followings' ? 'active' : 'btn'">{{followings_number || 0}} Following</span></div>
+                <button class="button button-positive button-small follow-button" ng-click="Follow()" ng-class="follow == 'Follow' ? 'button-follow': ''">{{ follow || "Follow" }}</button>
+            </div>
+        </div>
+
+        <div class="button-bar">
+            <div ng-click="ShowPosts()" ng-class="show == 'posts' ? 'active' : 'btn'" class="button button-dark">Posts</div>
+            <div ng-click="ShowLikedPosts()" ng-class="show == 'likedposts' ? 'active' : 'btn'" class="button button-dark">Liked Posts</div>
+        </div>
+
+        <ion-spinner ng-if="show == ''" icon="android" class="col col-33 col-offset-33 text-center"></ion-spinner>
+
+        <div ng-if="show == 'posts'" class="list post-repeat" ng-click="OpenDetail(post.id)"
+             ng-repeat="post in feeds | filter:search.searchText | orderBy:'-id' ">
+            <div ng-if="post.post_type == 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg">
+                <!-- check if crawler post -->
+                <div style="position:absolute; right:15px; top:15px;">Ads</div>
+                <h2 class="username">{{ post.user.name | limitTo: 25 }}</h2><i ng-if="post.user.is_store" class="ion-checkmark"></i>
+                <p>Quận 2, HCM</p>
+            </div>
+
+            <div ng-if="post.post_type != 'crawl'" class="item item-avatar">
+                <img style="border-radius:0;" ng-if="post.user.avatar_url" ng-src="{{ post.user.avatar_url }}" ng-click="OpenProfile(post.user.id)">
+                <img style="border-radius:0;" ng-if="!post.user.avatar_url" ng-src="img/nguyen.jpg" ng-click="OpenProfile(post.user.id)">
+                <!-- check if crawler post -->
+                <div ng-if="post.post_type == 'user' " style="position:absolute; right:15px; top:15px;">User Post</div>
+                <h2 class="username" ng-click="OpenProfile(post.user.id)">{{ post.user.name | limitTo: 25 }}</h2>
+                <p>Quận 2, HCM</p>
+            </div>
+            <div class="item item-body" ng-click="OpenDetail(post.id)">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
+                <p style="margin-bottom:5px;">
+                    {{ post.description }}
+                </p>
+                <div ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
+                <div class="deal-icons">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                </div>
+                <div class="row deal-footer">
+                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
+                    <div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="show == 'likedposts'" class="list"
+             ng-repeat="post in liked | filter:search.searchText | orderBy:'-id' ">
+            <div class="item item-avatar">
+                <img style="border-radius:0;" ng-src="{{ post.user.avatar_url }}" ng-click="OpenProfile(post.user.id)">
+                <div style="position:absolute; right:15px; top:15px;">1 Day</div>
+                <h2 class="username" ng-click="OpenProfile(post.user.id)">{{ post.user.name | limitTo: 25 }}</h2>
+                <p>Quận 2, HCM</p>
+            </div>
+            <div class="item item-body" ng-click="OpenDetail(post.id)">
+                <img class="full-image" ng-src="{{ post.picture_url }}">
+                <p style="margin-bottom:5px;">
+                    {{ post.description }}
+                </p>
+                <div ng-repeat="tag in post.tags" class="hashtag">{{'#' + tag.name}}</div>
+                <div class="deal-icons">
+                    <a href="#" class="subdued"><i class="ion-android-star-outline"></i> {{post.likes.count || 0}}</a>
+                    <a href="#" class="subdued"><i class="ion-ios-chatboxes-outline"></i> {{post.comments.count || 0}}</a>
+                </div>
+                <div class="row deal-footer">
+                    <div class="deal-sale-off col-67"><span ng-if="post.promotion_value" >Sale off {{post.promotion_value}}</span></div>
+                    <!--<div class="share col-33"><button class="button" ng-click=Share()>Share</button></div>-->
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="show == 'followings'" class="list">
+            <a ng-repeat="follow in followings" ng-click="OpenProfile(follow.id)"
+                class="item item-avatar waves-effect waves-button waves-dark in done" style="min-height: 80px;">
+                <span class="avatar deal-picture" ng-style="{'background-image':'url('+follow.avatar+')'}"></span>
+                <h2 class="username">{{ follow.name | limitTo: 25 }}</h2>
+            </a>
+
+            <p ng-if="!followings.length" class="text-center">This user has not follow anyone yet</p>
+        </div>
+
+        <div ng-if="show == 'followers'" class="list">
+            <a ng-repeat="follow in followers" ng-click="OpenProfile(follow.id)"
+               class="item item-avatar item-text-wrap in done" style="min-height: 80px;">
+                <span class="avatar deal-picture" ng-style="{'background-image':'url('+follow.avatar+')'}"></span>
+                <h2 class="username">{{ follow.name | limitTo: 25 }}</h2>
+            </a>
+
+            <p ng-if="!followers.length" class="text-center">This user has not followed by anyone yet</p>
+        </div>
+
+    </ion-content>
+</ion-view>

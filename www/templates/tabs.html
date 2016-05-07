@@ -1,7 +1,7 @@
-<ion-tabs class="tabs-icon-top" ng-class="{'tabs-item-hide': hideTabs}">
+<ion-tabs class="tabs-icon-top tabs-striped" ng-class="{'tabs-item-hide': hideTabs}">
 
     <!-- Dashboard Tab -->
-    <ion-tab title="Bảng Tin" icon-off="ion-ios-home" icon-on="ion-ios-home" href="#/tab/dash">
+    <ion-tab title="Bảng Tin" icon-off="ion-ios-home" icon-on="ion-ios-home" href="#/tab/dash" on-select="onselected()">
         <ion-nav-view name="tab-dash"></ion-nav-view>
     </ion-tab>
 
@@ -14,7 +14,7 @@
         <ion-nav-view name="tab-post"></ion-nav-view>
     </ion-tab>
 
-    <ion-tab title="Thông Báo" icon-off="ion-android-notifications-none" icon-on="ion-android-notifications-none" href="#/tab/noti">
+    <ion-tab badge="$root.badge.noti" badge-style="badge-positive" title="Thông Báo" icon-off="ion-android-notifications-none" icon-on="ion-android-notifications-none" href="#/tab/noti">
         <ion-nav-view name="tab-noti"></ion-nav-view>
     </ion-tab>
 

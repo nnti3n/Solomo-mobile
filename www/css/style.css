@@ -1,1 +1,268 @@
 /* Empty. Add your own CSS if you like */
+input[type="search"]::-webkit-input-placeholder {
+   color: #E9E9E9;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #E9E9E9;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #E9E9E9;
+}
+
+:-ms-input-placeholder {
+   color: #E9E9E9;
+}
+
+.bar > .button + .button:last-child {
+	position: relative;
+	top: 0;
+	bottom: 0;
+	right:0;
+}
+
+.target, .notifier {
+	font-weight: bold;
+}
+
+.item > .messages {
+	padding: 0px 10px;
+	white-space: normal;
+	width: 60%;
+    float: left;
+}
+
+.item-thumbnail-left {
+	padding: 16px;
+}
+
+.item-thumbnail-left > img:first-child {
+	position: relative;
+	float: left;
+	top:0;
+	left:0;
+	width: 20%;
+    height: auto;
+}
+
+.notifications img {
+	width: 25%;
+	height: 25%;
+}
+
+.bar .title {
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+.disable-user-behavior .list {
+	padding: 0px 10px;
+}
+
+.deal-sale-off {
+	font-size: 20px;
+	padding: 10px 0px;
+	color: #E88F3C;
+}
+
+.deal-footer {
+	padding: 0;
+	padding-top: 10px;
+}
+
+.item .username {
+	font-weight: bold;
+	color:#4C4C4C;
+}
+
+.share > .button {
+	width: 100%;
+	border-radius: 0px;
+	min-height: 30px;
+    line-height: 35px;
+    background-color: #0C60EE;
+    color:#FFF;
+}
+.bar.bar-header .button+.title {
+	left:0 !important;
+}
+.bar.item-input-inset .item-input-wrapper input {
+	background: transparent;
+	border-bottom: 1px solid transparent;
+    color: #E9E9E9;
+}
+.bar.item-input-inset .item-input-wrapper input:active, .bar.item-input-inset .item-input-wrapper input:focus{
+	border-bottom-color: #E9E9E9;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+}
+.item-input-wrapper {
+	background-color: transparent;
+	color: #E9E9E9;
+}
+.bar.bar-subheader {
+    padding: 0px 15px;
+}
+.bar.bar-header {
+    padding-left: 15px;
+}
+.item-input-wrapper{
+	padding-left: 0;
+	padding-right: 0;
+}
+.ion-ios-search:before {
+	font-size: 25px !important;
+	font-weight: 600;
+}
+.deal-icons {
+	padding: 10px 5px;
+}
+.comment-block {
+	border-color: transparent;
+	border-top-color: #EEE;
+}
+.comment-block > .button {
+	background-color: #0C60EE;
+	padding: 0 1rem;
+}
+.comment-block > textarea {
+	resize:none;
+	width:95%;
+	padding:0 5px;
+	margin-right:5%;
+}
+.bar .buttons-right span {
+	margin-left: 3px;
+}
+
+.item-body {
+	padding-top: 0;
+}
+.button.button-block {
+	text-transform: none;
+    font-weight: normal;
+}
+.button.destructive {
+	background: #ef473a;
+    color: #FFF !important;
+    text-align: center !important;
+    border-radius: 5px;
+}
+.action-sheet-title {
+
+}
+.action-sheet-group.action-sheet-options{
+	padding: 15px;
+}
+.avatar+.username {
+	line-height: 40px;
+}
+.user-list .avatar, .user-list .item-avatar .avatar {
+	height: 50px;
+	width: 50px;
+}
+.comment-detail > h2 {
+	color: #0C60EE;
+}
+.comment-detail > div {
+	padding: 3px 0;
+}
+.bar.bar-subheader .filter {
+	display: inline-block;
+}
+.follow-block > span.active {
+	font-weight: bold;
+}
+.text-anncounce {
+	font-size: 1.2em;
+	padding: 15px;
+	margin:0;
+}
+.hero>.content>.avatar {
+	margin-bottom: 0;
+}
+.hero>.content {
+	bottom:10px !important;
+}
+.hero {
+	height: 230px !important;
+}
+.button-dark.active {
+	background-color: #FFF !important;
+	color: #000 !important;
+}
+.hero > .content > .button {
+	padding: 0 12px;
+}
+.follow-block {
+	padding: 5px 0;
+}
+.comment-section {
+	border-top: 1px solid #EEE;
+	margin-bottom: 20px;
+}
+.comment-section > .card > .item:last-child {
+	padding-bottom: 0;
+	min-height: 10px;
+}
+.card {
+	margin:0;
+}
+.buttons-right > .right-buttons > .deal-button {
+	height: 43px;
+	padding: 0 2rem;
+	max-width: 60px;
+	width: 60px;
+}
+.modal-map {
+	border-top: 1px solid #7C7C7C;
+}
+.tag-block {
+	padding-top: 5px;
+}
+.create-deal-block {
+	padding: 0px 15px;
+}
+.create-deal-block .button:before{
+	font-size: 1.5em;
+	vertical-align: sub;
+}
+.tags-input .tags {
+	border-color: #DDDDDD !important;
+}
+.map-item {
+	overflow: auto;
+}
+.map-item > div {
+	padding-left: 110px;
+}
+.list-map > .item.item-avatar {
+	padding-left: 80px !important;
+}
+
+
+* {
+    box-shadow: none !important;
+}
+
+.list-map .deal-picture.search {
+    border-radius: 50% !important;
+    height: 50px;
+    width: 50px;
+}
+
+.modal-search {
+    position: absolute;
+    top: 44px !important;
+    min-height: 600px !important;
+}
+
+.modal-search .item-post {
+    min-height: 97px;
+}
+
+.modal-search .item-user {
+    height: 80px;
+}
